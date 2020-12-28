@@ -1,0 +1,10 @@
+app:
+  port: 8090
+  workId: 1
+mysql:
+  address: 127.0.0.1
+  port: 3306
+  database: psychology
+  username: root
+  password: 123456
+  option: charset=utf8&parseTime=True&loc=Local
