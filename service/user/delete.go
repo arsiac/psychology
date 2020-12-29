@@ -5,7 +5,6 @@ import (
 	"github.com/arsiac/psychology/service"
 )
 
-func Insert(user *entity.User) bool {
-	service.Mysql.Create(user)
-	return true
+func Delete(user *entity.User)  {
+	service.Mysql.Delete(user)
 }

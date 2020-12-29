@@ -2,7 +2,7 @@ package common
 
 import (
 	"fmt"
-	"github.com/arsiac/psychology/log"
+	"github.com/arsiac/psychology/common/log"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 )
@@ -47,6 +47,7 @@ func GenerateMysqlUrl(info *MysqlInfo) string {
 
 func GetMysqlConnection(url string) *gorm.DB {
 	db, err := gorm.Open("mysql", url)
+	db.LogMode(true)
 	if err != nil {
 		log.Errorln("打开数据库失败", err)
 		return nil

@@ -2,7 +2,7 @@ package constant
 
 import (
 	"github.com/arsiac/psychology/common"
-	"github.com/arsiac/psychology/log"
+	"github.com/arsiac/psychology/common/log"
 	"gopkg.in/yaml.v2"
 	"strconv"
 )

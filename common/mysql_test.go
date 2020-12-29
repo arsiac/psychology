@@ -20,7 +20,7 @@ func TestGenerateMysqlUrl(t *testing.T) {
 			name: "test 1",
 			want: "admin:123456@tcp(1.1.1.1:3306)/db",
 			args: args{
-				info: NewMysqlInfo(3306, "1.1.1.1", "db", "admin", "123456"),
+				info: NewMysqlInfo(3306, "1.1.1.1", "db", "admin", "123456", ""),
 			},
 		},
 		{

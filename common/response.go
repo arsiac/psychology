@@ -1,20 +1,9 @@
-package api
+package common
 
 import (
-	"github.com/arsiac/psychology/constant/api"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
-
-var Router = gin.Default()
-
-func init()  {
-	userApi := Router.Group(api.UserApi)
-	{
-		userApi.GET("", List)
-		userApi.POST("", Save)
-	}
-}
 
 // response
 func Response(code int, msg string, data interface{}) gin.H {

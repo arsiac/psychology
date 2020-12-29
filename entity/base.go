@@ -1,11 +1,19 @@
 package entity
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 type Page struct {
 	Total int `json:"total"`
 	Size  int `json:"size"`
 	Index int `json:"index"`
+	List interface{} `json:"list"`
+}
+
+func (p *Page)String() string {
+	return fmt.Sprintf("Page{ total: %v, size: %v, index: %v, list: %v}", p.Total, p.Size, p.Index, p.List)
 }
 
 type BaseModel struct {

@@ -1,7 +1,7 @@
 package common
 
 import (
-	"github.com/arsiac/psychology/log"
+	"github.com/arsiac/psychology/common/log"
 	"golang.org/x/crypto/bcrypt"
 	"math/rand"
 )
@@ -20,11 +20,6 @@ func EncryptPassword(password string) string  {
 	if err != nil {
 		log.Errorln("加密失败", err)
 	}
-	log.WithFields(log.Fields{
-		"password": password,
-		"cost": cost,
-		"encode": string(encodePassword),
-	}).Debugln("加密结果")
 	return string(encodePassword)
 }
 

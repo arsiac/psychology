@@ -5,11 +5,11 @@ type Level int
 var (
 	// 日志级别 map
 	LevelMap = map[string]Level{
-		ERROR.String():   ERROR,
-		WARN.String(): WARN,
-		INFO.String():    INFO,
-		DEBUG.String():   DEBUG,
-		SILENT.String():  SILENT,
+		ERROR.String():  ERROR,
+		WARN.String():   WARN,
+		INFO.String():   INFO,
+		DEBUG.String():  DEBUG,
+		SILENT.String(): SILENT,
 	}
 )
 

@@ -3,11 +3,10 @@ package entity
 import (
 	"fmt"
 	"github.com/arsiac/psychology/common"
+	"github.com/arsiac/psychology/common/log"
 	"github.com/arsiac/psychology/constant"
-	"github.com/arsiac/psychology/log"
 	"github.com/jinzhu/gorm"
 	"strconv"
-	"time"
 )
 
 // table user
@@ -20,6 +19,8 @@ type User struct {
 type UserVO struct {
 	BaseModelVo
 	Name string `json:"name"`
+	Password string `json:"password"`
+	OldPassword string `json:"oldPassword"`
 }
 
 // 结构体对应的数据库表名
@@ -37,36 +38,47 @@ func (u *User) BeforeCreate(scope *gorm.Scope) error {
 	}
 	// 加密密码
 	err = scope.SetColumn("password", common.EncryptPassword(u.Password))
+	if err != nil {
+		log.Errorln("user.BeforeCreate() -> ", err)
+		return err
+	}
 	return nil
 }
 
-func CreateUser(name, password string) *User {
-	user := new(User)
-	user.Name = name
-	user.Password = password
-	return user
-}
-
-func NewUser(id int64, createAt, updateAt time.Time, name, password string) *User {
-	user := new(User)
-	user.ID = id
-	user.Name = name
-	user.Password = password
-	user.CreatedAt = createAt
-	user.UpdatedAt = updateAt
-	user.DeletedAt = nil
-	return user
+func (u *User) BeforeUpdate(scope *gorm.Scope) error {
+	// 加密密码
+	if u.Password == "" {
+		return nil
+	}
+	err := scope.SetColumn("password", common.EncryptPassword(u.Password))
+	if err != nil {
+		log.Errorln("user.BeforeCreate() -> ", err)
+		return err
+	}
+	return nil
 }
 
 func NewUserVo(user *User) *UserVO {
 	userVo := new (UserVO)
 	userVo.ID = strconv.FormatInt(user.ID, 10)
 	userVo.Name = user.Name
-	//userVo.CreatedAt = strconv.FormatInt(user.CreatedAt.Unix(), 10)
-	//userVo.UpdatedAt = strconv.FormatInt(user.UpdatedAt.Unix(), 10)
+	userVo.Password = user.Password
 	userVo.CreatedAt = user.CreatedAt.Format(constant.TimeFormat)
 	userVo.UpdatedAt = user.UpdatedAt.Format(constant.TimeFormat)
 	return userVo
+}
+
+func GetUserFromUserVO(vo *UserVO) *User {
+	user := new(User)
+	var err error
+	user.ID, err = strconv.ParseInt(vo.ID, 10, 64)
+	if err != nil {
+		log.Errorln("user.GetUserFromUserVO -> ", err)
+		return nil
+	}
+	user.Name = vo.Name
+	user.Password = vo.Password
+	return user
 }
 
 func GetUserVos(users *[]User) []UserVO {
