@@ -2,12 +2,15 @@
 
 - psychology-gateway
   - port: 8080
-  - role: gateway
+  - role: 网关
     
 - psychology-registry
   - port: 8070
-  - role: service registry
+  - role: 注册中心
     
 - psychology-user-centre
   - port: 8060
-  - role: user centre
+  - role: 用户中心
+  
+- psychology-utils
+  - role: 工具包
