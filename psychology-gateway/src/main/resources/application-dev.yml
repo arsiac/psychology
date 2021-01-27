@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    root: info
+
+# 消费者
+eureka:
+  instance:
+    # 提供ip地址
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8070/eureka
+
+spring:
+  output:
+    ansi:
+      enabled: always
+  application:
+    name: psychology-gateway
+  cloud:
+    gateway:
+      enabled: true
+      routes:
+        # 用户中心
+        - id: user-centre
+          uri: lb://psychology-user-centre
+          predicates:
+            - Path=/user/centre/**
+

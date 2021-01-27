@@ -1,0 +1,29 @@
+server:
+  port: 8060
+  servlet:
+    context-path: /user/centre
+
+spring:
+  application:
+    name: psychology-user-centre
+  output:
+    ansi:
+      enabled: always
+
+logging:
+  level:
+    root: info
+
+# 服务提供者
+eureka:
+  client:
+    # 不获取服务注册信息
+    fetch-registry: false
+    service-url:
+      defaultZone: http://127.0.0.1:8070/eureka
+
+  instance:
+    # 提供IP地址
+    prefer-ip-address: true
+    # 指定自己的ip信息，不指定的话会自己寻找
+    ip-address: 127.0.0.1
