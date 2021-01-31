@@ -9,7 +9,7 @@ import java.util.Date;
  * @version 1.0
  * @since  2021/1/27
  */
-public class LogInfo {
+public class LogDetail {
     private Long id;
     /**
      * 用户名

@@ -25,7 +25,8 @@
         <spring.boot>2.4.2</spring.boot>
         <spring.cloud>3.0.0</spring.cloud>
         <spring.cloud.dependencies>2020.0.0</spring.cloud.dependencies>
-
+        <mybatis.spring.boot>2.1.4</mybatis.spring.boot>
+        <mybatis.generator>1.4.0</mybatis.generator>
         <fastjson.version>1.2.75</fastjson.version>
         <shiro.version>1.7.0</shiro.version>
         <slf4j.version>1.7.30</slf4j.version>
@@ -82,6 +83,13 @@
                 <version>${spring.cloud}</version>
             </dependency>
 
+            <!-- Mybatis Spring Boot Starter -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.spring.boot}</version>
+            </dependency>
+
             <!-- FastJson-->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -95,11 +103,6 @@
                 <artifactId>shiro-core</artifactId>
                 <version>${shiro.version}</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>org.apache.shiro</groupId>-->
-<!--                <artifactId>shiro-spring</artifactId>-->
-<!--                <version>${shiro.version}</version>-->
-<!--            </dependency>-->
 
             <!-- Slf4j -->
             <dependency>
@@ -112,6 +115,7 @@
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>

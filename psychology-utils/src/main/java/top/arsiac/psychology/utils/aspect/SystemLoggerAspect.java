@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import top.arsiac.psychology.utils.annotation.SystemLogger;
-import top.arsiac.psychology.utils.entity.LogInfo;
+import top.arsiac.psychology.utils.entity.LogDetail;
 
 import java.lang.reflect.Method;
 import java.util.Date;
@@ -58,39 +58,40 @@ public class SystemLoggerAspect {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
 
-        LogInfo logInfo = new LogInfo();
+        LogDetail logDetail = new LogDetail();
+        // 获取注解上的描述
         SystemLogger systemLogger = method.getAnnotation(SystemLogger.class);
         if(systemLogger != null){
-            //注解上的描述
-            logInfo.setOperation(systemLogger.value());
+            logDetail.setOperation(systemLogger.value());
         }
 
         //请求的方法名
         String className = joinPoint.getTarget().getClass().getName();
         String methodName = signature.getName();
-        logInfo.setMethod(className + "." + methodName + "()");
+        logDetail.setMethod(className + "." + methodName + "()");
 
-        //请求的参数
+        // 保存请求的参数
         Object[] args = joinPoint.getArgs();
 
         String params = JSON.toJSONString(args);
-        logInfo.setParams(params);
+        logDetail.setParams(params);
 
         //用户名
         String userInfo = JSON.toJSONString(SecurityUtils.getSubject().getPrincipal());
         JSONObject jsonObject = JSON.parseObject(userInfo);
-        logInfo.setUsername(jsonObject.getString("username"));
+        logDetail.setUsername(jsonObject.getString("username"));
 
-        logInfo.setTime(time);
-        logInfo.setCreateDate(new Date());
+        logDetail.setTime(time);
+        // 操作产生的时间
+        logDetail.setCreateDate(new Date());
 
         // 日志内容
-        String stringBuilder = "==> 用户名:" + logInfo.getUsername() +
-                "\n==> 描述:" + logInfo.getOperation() +
-                "\n==> 方法: " + logInfo.getMethod() +
-                "\n==> 参数: " + logInfo.getParams() +
-                "\n==> 使用时间: " + logInfo.getTime() +
-                "\n==> 调用时间: " + logInfo.getCreateDate();
+        String stringBuilder = "==> 用户名:" + logDetail.getUsername() +
+                "\n==> 描述:" + logDetail.getOperation() +
+                "\n==> 方法: " + logDetail.getMethod() +
+                "\n==> 参数: " + logDetail.getParams() +
+                "\n==> 使用时间: " + logDetail.getTime() +
+                "\n==> 调用时间: " + logDetail.getCreateDate();
 
         // 打印日志
         logger.info(stringBuilder);
