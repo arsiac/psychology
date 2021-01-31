@@ -24,7 +24,6 @@ public interface PowerMapper {
      * */
     List<PowerEntity> selectAll();
 
-
     /**
      * <p>模糊查找权力</p>
      *
@@ -32,6 +31,14 @@ public interface PowerMapper {
      * @return 权力列表
      * */
     List<PowerEntity> selectFuzzy(@Param("power") PowerEntity power);
+
+    /**
+     * <p>根据id查找权力</p>
+     *
+     * @param id 权力id
+     * @return 权力信息
+     * */
+    PowerEntity selectById(@Param("id") Long id);
 
     /**
      * <p>增加权力</p>

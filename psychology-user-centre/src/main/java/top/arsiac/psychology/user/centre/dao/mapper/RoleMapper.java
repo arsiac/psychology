@@ -24,7 +24,6 @@ public interface RoleMapper {
      * */
     List<RoleEntity> selectAll();
 
-
     /**
      * <p>模糊查找角色</p>
      *
@@ -32,6 +31,14 @@ public interface RoleMapper {
      * @return 角色列表
      * */
     List<RoleEntity> selectFuzzy(@Param("role") RoleEntity role);
+
+    /**
+     * <p>根据id查询</p>
+     *
+     * @param id 角色id
+     * @return 角色信息
+     * */
+    RoleEntity selectById(@Param("id") Long id);
 
     /**
      * <p>增加角色</p>

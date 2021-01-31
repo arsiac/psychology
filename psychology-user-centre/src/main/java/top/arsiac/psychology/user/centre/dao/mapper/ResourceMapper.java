@@ -24,7 +24,6 @@ public interface ResourceMapper {
      * */
     List<ResourceEntity> selectAll();
 
-
     /**
      * <p>模糊查找资源</p>
      *
@@ -32,6 +31,14 @@ public interface ResourceMapper {
      * @return 资源列表
      * */
     List<ResourceEntity> selectFuzzy(@Param("resource") ResourceEntity resource);
+
+    /**
+     * <p>根据id查询</p>
+     *
+     * @param id 资源id
+     * @return 资源信息
+     * */
+    ResourceEntity selectById(@Param("id") Long id);
 
     /**
      * <p>增加资源</p>

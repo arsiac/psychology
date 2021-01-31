@@ -24,7 +24,6 @@ public interface UserMapper {
      * */
     List<UserEntity> selectAll();
 
-
     /**
      * <p>模糊查找用户</p>
      *
@@ -32,6 +31,14 @@ public interface UserMapper {
      * @return 用户列表
      * */
     List<UserEntity> selectFuzzy(@Param("user") UserEntity user);
+
+    /**
+     * <p>根据id查询</p>
+     *
+     * @param id 用户id
+     * @return 用户信息
+     * */
+    UserEntity selectById(@Param("id") Long id);
 
     /**
      * <p>增加用户</p>

@@ -18,7 +18,7 @@
 
     <!-- 查询全部 -->
     <select id="selectAll" resultMap="resourceMap">
-        SELECT * FROM psychology_user_centre.resource
+        SELECT * FROM psychology_user_centre.resource ORDER BY update_time
     </select>
 
     <!-- 模糊查询 -->
@@ -37,6 +37,12 @@
                 url LIKE #{resourceUrl}
             </if>
         </where>
+        ORDER BY update_time
+    </select>
+
+    <!-- 根据id查询 -->
+    <select id="selectById" resultMap="resourceMap" parameterType="java.lang.Long">
+        SELECT * FROM psychology_user_centre.resource WHERE id = #{id}
     </select>
 
     <!-- 插入 版本为1 时间为当前时间 -->
