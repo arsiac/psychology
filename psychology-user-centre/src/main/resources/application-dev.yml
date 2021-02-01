@@ -3,6 +3,10 @@ server:
   servlet:
     context-path: /user/centre
 
+snow-flake:
+  machineId: 1
+  roomId: 2
+
 spring:
   application:
     name: psychology-user-centre

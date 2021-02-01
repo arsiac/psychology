@@ -82,6 +82,11 @@ public class SnowFlake {
     private static final long MAX_ID_NUMBER = 4095L;
 
     /**
+     * id 序列号最小值
+     * */
+    private static final long MIN_ID_NUMBER = 0L;
+
+    /**
      * 当前的 id 序列号
      * */
     private final AtomicLong idNumber = new AtomicLong(0);
@@ -108,11 +113,12 @@ public class SnowFlake {
             throw new IllegalArgumentException("machineId: " + machineId);
         }
 
+        // 将机器和机房id提前左移整合，减少之后的运算
         this.machineAndRoomId = (machineRoomId << MACHINE_ROOM_LEFT_SHIFT) + (machineId << MACHINE_LEFT_SHIFT);
     }
 
     /**
-     * 获取系统当前时间戳
+     * <p>获取系统当前时间戳</p>
      *
      * @return 当前时间戳
      * */
@@ -144,7 +150,7 @@ public class SnowFlake {
                         // 更新时间戳
                         lastTimeStamp = currentTimeStamp;
                         //将id序列号置零
-                        idNumber.set(0L);
+                        idNumber.set(MIN_ID_NUMBER);
                         break;
                     }
                 }
@@ -154,11 +160,11 @@ public class SnowFlake {
             // 更新时间戳
             lastTimeStamp = currentTimeStamp;
             //将id序列号置零
-            idNumber.set(0L);
+            idNumber.set(MIN_ID_NUMBER);
         }
 
         // 生成新id
-        return currentTimeStamp << TIME_STAMP_LEFT_SHIFT + machineAndRoomId + idNumber.getAndIncrement();
+        return (currentTimeStamp << TIME_STAMP_LEFT_SHIFT) + machineAndRoomId + idNumber.getAndIncrement();
     }
 
     /**
@@ -167,7 +173,7 @@ public class SnowFlake {
      * @param id 由雪花算法生成的 id
      * @return 生成该 id 的时间
      * */
-    public static long getTimeStampFromId(long id) {
+    public static long getTimeStamp(long id) {
         return (id & TIME_STAMP_MASK) >> TIME_STAMP_LEFT_SHIFT;
     }
 
@@ -177,7 +183,7 @@ public class SnowFlake {
      * @param id 由雪花算法生成的 id
      * @return 生成该 id 的机房 id
      * */
-    public static long getMachineRoomIdFromId(long id) {
+    public static long getMachineRoomId(long id) {
         return (id & MACHINE_ROOM_MASK) >> MACHINE_ROOM_LEFT_SHIFT;
     }
 
@@ -189,5 +195,34 @@ public class SnowFlake {
      * */
     public static long getMachineId(long id) {
         return (id & MACHINE_MASK) >> MACHINE_LEFT_SHIFT;
+    }
+
+    /**
+     * <p>根据提供的参数生成对应id</p>
+     *
+     * @param timeStamp 时间戳
+     * @param machineRoomId 机房i d
+     * @param machineId 主机 id
+     * @param idNumber id 序列号
+     * */
+    public static long generateId(long timeStamp, long machineRoomId, long machineId, long idNumber) {
+        if (machineRoomId < MIN_MACHINE_ROOM_ID || MAX_MACHINE_ROOM_ID < machineRoomId) {
+            throw new IllegalArgumentException("machineRoomId: " + machineRoomId);
+        }
+        if (machineId < MIN_MACHINE_ID || MAX_MACHINE_ID < machineId) {
+            throw new IllegalArgumentException("machineId: " + machineId);
+        }
+        if (timeStamp < 0L) {
+            throw new IllegalArgumentException("timeStamp: " + timeStamp);
+        }
+        if (idNumber < MIN_ID_NUMBER || MAX_ID_NUMBER < idNumber) {
+            throw new IllegalArgumentException("idNumber: " + idNumber);
+        }
+
+        // 生成id
+        return (timeStamp << TIME_STAMP_LEFT_SHIFT) +
+                (machineRoomId << MACHINE_ROOM_LEFT_SHIFT) +
+                (machineId << MACHINE_LEFT_SHIFT) +
+                idNumber;
     }
 }

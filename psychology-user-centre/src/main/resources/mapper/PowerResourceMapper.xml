@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="top.arsiac.psychology.user.centre.dao.mapper.PowerResourceMapper">
+<mapper namespace="top.arsiac.psychology.user.centre.dao.PowerResourceMapper">
 
     <!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="top.arsiac.psychology.user.centre.dao.entity.PowerResourceEntity" id="userRoleMap">
+    <resultMap type="top.arsiac.psychology.user.centre.pojo.entity.PowerResourceEntity" id="userRoleMap">
         <result property="id" column="id"/>
         <result property="powerId" column="power_id"/>
         <result property="resourceId" column="resource_id"/>
@@ -35,7 +35,7 @@
     </select>
 
     <!-- 增加用户对应角色 -->
-    <insert id="insert" parameterType="top.arsiac.psychology.user.centre.dao.entity.PowerResourceEntity">
+    <insert id="insert" parameterType="top.arsiac.psychology.user.centre.pojo.entity.PowerResourceEntity">
         INSERT INTO psychology_user_centre.power_resource
         (id, power_id, resource_id, create_by, create_time, update_by, update_time, version)
         VALUES
@@ -45,7 +45,7 @@
     </insert>
 
     <!-- 更新用户对应角色 -->
-    <update id="update" parameterType="top.arsiac.psychology.user.centre.dao.entity.PowerResourceEntity">
+    <update id="update" parameterType="top.arsiac.psychology.user.centre.pojo.entity.PowerResourceEntity">
         UPDATE psychology_user_centre.power_resource
         SET power_id = #{powerResource.powerId}, resource_id = #{powerResource.resourceId},
             update_by = #{powerResource.updateBy}, update_time = CURRENT_TIMESTAMP(),
@@ -54,7 +54,7 @@
     </update>
 
     <!-- 删除用户对应角色 -->
-    <delete id="delete" parameterType="top.arsiac.psychology.user.centre.dao.entity.PowerResourceEntity">
+    <delete id="delete" parameterType="top.arsiac.psychology.user.centre.pojo.entity.PowerResourceEntity">
         DELETE FROM psychology_user_centre.power_resource WHERE id = #{powerResource.id} AND version = #{powerResource.version}
     </delete>
 </mapper>

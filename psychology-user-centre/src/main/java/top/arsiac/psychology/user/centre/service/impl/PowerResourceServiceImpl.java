@@ -1,10 +1,10 @@
 package top.arsiac.psychology.user.centre.service.impl;
 
 import org.springframework.transaction.annotation.Transactional;
-import top.arsiac.psychology.user.centre.dao.dto.PowerResourceDTO;
-import top.arsiac.psychology.user.centre.dao.entity.PowerResourceEntity;
-import top.arsiac.psychology.user.centre.dao.mapper.PowerResourceMapper;
+import top.arsiac.psychology.user.centre.pojo.dto.PowerResourceDTO;
+import top.arsiac.psychology.user.centre.dao.PowerResourceMapper;
 import top.arsiac.psychology.user.centre.service.PowerResourceService;
+import top.arsiac.psychology.utils.common.IdGenerator;
 import top.arsiac.psychology.utils.common.BeanCopy;
 import top.arsiac.psychology.utils.exception.PsychologyErrorCode;
 
@@ -24,6 +24,11 @@ public class PowerResourceServiceImpl implements PowerResourceService {
      * 权力资源 dao
      * */
     private PowerResourceMapper powerResourceMapper;
+
+    /**
+     * id 生成器
+     * */
+    private IdGenerator idGenerator;
 
     @Override
     public List<PowerResourceDTO> queryAll() {
@@ -49,11 +54,9 @@ public class PowerResourceServiceImpl implements PowerResourceService {
         if (dto == null) {
             throw PsychologyErrorCode.DATA_IS_EMPTY.createException();
         }
-        try {
-            return powerResourceMapper.insert(dto) > 0;
-        } catch (Exception e) {
-            throw PsychologyErrorCode.INSERT_FAILED.createException(e);
-        }
+        // 生成id
+        dto.setId(idGenerator.generate());
+        return powerResourceMapper.insert(dto) > 0;
     }
 
     @Override
@@ -65,7 +68,7 @@ public class PowerResourceServiceImpl implements PowerResourceService {
 
         int count = 0;
         for (PowerResourceDTO dto : dtoList) {
-            count += powerResourceMapper.insert(BeanCopy.copy(dto, PowerResourceEntity.class));
+            count += powerResourceMapper.insert(dto);
         }
 
         // true 则为全部插入成功
@@ -76,7 +79,7 @@ public class PowerResourceServiceImpl implements PowerResourceService {
     @Override
     public boolean modify(PowerResourceDTO dto) {
         checkIdAndVersion(dto);
-        return powerResourceMapper.update(BeanCopy.copy(dto, PowerResourceEntity.class)) > 0;
+        return powerResourceMapper.update(dto) > 0;
     }
 
     @Override
@@ -125,5 +128,10 @@ public class PowerResourceServiceImpl implements PowerResourceService {
     @Resource
     public void setPowerResourceMapper(PowerResourceMapper powerResourceMapper) {
         this.powerResourceMapper = powerResourceMapper;
+    }
+
+    @Resource
+    public void setIdGenerator(IdGenerator idGenerator) {
+        this.idGenerator = idGenerator;
     }
 }

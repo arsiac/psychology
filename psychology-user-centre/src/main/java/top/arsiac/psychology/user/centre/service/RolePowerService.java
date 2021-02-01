@@ -1,7 +1,7 @@
 package top.arsiac.psychology.user.centre.service;
 
 
-import top.arsiac.psychology.user.centre.dao.dto.RolePowerDTO;
+import top.arsiac.psychology.user.centre.pojo.dto.RolePowerDTO;
 
 import java.util.List;
 
