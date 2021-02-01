@@ -1,7 +1,7 @@
 package top.arsiac.psychology.utils.common;
 
 import org.springframework.beans.BeanUtils;
-import top.arsiac.psychology.utils.exception.PsychologyUtilErrorCode;
+import top.arsiac.psychology.utils.exception.PsychologyErrorCode;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class BeanCopy {
            BeanUtils.copyProperties(source, target);
            return target;
        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-           throw PsychologyUtilErrorCode.CREATE_TARGET_OBJECT_FAILED.createException(e);
+           throw PsychologyErrorCode.CREATE_TARGET_OBJECT_FAILED.createException(e);
        }
    }
 
@@ -55,10 +55,10 @@ public class BeanCopy {
            return;
        }
        if (source == null) {
-           throw PsychologyUtilErrorCode.SOURCE_OBJECT_IS_NULL.createException();
+           throw PsychologyErrorCode.SOURCE_OBJECT_IS_NULL.createException();
        }
        if (target == null) {
-           throw PsychologyUtilErrorCode.TARGET_OBJECT_IS_NULL.createException();
+           throw PsychologyErrorCode.TARGET_OBJECT_IS_NULL.createException();
        }
 
        // 复制属性

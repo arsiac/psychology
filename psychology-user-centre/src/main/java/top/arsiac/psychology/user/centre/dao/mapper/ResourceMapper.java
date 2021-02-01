@@ -59,8 +59,9 @@ public interface ResourceMapper {
     /**
      * <p>删除资源</p>
      *
-     * @param resource 资源信息
+     * @param id 资源 id
+     * @param version 版本
      * @return 数据库变动行数
      * */
-    int delete(@Param("resource") ResourceEntity resource);
+    int delete(@Param("id") Long id, @Param("version") Integer version);
 }

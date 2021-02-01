@@ -59,8 +59,9 @@ public interface UserMapper {
     /**
      * <p>删除用户</p>
      *
-     * @param user 用户信息
+     * @param id 用户 id
+     * @param version 版本
      * @return 数据库变动行数
      * */
-    int delete(@Param("user") UserEntity user);
+    int delete(@Param("id") Long id, @Param("version") Integer version);
 }

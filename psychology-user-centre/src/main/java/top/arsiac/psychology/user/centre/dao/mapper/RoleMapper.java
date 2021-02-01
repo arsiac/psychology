@@ -59,8 +59,9 @@ public interface RoleMapper {
     /**
      * <p>删除角色</p>
      *
-     * @param role 角色信息
+     * @param id 角色 id
+     * @param version 版本
      * @return 数据库变动行数
      * */
-    int delete(@Param("role") RoleEntity role);
+    int delete(@Param("id") Long id, @Param("version") Integer version);
 }

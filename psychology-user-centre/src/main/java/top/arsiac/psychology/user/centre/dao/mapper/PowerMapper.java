@@ -59,8 +59,9 @@ public interface PowerMapper {
     /**
      * <p>删除权力</p>
      *
-     * @param power 权力信息
+     * @param id 权力id
+     * @param version 版本
      * @return 数据库变动行数
      * */
-    int delete(@Param("power") PowerEntity power);
+    int delete(@Param("id") Long id, @Param("version") Integer version);
 }

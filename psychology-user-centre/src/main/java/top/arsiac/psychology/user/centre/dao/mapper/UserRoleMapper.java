@@ -59,8 +59,9 @@ public interface UserRoleMapper {
     /**
      * <p>删除用户对应角色</p>
      *
-     * @param userRole 用户对应角色信息
+     * @param id 用户对应角色 id
+     * @param version 版本
      * @return 数据库变动行数
      * */
-    int delete(@Param("userRole") UserRoleEntity userRole);
+    int delete(@Param("id") Long id, @Param("version") Integer version);
 }

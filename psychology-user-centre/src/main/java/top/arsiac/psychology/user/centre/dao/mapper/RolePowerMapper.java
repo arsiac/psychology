@@ -60,8 +60,9 @@ public interface RolePowerMapper {
     /**
      * <p>删除角色对应权力</p>
      *
-     * @param rolePower 角色对应权力信息
+     * @param id 角色对应权力 id
+     * @param version 版本
      * @return 数据库变动行数
      * */
-    int delete(@Param("rolePower") RolePowerEntity rolePower);
+    int delete(@Param("id") Long id, @Param("version") Integer version);
 }

@@ -59,8 +59,8 @@ public interface PowerResourceMapper {
     /**
      * <p>删除权限对应资源</p>
      *
-     * @param userRole 权限对应资源信息
+     * @param id 权限对应资源 id
      * @return 数据库变动行数
      * */
-    int delete(@Param("powerResource") PowerResourceEntity userRole);
+    int delete(@Param("id") Long id, @Param("version") Integer version);
 }

@@ -55,6 +55,6 @@
 
     <!-- 删除 根据id和版本删除 -->
     <delete id="delete" parameterType="top.arsiac.psychology.user.centre.dao.entity.PowerEntity">
-        DELETE FROM psychology_user_centre.power WHERE id = #{power.id} AND version = #{power.version}
+        DELETE FROM psychology_user_centre.power WHERE id = #{id} AND version = #{version}
     </delete>
 </mapper>
