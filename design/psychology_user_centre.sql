@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 31/01/2021 13:46:24
+ Date: 06/02/2021 13:12:23
 */
 
 SET NAMES utf8mb4;
@@ -27,9 +27,47 @@ CREATE TABLE `power` (
   `create_by` bigint(20) NOT NULL COMMENT '创建者',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_by` bigint(20) NOT NULL COMMENT '更新者',
-  `update_time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `version` int(11) NOT NULL COMMENT '版本',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='权利表';
+
+-- ----------------------------
+-- Table structure for power_resource
+-- ----------------------------
+DROP TABLE IF EXISTS `power_resource`;
+CREATE TABLE `power_resource` (
+  `id` bigint(20) NOT NULL COMMENT '权力对应资源id',
+  `power_id` bigint(20) NOT NULL COMMENT '权力id',
+  `resource_id` bigint(20) NOT NULL COMMENT '资源id',
+  `create_by` bigint(20) NOT NULL COMMENT '创建者',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_by` bigint(20) NOT NULL COMMENT '更新者',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `version` int(11) NOT NULL COMMENT '版本',
+  PRIMARY KEY (`power_id`,`resource_id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `power_resource_resource_id` (`resource_id`),
+  CONSTRAINT `power_resource_power_id` FOREIGN KEY (`power_id`) REFERENCES `power` (`id`),
+  CONSTRAINT `power_resource_resource_id` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='权力对应资源';
+
+-- ----------------------------
+-- Table structure for resource
+-- ----------------------------
+DROP TABLE IF EXISTS `resource`;
+CREATE TABLE `resource` (
+  `id` bigint(20) NOT NULL COMMENT '资源id',
+  `name` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT '资源名称',
+  `url` varchar(511) COLLATE utf8mb4_bin NOT NULL COMMENT '资源URL',
+  `type` int(11) NOT NULL COMMENT '请求类型',
+  `create_by` bigint(20) NOT NULL COMMENT '创建者',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_by` bigint(20) NOT NULL COMMENT '更新者',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `version` int(11) NOT NULL COMMENT '版本',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='资源表';
 
 -- ----------------------------
 -- Table structure for role
@@ -41,7 +79,8 @@ CREATE TABLE `role` (
   `create_by` bigint(20) NOT NULL COMMENT '创建者',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_by` bigint(20) NOT NULL COMMENT '更新者',
-  `update_time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `version` int(11) NOT NULL COMMENT '版本',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='角色表';
 
@@ -50,13 +89,16 @@ CREATE TABLE `role` (
 -- ----------------------------
 DROP TABLE IF EXISTS `role_power`;
 CREATE TABLE `role_power` (
+  `id` bigint(20) NOT NULL COMMENT '角色权力id',
   `role_id` bigint(20) NOT NULL COMMENT '角色id',
   `power_id` bigint(20) NOT NULL COMMENT '权力id',
   `create_by` bigint(20) NOT NULL COMMENT '创建者',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_by` bigint(20) NOT NULL COMMENT '更新者',
-  `update_time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `version` int(11) NOT NULL COMMENT '版本',
   PRIMARY KEY (`role_id`,`power_id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `role_power_power_id` (`power_id`),
   CONSTRAINT `role_power_power_id` FOREIGN KEY (`power_id`) REFERENCES `power` (`id`),
   CONSTRAINT `role_power_role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
@@ -73,7 +115,8 @@ CREATE TABLE `user` (
   `create_by` bigint(20) NOT NULL COMMENT '创建者',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_by` bigint(20) NOT NULL COMMENT '更新者',
-  `update_time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `version` int(11) NOT NULL COMMENT '版本',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='用户表';
 
@@ -82,13 +125,16 @@ CREATE TABLE `user` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (
+  `id` bigint(20) NOT NULL COMMENT '用户角色id',
   `user_id` bigint(20) NOT NULL COMMENT '用户id',
   `role_id` bigint(20) NOT NULL COMMENT '角色id',
   `create_by` bigint(20) NOT NULL COMMENT '创建者',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_by` bigint(20) NOT NULL COMMENT '更新者',
-  `update_time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `version` int(11) NOT NULL COMMENT '版本',
   PRIMARY KEY (`user_id`,`role_id`) USING BTREE,
+  UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `user_role_role_id` (`role_id`),
   CONSTRAINT `user_role_role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
   CONSTRAINT `user_role_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
