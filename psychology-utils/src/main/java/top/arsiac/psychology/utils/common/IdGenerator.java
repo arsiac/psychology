@@ -1,6 +1,8 @@
 package top.arsiac.psychology.utils.common;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -11,19 +13,19 @@ import org.springframework.context.annotation.Configuration;
  * @since  2021/2/1
  */
 @Configuration
+@EnableConfigurationProperties(IdGenerator.class)
+@ConfigurationProperties(prefix = "snow-flake", ignoreInvalidFields = true)
 public class IdGenerator {
     private volatile SnowFlake snowFlake;
 
     /**
      * 主机 id
      * */
-    @Value("snow-flake.machine:0")
     private int machineId;
 
     /**
      * 机房 id
      * */
-    @Value("snow-flake.room:0")
     private int roomId;
 
     public IdGenerator() {}

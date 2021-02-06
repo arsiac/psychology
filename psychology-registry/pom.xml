@@ -20,6 +20,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>8</maven.compiler.source>
     <maven.compiler.target>8</maven.compiler.target>
+    <mainClass>top.arsiac.psychology.PsychologyRegistryApplication</mainClass>
   </properties>
 
   <dependencies>
@@ -36,10 +37,12 @@
   </dependencies>
 
   <build>
+    <finalName>psychology-registry</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>2.4.1</version>
         <executions>
           <execution>
             <goals>
