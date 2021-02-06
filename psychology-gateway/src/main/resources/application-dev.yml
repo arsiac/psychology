@@ -29,5 +29,5 @@ spring:
         - id: user-centre
           uri: lb://psychology-user-centre
           predicates:
-            - Path=/user/centre/**
+            - Path=/centre/**
 

@@ -1,11 +1,11 @@
 server:
   port: 8060
   servlet:
-    context-path: /user/centre
+    context-path: /centre
 
 snow-flake:
-  machineId: 1
-  roomId: 2
+  machine: 1
+  room: 2
 
 spring:
   application:

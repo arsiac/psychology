@@ -1,8 +1,7 @@
 package top.arsiac.psychology.user.centre.api;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import top.arsiac.psychology.user.centre.pojo.dto.UserRoleDTO;
 import top.arsiac.psychology.user.centre.pojo.vo.UserRoleVO;
 
 import java.util.List;
@@ -23,6 +22,7 @@ public interface UserRoleApi {
      * @return 全部用户-角色
      * */
     @GetMapping("/all")
+    @ResponseBody
     List<UserRoleVO> queryAll();
 
     /**
@@ -31,7 +31,9 @@ public interface UserRoleApi {
      * @param id 角色id
      * @return 查询结果
      * */
-    List<UserRoleVO> queryByRoleId(Long id);
+    @GetMapping("/role/{id}")
+    @ResponseBody
+    List<UserRoleVO> queryByRoleId(@PathVariable Long id);
 
     /**
      * <p>根据用户id查询</p>
@@ -39,45 +41,57 @@ public interface UserRoleApi {
      * @param id 用户id
      * @return 查询结果
      * */
-    List<UserRoleVO> queryByUserId(Long id);
+    @GetMapping("/user/{id}")
+    @ResponseBody
+    List<UserRoleVO> queryByUserId(@PathVariable Long id);
 
     /**
      * <p>增加用户-角色</p>
      *
-     * @param vo 权限-资源信息
+     * @param  dto 权限-资源信息
      * @return 数据库变动行数
      * */
-    boolean add(UserRoleVO vo);
+    @PostMapping
+    @ResponseBody
+    boolean add(@RequestBody  UserRoleDTO dto);
 
     /**
      * <p>增加用户-角色</p>
      *
-     * @param voList 用户-角色信息
+     * @param  dtoList 用户-角色信息
      * @return 数据库变动行数
      * */
-    boolean batchAdd(List<UserRoleVO> voList);
+    @PostMapping("/batch")
+    @ResponseBody
+    boolean batchAdd(@RequestBody List<UserRoleDTO>  dtoList);
 
     /**
      * <p>更新用户-角色</p>
      *
-     * @param vo 用户-角色信息
+     * @param  dto 用户-角色信息
      * @return 数据库变动行数
      * */
-    boolean modify(UserRoleVO vo);
+    @PutMapping
+    @ResponseBody
+    boolean modify(@RequestBody UserRoleDTO dto);
 
     /**
      * <p>删除用户-角色</p>
      *
-     * @param vo 用户-角色信息
+     * @param  dto 用户-角色信息
      * @return 数据库变动行数
      * */
-    boolean remove(UserRoleVO vo);
+    @DeleteMapping
+    @ResponseBody
+    boolean remove(@RequestBody  UserRoleDTO dto);
 
     /**
      * <p>批量删除用户-角色</p>
      *
-     * @param voList 用户-角色信息
+     * @param  dtoList 用户-角色信息
      * @return 数据库变动行数
      * */
-    boolean batchRemove(List<UserRoleVO> voList);
+    @DeleteMapping("/batch")
+    @ResponseBody
+    boolean batchRemove(@RequestBody List<UserRoleDTO>  dtoList);
 }

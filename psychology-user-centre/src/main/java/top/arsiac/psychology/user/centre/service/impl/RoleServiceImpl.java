@@ -1,5 +1,6 @@
 package top.arsiac.psychology.user.centre.service.impl;
 
+import org.springframework.stereotype.Service;
 import top.arsiac.psychology.user.centre.pojo.dto.RoleDTO;
 import top.arsiac.psychology.user.centre.pojo.entity.RoleEntity;
 import top.arsiac.psychology.user.centre.dao.RoleMapper;
@@ -18,6 +19,7 @@ import java.util.List;
  * @version 1.0
  * @since 2021/1/31
  */
+@Service
 public class RoleServiceImpl implements RoleService {
     /**
      * 权力 dao

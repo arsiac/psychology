@@ -1,6 +1,7 @@
 package top.arsiac.psychology.user.centre.api;
 
 import org.springframework.web.bind.annotation.*;
+import top.arsiac.psychology.user.centre.pojo.dto.UserDTO;
 import top.arsiac.psychology.user.centre.pojo.vo.UserVO;
 
 import java.util.List;
@@ -21,16 +22,18 @@ public interface UserApi {
      * @return 全部用户
      * */
     @GetMapping("/all")
+    @ResponseBody
     List<UserVO> queryAll();
 
     /**
      * <p>模糊查询</p>
      *
-     * @param vo 用户信息
+     * @param dto 用户信息
      * @return 查询结果
      * */
     @GetMapping
-    List<UserVO> queryFuzzy(UserVO vo);
+    @ResponseBody
+    List<UserVO> queryFuzzy(@RequestBody UserDTO dto);
 
     /**
      * <p>根据id查询</p>
@@ -39,50 +42,56 @@ public interface UserApi {
      * @return 查询结果
      * */
     @GetMapping("/{id}")
+    @ResponseBody
     UserVO queryById(@PathVariable Long id);
 
     /**
      * <p>添加新用户</p>
      *
-     * @param vo 用户信息
+     * @param dto 用户信息
      * @return 是否成功
      */
     @PostMapping
-    boolean add(UserVO vo);
+    @ResponseBody
+    boolean add(@RequestBody UserDTO dto);
 
     /**
      * <p>批量添加新用户</p>
      *
-     * @param voList 用户信息
+     * @param dtoList 用户信息
      * @return 是否成功
      */
     @PostMapping("/batch")
-    boolean batchAdd(List<UserVO> voList);
+    @ResponseBody
+    boolean batchAdd(@RequestBody List<UserDTO> dtoList);
 
     /**
      * <p>更新用户</p>
      *
-     * @param vo 用户信息
+     * @param dto 用户信息
      * @return 是否成功
      */
     @PutMapping
-    boolean modify(UserVO vo);
+    @ResponseBody
+    boolean modify(@RequestBody UserDTO dto);
 
     /**
      * <p>删除用户</p>
      *
-     * @param vo 用户信息 id version
+     * @param dto 用户信息 id version
      * @return 是否成功
      */
     @DeleteMapping
-    boolean remove(UserVO vo);
+    @ResponseBody
+    boolean remove(@RequestBody UserDTO dto);
 
     /**
      * <p>批量删除用户</p>
      *
-     * @param voList 用户信息
+     * @param dtoList 用户信息
      * @return 是否成功
      */
     @DeleteMapping("/batch")
-    boolean batchRemove(List<UserVO> voList);
+    @ResponseBody
+    boolean batchRemove(@RequestBody List<UserDTO> dtoList);
 }

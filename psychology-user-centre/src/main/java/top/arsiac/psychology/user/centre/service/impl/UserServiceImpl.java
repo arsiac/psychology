@@ -1,5 +1,6 @@
 package top.arsiac.psychology.user.centre.service.impl;
 
+import org.springframework.stereotype.Service;
 import top.arsiac.psychology.user.centre.pojo.dto.UserDTO;
 import top.arsiac.psychology.user.centre.pojo.entity.UserEntity;
 import top.arsiac.psychology.user.centre.dao.UserMapper;
@@ -18,6 +19,7 @@ import java.util.List;
  * @version 1.0
  * @since 2021/1/31
  */
+@Service
 public class UserServiceImpl implements UserService {
     /**
      * 用户 dao
