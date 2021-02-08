@@ -1,4 +1,4 @@
-package top.arsiac.psychology.gateway;
+package top.arsiac.psychology;
 
 
 import org.springframework.boot.SpringApplication;
