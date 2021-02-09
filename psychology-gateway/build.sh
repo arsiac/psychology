@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # docker 暴露端口
-expose_port=8080
+expose_port=8010
 
 # 系统对应端口
-application_port=8080
+application_port=8010
 
 # 应用名称
 application_name=psychology-gateway
