@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.*;
 import java.util.List;
 
@@ -35,8 +36,9 @@ public class CaptchaServiceImpl implements CaptchaService {
     /**
      * 图片大小
      */
-    private static final int IMAGE_WIDTH = 100;
+    private static final int IMAGE_WIDTH = 120;
     private static final int IMAGE_HEIGHT = 40;
+    private static final int IMAGE_PADDING = 20;
 
     /**
      * 验证码长度
@@ -46,8 +48,8 @@ public class CaptchaServiceImpl implements CaptchaService {
     /**
      * 干扰横线数量
      * */
-    private  static final int MIN_LINE_NUMBER = 2;
-    private static final int MAX_LINE_NUMBER = 5;
+    private  static final int MIN_LINE_NUMBER = 4;
+    private static final int MAX_LINE_NUMBER = 10;
 
     /**
      * 色彩范围, 255为白色，颜色太浅
@@ -55,17 +57,12 @@ public class CaptchaServiceImpl implements CaptchaService {
     private static final int COLOR_RANGE = 225;
 
     /**
-     * 白色
-     */
-    private static final Color WHITE = new Color(255, 255, 255);
-
-    /**
      * 字体路径
      */
     private static final String[] FONTS_PATH = {
-            "fonts/JetBrainsMono-Regular.ttf",
-            "fonts/Pineapple-Grass.ttf",
-            "fonts/HAPPY-DONUTS.ttf"
+            "/fonts/JetBrainsMono-Regular.ttf",
+            "/fonts/Pineapple-Grass.ttf",
+            "fonts/Rhetoric-Book.ttf"
     };
 
     /**
@@ -98,10 +95,14 @@ public class CaptchaServiceImpl implements CaptchaService {
             '6', '7', '8', '9'
     };
 
-    /*
+    public CaptchaServiceImpl() {
+        initialize();
+    }
+
+    /**
      * 加载字体
      * */
-    static {
+    private static void initialize() {
         // 内部字体
         FONT_LIST.add(new Font(Font.DIALOG, Font.PLAIN, 1));
         FONT_LIST.add(new Font(Font.SANS_SERIF, Font.PLAIN, 1));
@@ -109,12 +110,13 @@ public class CaptchaServiceImpl implements CaptchaService {
         FONT_LIST.add(new Font(Font.MONOSPACED, Font.PLAIN, 1));
 
         // 自定义字体
+        LOGGER.info("根路径: {}", System.class.getResource("/"));
         for (String path : FONTS_PATH) {
-            String absolutePath = System.class.getResource(path).getPath();
-            LOGGER.info("字体路径: {} -> {}", path, absolutePath);
-            if (absolutePath != null) {
+            URL url = System.class.getResource(path);
+            LOGGER.info("字体路径: {} -> {}", path, url);
+            if (url != null) {
                 try {
-                    FONT_LIST.add(loadFont(absolutePath));
+                    FONT_LIST.add(loadFont(url.getPath()));
                 } catch (Exception e) {
                     LOGGER.error("加载字体失败", e);
                 }
@@ -186,7 +188,7 @@ public class CaptchaServiceImpl implements CaptchaService {
         BufferedImage imageBuffer = new BufferedImage(IMAGE_WIDTH, IMAGE_HEIGHT, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = (Graphics2D) imageBuffer.getGraphics();
         // 白色背景
-        graphics.setColor(WHITE);
+        graphics.setColor(Color.WHITE);
         graphics.fillRect(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
 
         // 生成验证码
@@ -196,7 +198,9 @@ public class CaptchaServiceImpl implements CaptchaService {
         }
 
         // 缓存验证码
-        CAPTCHA_CACHE.put(uuid, new String(captcha));
+        String captchaString = new String(captcha);
+        CAPTCHA_CACHE.put(uuid, captchaString);
+        LOGGER.info("生成验证码: {} -> {}", uuid, captchaString);
 
         // 绘制验证码
         for (int i=0; i < CAPTCHA_LENGTH; i++) {
@@ -204,8 +208,8 @@ public class CaptchaServiceImpl implements CaptchaService {
             graphics.setColor(randomColor());
             graphics.setFont(randomFont());
             graphics.drawBytes(captcha, i, 1,
-                    i * IMAGE_WIDTH / CAPTCHA_LENGTH + 3,
-                    RANDOM.nextInt(7) + 3);
+                    i * (IMAGE_WIDTH - IMAGE_PADDING) / CAPTCHA_LENGTH + IMAGE_PADDING / 2,
+                    IMAGE_HEIGHT - RANDOM.nextInt(10) - 5);
         }
 
         // 绘制横线

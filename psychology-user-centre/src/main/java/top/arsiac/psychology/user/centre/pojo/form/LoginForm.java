@@ -23,6 +23,11 @@ public class LoginForm {
      * */
     private String code;
 
+    /**
+     * 验证码 id
+     * */
+    private Long uuid;
+
     public String getUsername() {
         return username;
     }
@@ -45,5 +50,13 @@ public class LoginForm {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Long getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(Long uuid) {
+        this.uuid = uuid;
     }
 }

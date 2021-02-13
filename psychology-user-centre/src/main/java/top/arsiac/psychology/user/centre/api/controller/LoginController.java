@@ -7,9 +7,17 @@ import top.arsiac.psychology.user.centre.api.LoginApi;
 import top.arsiac.psychology.user.centre.pojo.dto.UserDTO;
 import top.arsiac.psychology.user.centre.pojo.entity.TokenEntity;
 import top.arsiac.psychology.user.centre.pojo.form.LoginForm;
+import top.arsiac.psychology.user.centre.service.CaptchaService;
 import top.arsiac.psychology.user.centre.service.TokenService;
 import top.arsiac.psychology.user.centre.service.UserService;
+import top.arsiac.psychology.utils.common.IdGenerator;
 import top.arsiac.psychology.utils.exception.PsychologyErrorCode;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * <p>登录接口实现</p>
@@ -20,6 +28,7 @@ import top.arsiac.psychology.utils.exception.PsychologyErrorCode;
  */
 @RestController
 public class LoginController implements LoginApi {
+
     /**
      * token 服务
      * */
@@ -29,6 +38,16 @@ public class LoginController implements LoginApi {
      * 用户服务
      * */
     private UserService userService;
+
+    /**
+     * 验证码服务
+     * */
+    private CaptchaService captchaService;
+
+    /**
+     * id 生成
+     * */
+    private IdGenerator idGenerator;
 
 
     @Override
@@ -42,6 +61,14 @@ public class LoginController implements LoginApi {
         }
         if (StringUtils.isBlank(loginForm.getPassword())) {
             throw PsychologyErrorCode.PASSWORD_IS_EMPTY.createException();
+        }
+        if (loginForm.getUuid() == null) {
+            throw PsychologyErrorCode.CAPTURE_WRONG.createException("captcha uuid is null");
+        }
+
+        // 验证码错误
+        if (!captchaService.validate(loginForm.getUuid(), loginForm.getCode())) {
+            throw PsychologyErrorCode.CAPTURE_WRONG.createException();
         }
 
         /*
@@ -60,6 +87,21 @@ public class LoginController implements LoginApi {
         return false;
     }
 
+    @Override
+    public void captcha(HttpServletResponse response) throws IOException {
+        long uuid = idGenerator.generate();
+        response.reset();
+        response.setHeader("Captcha-Id", String.valueOf(uuid));
+        response.setHeader("Cache-Control", "no-store, no-cache");
+        response.setContentType("image/png");
+
+        //获取图片验证码
+        BufferedImage image = captchaService.generateCaptcha(uuid);
+        ServletOutputStream out = response.getOutputStream();
+        ImageIO.write(image, "png", out);
+        out.flush();
+    }
+
     @Autowired
     public void setTokenService(TokenService tokenService) {
         this.tokenService = tokenService;
@@ -68,5 +110,15 @@ public class LoginController implements LoginApi {
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Autowired
+    public void setCaptchaService(CaptchaService captchaService) {
+        this.captchaService = captchaService;
+    }
+
+    @Autowired
+    public void setIdGenerator(IdGenerator idGenerator) {
+        this.idGenerator = idGenerator;
     }
 }

@@ -33,8 +33,9 @@ public enum PsychologyErrorCode {
     PASSWORD_IS_EMPTY(1015, "密码为空"),
     CAPTURE_IS_EMPTY(1016, "验证码为空"),
     USERNAME_OR_PASSWORD_ERROR(1017, "用户名不存在或密码错误"),
+    CAPTURE_WRONG(1018, "验证错误"),
 
-    LOAD_FONT_ERROR(1018, "加载字体出错");
+    LOAD_FONT_ERROR(1019, "加载字体出错");
 
     /**
      * 错误码

@@ -1,5 +1,5 @@
 server:
-  port: 8060
+  port: 8080
   servlet:
     context-path: /centre
 
@@ -37,7 +37,7 @@ eureka:
     # 不获取服务注册信息
     fetch-registry: false
     service-url:
-      defaultZone: http://127.0.0.1:8070/eureka
+      defaultZone: http://47.110.247.139:8000/eureka
 
   instance:
     # 提供IP地址
