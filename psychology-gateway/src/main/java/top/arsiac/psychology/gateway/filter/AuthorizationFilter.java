@@ -31,8 +31,8 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
      * 不需要token的请求路径
      * */
     private static final String[] PATH_NOT_NEED_AUTHORIZATION = {
-            "/user/login",
-            "/user/logout"
+            "/centre/login",
+            "/centre/logout"
     };
 
     @Override
