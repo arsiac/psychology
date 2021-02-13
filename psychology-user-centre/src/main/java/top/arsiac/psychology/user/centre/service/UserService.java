@@ -37,6 +37,14 @@ public interface UserService {
     UserDTO queryById(Long id);
 
     /**
+     * <p>根据用户名查询</p>
+     *
+     * @param name 用户名
+     * @return 查询结果
+     * */
+    UserDTO queryByName(String name);
+
+    /**
      * <p>添加新用户</p>
      *
      * @param dto 用户信息

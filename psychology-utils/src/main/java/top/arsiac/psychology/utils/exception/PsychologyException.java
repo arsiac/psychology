@@ -14,38 +14,46 @@ public class PsychologyException extends RuntimeException {
     private final int code;
 
     /**
-     * 错误细节 (后端看到)
+     * 错误信息
+     * */
+    private final String brief;
+
+    /**
+     * 错误细节
      * */
     private final String detail;
 
     /**
      * @param code 错误码
-     * @param message 错误信息
+     * @param brief 错误信息
      * @param detail 详细信息
      * */
-    public PsychologyException(int code, String message, String detail) {
-        super(message);
+    public PsychologyException(int code, String brief, String detail) {
+        super(detail == null || "".equals(detail) ?
+                String.format("%s(%d)", brief, code) :
+                String.format("%s(%d) -> %s", brief, code, detail));
+        this.brief = brief;
         this.code = code;
         this.detail = detail == null ? "" : detail;
     }
 
     /**
      * @param code 错误码
-     * @param message 错误信息
+     * @param brief 错误信息
      * */
-    public PsychologyException(int code, String message) {
-        super(message);
-        this.code = code;
-        this.detail = "";
+    public PsychologyException(int code, String brief) {
+        this(code, brief, "");
     }
 
     /**
-     * @param message 错误信息
+     * @param brief 错误信息
      * */
-    public PsychologyException(String message) {
-        super(message);
-        this.code = 0;
-        this.detail = "";
+    public PsychologyException(String brief) {
+        this(0, brief);
+    }
+
+    public String getBrief() {
+        return brief;
     }
 
     public String getDetail() {
@@ -54,12 +62,5 @@ public class PsychologyException extends RuntimeException {
 
     public int getCode() {
         return code;
-    }
-
-    /**
-     * <p>获取全部错误信息 (message(code) -> detail)</p>
-     * */
-    public String getMainMessage() {
-        return "".equals(detail) ? super.getMessage() : String.format("%s(%d) -> %s", super.getMessage(), code, detail);
     }
 }

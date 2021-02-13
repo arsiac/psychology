@@ -41,6 +41,14 @@ public interface UserMapper {
     UserEntity selectById(@Param("id") Long id);
 
     /**
+     * <p>根据用户名查询</p>
+     *
+     * @param name 用户名
+     * @return 用户信息
+     */
+    UserEntity selectByUsername(@Param("name") String name);
+
+    /**
      * <p>增加用户</p>
      *
      * @param user 用户信息

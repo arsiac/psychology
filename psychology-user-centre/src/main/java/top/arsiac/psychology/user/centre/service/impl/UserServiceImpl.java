@@ -1,5 +1,6 @@
 package top.arsiac.psychology.user.centre.service.impl;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import top.arsiac.psychology.user.centre.pojo.dto.UserDTO;
 import top.arsiac.psychology.user.centre.pojo.entity.UserEntity;
@@ -54,6 +55,14 @@ public class UserServiceImpl implements UserService {
             throw PsychologyErrorCode.ID_IS_NULL.createException();
         }
         return BeanCopy.copy(userMapper.selectById(id), UserDTO.class);
+    }
+
+    @Override
+    public UserDTO queryByName(String name) {
+        if (StringUtils.isBlank(name)) {
+            throw PsychologyErrorCode.USERNAME_IS_EMPTY.createException();
+        }
+        return BeanCopy.copy(userMapper.selectByUsername(name), UserDTO.class);
     }
 
     @Override

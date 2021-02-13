@@ -36,6 +36,10 @@
         SELECT * FROM psychology_user_centre.user WHERE id = #{id}
     </select>
 
+    <select id="selectByUsername" resultMap="userMap" parameterType="java.lang.String">
+        SELECT * FROM psychology_user_centre.user WHERE username = #{name}
+    </select>
+
     <!-- 插入 版本为1 时间为当前时间 -->
     <insert id="insert" parameterType="top.arsiac.psychology.user.centre.pojo.entity.UserEntity">
         INSERT INTO psychology_user_centre.user

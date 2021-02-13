@@ -24,7 +24,17 @@ public enum PsychologyErrorCode {
     DATA_ALREADY_EXIST(1010, "数据已经存在"),
     INSERT_FAILED(1011, "插入失败"),
     DELETE_FAILED(1012, "删除失败"),
-    DATA_IS_EMPTY(1013, "传入数据为空");
+    DATA_IS_EMPTY(1013, "传入数据为空"),
+
+    /*
+     * 登录
+     * */
+    USERNAME_IS_EMPTY(1014, "用户名为空"),
+    PASSWORD_IS_EMPTY(1015, "密码为空"),
+    CAPTURE_IS_EMPTY(1016, "验证码为空"),
+    USERNAME_OR_PASSWORD_ERROR(1017, "用户名不存在或密码错误"),
+
+    LOAD_FONT_ERROR(1018, "加载字体出错");
 
     /**
      * 错误码
