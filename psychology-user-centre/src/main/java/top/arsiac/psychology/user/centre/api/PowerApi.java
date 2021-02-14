@@ -17,7 +17,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RequestMapping("/power")
-@Api(value = "/centre/power", tags = "权力管理")
+@Api(tags = "权力管理")
 public interface PowerApi {
     /**
      * <p>查找全部</p>

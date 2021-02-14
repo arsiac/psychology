@@ -1,5 +1,7 @@
 package top.arsiac.psychology.user.centre.api;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import top.arsiac.psychology.user.centre.pojo.dto.UserDTO;
 import top.arsiac.psychology.user.centre.pojo.vo.UserVO;
@@ -13,6 +15,7 @@ import java.util.List;
  * @version 1.0
  * @since  2021/1/27
  */
+@Api(tags = "用户管理")
 @CrossOrigin
 @RequestMapping(value = "/user")
 public interface UserApi {
@@ -21,6 +24,7 @@ public interface UserApi {
      *
      * @return 全部用户
      * */
+    @ApiOperation("查询全部")
     @GetMapping("/all")
     @ResponseBody
     List<UserVO> queryAll();
@@ -31,6 +35,7 @@ public interface UserApi {
      * @param dto 用户信息
      * @return 查询结果
      * */
+    @ApiOperation("模糊查询")
     @GetMapping
     @ResponseBody
     List<UserVO> queryFuzzy(@RequestBody UserDTO dto);
@@ -41,6 +46,7 @@ public interface UserApi {
      * @param id 用户id
      * @return 查询结果
      * */
+    @ApiOperation("根据id查询")
     @GetMapping("/{id}")
     @ResponseBody
     UserVO queryById(@PathVariable Long id);
@@ -51,6 +57,7 @@ public interface UserApi {
      * @param dto 用户信息
      * @return 是否成功
      */
+    @ApiOperation("新增")
     @PostMapping
     @ResponseBody
     boolean add(@RequestBody UserDTO dto);
@@ -61,6 +68,7 @@ public interface UserApi {
      * @param dtoList 用户信息
      * @return 是否成功
      */
+    @ApiOperation("批量新增")
     @PostMapping("/batch")
     @ResponseBody
     boolean batchAdd(@RequestBody List<UserDTO> dtoList);
@@ -71,6 +79,7 @@ public interface UserApi {
      * @param dto 用户信息
      * @return 是否成功
      */
+    @ApiOperation("修改")
     @PutMapping
     @ResponseBody
     boolean modify(@RequestBody UserDTO dto);
@@ -81,6 +90,7 @@ public interface UserApi {
      * @param dto 用户信息 id version
      * @return 是否成功
      */
+    @ApiOperation("删除")
     @DeleteMapping
     @ResponseBody
     boolean remove(@RequestBody UserDTO dto);
@@ -91,6 +101,7 @@ public interface UserApi {
      * @param dtoList 用户信息
      * @return 是否成功
      */
+    @ApiOperation("批量删除")
     @DeleteMapping("/batch")
     @ResponseBody
     boolean batchRemove(@RequestBody List<UserDTO> dtoList);

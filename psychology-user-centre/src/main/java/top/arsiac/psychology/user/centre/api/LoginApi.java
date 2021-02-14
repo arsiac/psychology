@@ -1,5 +1,7 @@
 package top.arsiac.psychology.user.centre.api;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import top.arsiac.psychology.user.centre.pojo.dto.UserDTO;
 import top.arsiac.psychology.user.centre.pojo.entity.TokenEntity;
@@ -15,6 +17,7 @@ import java.io.IOException;
  * @version 1.0
  * @since  2021/2/11
  */
+@Api(tags = "登录登出管理")
 @CrossOrigin
 public interface LoginApi {
 
@@ -24,6 +27,7 @@ public interface LoginApi {
      * @param loginForm 登录数据
      * @return token
      */
+    @ApiOperation("登录")
     @PostMapping("/login")
     TokenEntity login(@RequestBody LoginForm loginForm);
 
@@ -33,6 +37,7 @@ public interface LoginApi {
      * @param dto 用户信息
      * @return 是否成功
      */
+    @ApiOperation("登出")
     @PostMapping("/logout")
     boolean logout(@RequestBody UserDTO dto);
 
@@ -42,7 +47,7 @@ public interface LoginApi {
      * @param response 回复
      * @throws IOException 写文件错误
      */
+    @ApiOperation("获取验证码")
     @GetMapping("/captcha")
-    @ResponseBody
     void captcha(HttpServletResponse response) throws IOException;
 }

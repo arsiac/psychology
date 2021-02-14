@@ -3,6 +3,7 @@ package top.arsiac.psychology;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
  * <p>心理学院-用户中心</p>
@@ -11,6 +12,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * @version 1.0
  * @since  2021/1/27
  */
+@EnableOpenApi
 @EnableEurekaClient
 @SpringBootApplication
 public class PsychologyUserCentreApplication {

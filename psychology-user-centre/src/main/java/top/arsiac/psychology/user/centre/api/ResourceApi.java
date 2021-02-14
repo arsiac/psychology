@@ -1,5 +1,7 @@
 package top.arsiac.psychology.user.centre.api;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import top.arsiac.psychology.user.centre.pojo.dto.ResourceDTO;
 import top.arsiac.psychology.user.centre.pojo.vo.ResourceVO;
@@ -13,6 +15,7 @@ import java.util.List;
  * @version 1.0
  * @since  2021/2/2
  */
+@Api(tags = "资源管理")
 @CrossOrigin
 @RequestMapping("/resource")
 public interface ResourceApi {
@@ -21,6 +24,7 @@ public interface ResourceApi {
      *
      * @return 全部资源
      * */
+    @ApiOperation("查询全部")
     @GetMapping("/all")
     List<ResourceVO> queryAll();
 
@@ -30,6 +34,7 @@ public interface ResourceApi {
      * @param dto 资源信息
      * @return 查询结果
      * */
+    @ApiOperation("模糊查询")
     @GetMapping
     List<ResourceVO> queryFuzzy(@RequestBody ResourceDTO dto);
 
@@ -39,6 +44,7 @@ public interface ResourceApi {
      * @param id 资源id
      * @return 查询结果
      * */
+    @ApiOperation("根据id查询")
     @GetMapping("/{id}")
     ResourceVO queryById(@PathVariable Long id);
 
@@ -48,6 +54,7 @@ public interface ResourceApi {
      * @param dto 资源信息
      * @return 是否成功
      */
+    @ApiOperation("新增")
     @PostMapping
     boolean add(@RequestBody ResourceDTO dto);
 
@@ -57,6 +64,7 @@ public interface ResourceApi {
      * @param dtoList 资源信息
      * @return 是否成功
      */
+    @ApiOperation("批量新增")
     @PostMapping("/batch")
     boolean batchAdd(@RequestBody List<ResourceDTO> dtoList);
 
@@ -66,6 +74,7 @@ public interface ResourceApi {
      * @param dto 资源信息
      * @return 是否成功
      */
+    @ApiOperation("修改")
     @PutMapping
     boolean modify(@RequestBody ResourceDTO dto);
 
@@ -75,6 +84,7 @@ public interface ResourceApi {
      * @param dto 资源信息 id version
      * @return 是否成功
      */
+    @ApiOperation("删除")
     @DeleteMapping
     boolean remove(@RequestBody ResourceDTO dto);
 
@@ -84,6 +94,7 @@ public interface ResourceApi {
      * @param dtoList 资源信息
      * @return 是否成功
      */
+    @ApiOperation("批量删除")
     @DeleteMapping("/batch")
     boolean batchRemove(@RequestBody List<ResourceDTO> dtoList);
 }

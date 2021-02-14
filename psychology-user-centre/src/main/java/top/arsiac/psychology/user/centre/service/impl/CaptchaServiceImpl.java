@@ -62,7 +62,7 @@ public class CaptchaServiceImpl implements CaptchaService {
     private static final String[] FONTS_PATH = {
             "/fonts/JetBrainsMono-Regular.ttf",
             "/fonts/Pineapple-Grass.ttf",
-            "fonts/Rhetoric-Book.ttf"
+            "/fonts/Rhetoric-Book.ttf"
     };
 
     /**
@@ -110,7 +110,6 @@ public class CaptchaServiceImpl implements CaptchaService {
         FONT_LIST.add(new Font(Font.MONOSPACED, Font.PLAIN, 1));
 
         // 自定义字体
-        LOGGER.info("根路径: {}", System.class.getResource("/"));
         for (String path : FONTS_PATH) {
             URL url = System.class.getResource(path);
             LOGGER.info("字体路径: {} -> {}", path, url);
