@@ -8,9 +8,9 @@ logging:
 # 消费者
 eureka:
   instance:
-    # 提供ip地址
     prefer-ip-address: true
     ip-address: 47.110.247.139
+    instance-id: 47.110.247.139:${server.port}
   client:
     service-url:
       defaultZone: http://47.110.247.139:8000/eureka

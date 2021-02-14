@@ -3,6 +3,16 @@ server:
   servlet:
     context-path: /centre
 
+# 服务提供者
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 47.110.247.139
+    instance-id: 47.110.247.139:${server.port}
+  client:
+    service-url:
+      defaultZone: http://47.110.247.139:8000/eureka
+
 snow-flake:
   machine-id: 1
   room-id: 2
@@ -25,22 +35,9 @@ spring:
       max-lifetime: 1800000
       connection-timeout: 30000
       auto-commit: true
-      pool-name: user_centre__db_pool
+      pool-name: user_centre_db_pool
 
 logging:
   level:
     root: info
 
-# 服务提供者
-eureka:
-  client:
-    # 不获取服务注册信息
-    fetch-registry: false
-    service-url:
-      defaultZone: http://47.110.247.139:8000/eureka
-
-  instance:
-    # 提供IP地址
-    prefer-ip-address: true
-    # 指定自己的ip信息，不指定的话会自己寻找
-    ip-address: 127.0.0.1
