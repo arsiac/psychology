@@ -25,4 +25,9 @@ public interface CaptchaService {
      * @return  true：成功  false：失败
      */
     boolean validate(long uuid, String code);
+
+    /**
+     * 从缓存移除过期验证码信息
+     * */
+    void removeInvalidCaptcha();
 }

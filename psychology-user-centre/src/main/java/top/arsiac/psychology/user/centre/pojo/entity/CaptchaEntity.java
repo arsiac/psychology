@@ -18,7 +18,7 @@ public class CaptchaEntity {
     /**
      * 过期时间
      * */
-    private Date expireTime;
+    private Long expireTime;
 
     public String getCode() {
         return code;
@@ -28,11 +28,19 @@ public class CaptchaEntity {
         this.code = code;
     }
 
-    public Date getExpireTime() {
+    public Long getExpireTime() {
         return expireTime;
     }
 
-    public void setExpireTime(Date expireTime) {
+    public void setExpireTime(Long expireTime) {
         this.expireTime = expireTime;
+    }
+
+    @Override
+    public String toString() {
+        return "CaptchaEntity{" +
+                "code='" + code + '\'' +
+                ", expireTime=" + expireTime +
+                '}';
     }
 }

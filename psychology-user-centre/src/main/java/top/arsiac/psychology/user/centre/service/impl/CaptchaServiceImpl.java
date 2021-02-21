@@ -3,6 +3,7 @@ package top.arsiac.psychology.user.centre.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import top.arsiac.psychology.user.centre.pojo.entity.CaptchaEntity;
 import top.arsiac.psychology.user.centre.service.CaptchaService;
 import top.arsiac.psychology.utils.exception.PsychologyErrorCode;
 
@@ -31,7 +32,12 @@ public class CaptchaServiceImpl implements CaptchaService {
     /**
      * 验证缓存
      * */
-    private static final Map<Long, String> CAPTCHA_CACHE = new HashMap<>(64);
+    private static final Map<Long, CaptchaEntity> CAPTCHA_CACHE = new HashMap<>(64);
+
+    /**
+     * 过期时间 5min
+     * */
+    private static final long EXPIRE_TIME = 300000L;
 
     /**
      * 图片大小
@@ -197,9 +203,11 @@ public class CaptchaServiceImpl implements CaptchaService {
         }
 
         // 缓存验证码
-        String captchaString = new String(captcha);
-        CAPTCHA_CACHE.put(uuid, captchaString);
-        LOGGER.info("生成验证码: {} -> {}", uuid, captchaString);
+        CaptchaEntity captchaEntity = new CaptchaEntity();
+        captchaEntity.setCode(new String(captcha));
+        captchaEntity.setExpireTime(System.currentTimeMillis() + EXPIRE_TIME);
+        CAPTCHA_CACHE.put(uuid, captchaEntity);
+        LOGGER.info("生成验证码: {}", captchaEntity);
 
         // 绘制验证码
         for (int i=0; i < CAPTCHA_LENGTH; i++) {
@@ -226,16 +234,27 @@ public class CaptchaServiceImpl implements CaptchaService {
 
     @Override
     public boolean validate(long uuid, String code) {
-        String captcha = CAPTCHA_CACHE.get(uuid);
-
-        // 不存在该验证码
-        if (captcha == null) {
+        if (code == null) {
             return false;
+        }
+        CaptchaEntity captcha = CAPTCHA_CACHE.get(uuid);
+
+        // 不存在该验证码 或 过期
+        if (captcha == null || captcha.getExpireTime() < System.currentTimeMillis()) {
+            throw PsychologyErrorCode.CAPTURE_INVALID.createException(String.format("uuid: %d", uuid));
         }
 
         // 删除缓存
         CAPTCHA_CACHE.remove(uuid);
 
-        return captcha.equals(code);
+        // 比较是否相同
+        return captcha.getCode().equalsIgnoreCase(code);
+    }
+
+    @Override
+    public void removeInvalidCaptcha() {
+        final long current = System.currentTimeMillis();
+        // 移除过期的验证码
+        CAPTCHA_CACHE.entrySet().removeIf(entityEntry -> current > entityEntry.getValue().getExpireTime());
     }
 }
