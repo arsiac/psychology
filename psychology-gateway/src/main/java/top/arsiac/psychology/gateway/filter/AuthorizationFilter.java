@@ -33,7 +33,8 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
     private static final String[] PATH_NOT_NEED_AUTHORIZATION = {
             "/centre/login",
             "/centre/logout",
-            "/centre/captcha"
+            "/centre/captcha",
+            "/centre/app"
     };
 
     @Override

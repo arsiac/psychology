@@ -50,4 +50,8 @@ public interface LoginApi {
     @ApiOperation("获取验证码")
     @GetMapping("/captcha")
     void captcha(HttpServletResponse response) throws IOException;
+
+    @ApiOperation("应用")
+    @GetMapping("/app")
+    String app();
 }

@@ -102,6 +102,11 @@ public class LoginController implements LoginApi {
         out.flush();
     }
 
+    @Override
+    public String app() {
+        return "Psychology User Centre";
+    }
+
     @Autowired
     public void setTokenService(TokenService tokenService) {
         this.tokenService = tokenService;
