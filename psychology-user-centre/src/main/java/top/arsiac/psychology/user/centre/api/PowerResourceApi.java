@@ -16,7 +16,6 @@ import java.util.List;
  * @since  2021/2/5
  */
 @Api(tags = "权力-资源管理")
-@CrossOrigin
 @RequestMapping("/power/resource")
 public interface PowerResourceApi {
     /**

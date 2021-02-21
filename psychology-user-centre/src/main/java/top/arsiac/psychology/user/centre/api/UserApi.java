@@ -16,7 +16,6 @@ import java.util.List;
  * @since  2021/1/27
  */
 @Api(tags = "用户管理")
-@CrossOrigin
 @RequestMapping(value = "/user")
 public interface UserApi {
     /**

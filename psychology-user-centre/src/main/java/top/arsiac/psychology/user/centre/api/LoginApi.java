@@ -18,7 +18,6 @@ import java.io.IOException;
  * @since  2021/2/11
  */
 @Api(tags = "登录登出管理")
-@CrossOrigin
 public interface LoginApi {
 
     /**

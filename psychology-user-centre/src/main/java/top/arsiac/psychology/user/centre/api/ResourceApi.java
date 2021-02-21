@@ -16,7 +16,6 @@ import java.util.List;
  * @since  2021/2/2
  */
 @Api(tags = "资源管理")
-@CrossOrigin
 @RequestMapping("/resource")
 public interface ResourceApi {
     /**

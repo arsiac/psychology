@@ -16,7 +16,6 @@ import java.util.List;
  * @since  2021/2/1
  */
 @Api(tags = "用户-角色管理")
-@CrossOrigin
 @RequestMapping("/user/role")
 public interface UserRoleApi {
     /**

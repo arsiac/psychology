@@ -15,7 +15,6 @@ import java.util.List;
  * @version 1.0
  * @since  2021/2/5
  */
-@CrossOrigin
 @RequestMapping("/power")
 @Api(tags = "权力管理")
 public interface PowerApi {

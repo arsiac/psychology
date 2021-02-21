@@ -16,7 +16,6 @@ import java.util.List;
  * @since  2021/2/2
  */
 @Api(tags = "角色-权力管理")
-@CrossOrigin
 @RequestMapping("/role/power")
 public interface RolePowerApi {
     /**
