@@ -1,6 +1,8 @@
 package top.arsiac.psychology.user.centre.api.controller;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import top.arsiac.psychology.user.centre.api.LoginApi;
@@ -28,6 +30,10 @@ import java.io.IOException;
  */
 @RestController
 public class LoginController implements LoginApi {
+    /**
+     * 日志
+     * */
+    private final Logger logger = LoggerFactory.getLogger("login");
 
     /**
      * token 服务
@@ -52,6 +58,7 @@ public class LoginController implements LoginApi {
 
     @Override
     public TokenEntity login(LoginForm loginForm) {
+        logger.info("登录信息: {}", loginForm);
         // 验证数据
         if (StringUtils.isBlank(loginForm.getCode())) {
             throw PsychologyErrorCode.CAPTURE_IS_EMPTY.createException();
@@ -75,8 +82,11 @@ public class LoginController implements LoginApi {
          * 查询用户, 比较密码
          * */
         UserDTO userDTO = userService.queryByName(loginForm.getUsername());
-        if (userDTO == null || !userDTO.getPassword().equals(loginForm.getPassword())) {
-            throw PsychologyErrorCode.USERNAME_OR_PASSWORD_ERROR.createException();
+        if (userDTO == null) {
+            throw PsychologyErrorCode.USERNAME_OR_PASSWORD_ERROR.createException("用户不存在");
+        }
+        if (!userDTO.getPassword().equals(loginForm.getPassword())) {
+            throw PsychologyErrorCode.USERNAME_OR_PASSWORD_ERROR.createException("密码错误");
         }
 
         return tokenService.createToken(userDTO);
@@ -90,7 +100,7 @@ public class LoginController implements LoginApi {
     @Override
     public void captcha(HttpServletResponse response) throws IOException {
         long uuid = idGenerator.generate();
-        response.reset();
+        response.setHeader("Access-Control-Expose-Headers", "Captcha-Id");
         response.setHeader("Captcha-Id", String.valueOf(uuid));
         response.setHeader("Cache-Control", "no-store, no-cache");
         response.setContentType("image/png");

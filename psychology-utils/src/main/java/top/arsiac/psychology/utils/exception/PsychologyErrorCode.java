@@ -9,33 +9,45 @@ package top.arsiac.psychology.utils.exception;
  */
 public enum PsychologyErrorCode {
     /**
-     * 创建目标对象失败
+     * 未知错误
+     * */
+    UNKNOWN_ERROR(9999, "未知错误"),
+    /**
+     * 对象拷贝
      * */
     CREATE_TARGET_OBJECT_FAILED(1001, "创建目标对象失败"),
     SOURCE_OBJECT_IS_NULL(1002, "源对象为空"),
     TARGET_OBJECT_IS_NULL(1003, "目标对象为空"),
-    INSERT_LIST_IS_EMPTY(1004, "增加列表为空"),
-    DELETE_LIST_IS_EMPTY(1005, "删除列表为空"),
-    ID_IS_NULL(1006, "id为null"),
-    ID_NOT_AVAILABLE(1007, "未提供id"),
-    VERSION_NOT_AVAILABLE(1008, "未提供版本"),
-    SOME_DATA_INSERT_FAILED(1009, "部分数据增加失败"),
-    SOME_DATA_DELETE_FAILED(1009, "部分数据删除失败"),
-    DATA_ALREADY_EXIST(1010, "数据已经存在"),
-    INSERT_FAILED(1011, "插入失败"),
-    DELETE_FAILED(1012, "删除失败"),
-    DATA_IS_EMPTY(1013, "传入数据为空"),
+
+    /**
+     * CURD
+     * */
+    INSERT_LIST_IS_EMPTY(2001, "增加列表为空"),
+    DELETE_LIST_IS_EMPTY(2002, "删除列表为空"),
+    ID_IS_NULL(2003, "id为null"),
+    ID_NOT_AVAILABLE(2004, "未提供id"),
+    VERSION_NOT_AVAILABLE(2005, "未提供版本"),
+    SOME_DATA_INSERT_FAILED(2006, "部分数据增加失败"),
+    SOME_DATA_DELETE_FAILED(2007, "部分数据删除失败"),
+    DATA_ALREADY_EXIST(2008, "数据已经存在"),
+    INSERT_FAILED(2009, "插入失败"),
+    DELETE_FAILED(2010, "删除失败"),
+    DATA_IS_EMPTY(2011, "传入数据为空"),
 
     /*
      * 登录
      * */
-    USERNAME_IS_EMPTY(1014, "用户名为空"),
-    PASSWORD_IS_EMPTY(1015, "密码为空"),
-    CAPTURE_IS_EMPTY(1016, "验证码为空"),
-    USERNAME_OR_PASSWORD_ERROR(1017, "用户名不存在或密码错误"),
-    CAPTURE_WRONG(1018, "验证错误"),
+    USERNAME_IS_EMPTY(3001, "用户名为空"),
+    PASSWORD_IS_EMPTY(3002, "密码为空"),
+    CAPTURE_IS_EMPTY(3003, "验证码为空"),
+    USERNAME_OR_PASSWORD_ERROR(3004, "用户名不存在或密码错误"),
+    CAPTURE_WRONG(3005, "验证错误"),
+    CAPTURE_INVALID(3006, "验证码已失效"),
 
-    LOAD_FONT_ERROR(1019, "加载字体出错");
+    /**
+     * 其他
+     * */
+    LOAD_FONT_ERROR(4001, "加载字体出错");
 
     /**
      * 错误码

@@ -59,4 +59,14 @@ public class LoginForm {
     public void setUuid(Long uuid) {
         this.uuid = uuid;
     }
+
+    @Override
+    public String toString() {
+        return "LoginForm{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", code='" + code + '\'' +
+                ", uuid=" + uuid +
+                '}';
+    }
 }
