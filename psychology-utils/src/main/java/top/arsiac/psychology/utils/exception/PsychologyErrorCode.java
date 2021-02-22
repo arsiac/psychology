@@ -35,14 +35,15 @@ public enum PsychologyErrorCode {
     DATA_IS_EMPTY(2011, "传入数据为空"),
 
     /*
-     * 登录
+     * 登录注册
      * */
     USERNAME_IS_EMPTY(3001, "用户名为空"),
     PASSWORD_IS_EMPTY(3002, "密码为空"),
     CAPTURE_IS_EMPTY(3003, "验证码为空"),
     USERNAME_OR_PASSWORD_ERROR(3004, "用户名不存在或密码错误"),
-    CAPTURE_WRONG(3005, "验证错误"),
+    CAPTURE_WRONG(3005, "验证码错误"),
     CAPTURE_INVALID(3006, "验证码已失效"),
+    USERNAME_ALREADY_EXIST(3007, "用户名已存在"),
 
     /**
      * 其他

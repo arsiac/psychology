@@ -19,6 +19,15 @@ import java.io.IOException;
  */
 @Api(tags = "登录登出管理")
 public interface LoginApi {
+    /**
+     * <p>注册</p>
+     *
+     * @param dto 用户信息
+     * @return 是否成功
+     */
+    @ApiOperation("注册")
+    @PostMapping("/register")
+    boolean register(@RequestBody UserDTO dto);
 
     /**
      * <p>登录</p>

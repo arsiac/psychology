@@ -1,8 +1,6 @@
 package top.arsiac.psychology.utils.aspect;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import org.apache.shiro.SecurityUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -27,7 +25,7 @@ import java.util.Date;
 @Aspect
 @Component
 public class SystemLoggerAspect {
-    private static final Logger logger = LoggerFactory.getLogger("系统日志");
+    private static final Logger logger = LoggerFactory.getLogger(SystemLoggerAspect.class);
 
     @Pointcut("@annotation(top.arsiac.psychology.utils.annotation.SystemLogger)")
     public void pointCut() {
@@ -75,23 +73,17 @@ public class SystemLoggerAspect {
 
         String params = JSON.toJSONString(args);
         logDetail.setParams(params);
-
-        //用户名
-        String userInfo = JSON.toJSONString(SecurityUtils.getSubject().getPrincipal());
-        JSONObject jsonObject = JSON.parseObject(userInfo);
-        logDetail.setUsername(jsonObject.getString("username"));
-
         logDetail.setTime(time);
+
         // 操作产生的时间
         logDetail.setCreateDate(new Date());
 
         // 日志内容
-        String stringBuilder = "==> 用户名:" + logDetail.getUsername() +
-                "\n==> 描述:" + logDetail.getOperation() +
+        String stringBuilder = "==> 描述:" + logDetail.getOperation() +
                 "\n==> 方法: " + logDetail.getMethod() +
                 "\n==> 参数: " + logDetail.getParams() +
-                "\n==> 使用时间: " + logDetail.getTime() +
-                "\n==> 调用时间: " + logDetail.getCreateDate();
+                "\n==> 花费时间: " + logDetail.getTime() +
+                "ms\n==> 调用时间: " + logDetail.getCreateDate();
 
         // 打印日志
         logger.info(stringBuilder);

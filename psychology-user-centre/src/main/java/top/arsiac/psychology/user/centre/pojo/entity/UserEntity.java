@@ -27,6 +27,11 @@ public class UserEntity {
 	private String password;
 
 	/**
+	 * 盐
+	 * */
+	private String salt;
+
+	/**
 	 * 创建者
 	 */
 	private Long createBy;
@@ -111,6 +116,14 @@ public class UserEntity {
 
 	public void setVersion(Integer version) {
 		this.version = version;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 	@Override

@@ -12,6 +12,8 @@ import top.arsiac.psychology.user.centre.pojo.form.LoginForm;
 import top.arsiac.psychology.user.centre.service.CaptchaService;
 import top.arsiac.psychology.user.centre.service.TokenService;
 import top.arsiac.psychology.user.centre.service.UserService;
+import top.arsiac.psychology.utils.annotation.SystemLogger;
+import top.arsiac.psychology.utils.common.CommonTool;
 import top.arsiac.psychology.utils.common.IdGenerator;
 import top.arsiac.psychology.utils.exception.PsychologyErrorCode;
 
@@ -26,36 +28,54 @@ import java.io.IOException;
  *
  * @author arsiac
  * @version 1.0
- * @since  2021/2/11
+ * @since 2021/2/11
  */
 @RestController
 public class LoginController implements LoginApi {
     /**
      * 日志
-     * */
-    private final Logger logger = LoggerFactory.getLogger("login");
+     */
+    private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     /**
      * token 服务
-     * */
+     */
     private TokenService tokenService;
 
     /**
      * 用户服务
-     * */
+     */
     private UserService userService;
 
     /**
      * 验证码服务
-     * */
+     */
     private CaptchaService captchaService;
 
     /**
      * id 生成
-     * */
+     */
     private IdGenerator idGenerator;
 
+    @SystemLogger
+    @Override
+    public boolean register(UserDTO dto) {
+        if (StringUtils.isBlank(dto.getUsername())) {
+            throw PsychologyErrorCode.USERNAME_IS_EMPTY.createException();
+        }
+        UserDTO userDTO = userService.queryByName(dto.getUsername());
+        if (userDTO != null) {
+            throw PsychologyErrorCode.USERNAME_ALREADY_EXIST.createException(userDTO.getUsername());
+        }
 
+        final String password = dto.getPassword();
+        dto.setSalt(CommonTool.randomString(32));
+        logger.info("用户注册 密码：{}, 盐： {}", password, dto.getSalt());
+        dto.setPassword(CommonTool.encrypt(password, dto.getSalt()));
+        return userService.add(dto);
+    }
+
+    @SystemLogger
     @Override
     public TokenEntity login(LoginForm loginForm) {
         logger.info("登录信息: {}", loginForm);
@@ -85,13 +105,21 @@ public class LoginController implements LoginApi {
         if (userDTO == null) {
             throw PsychologyErrorCode.USERNAME_OR_PASSWORD_ERROR.createException("用户不存在");
         }
-        if (!userDTO.getPassword().equals(loginForm.getPassword())) {
-            throw PsychologyErrorCode.USERNAME_OR_PASSWORD_ERROR.createException("密码错误");
+
+        // 加密后比较密码
+        final String encryptPassword = CommonTool.encrypt(loginForm.getPassword(), userDTO.getSalt());
+
+        if (!userDTO.getPassword().equals(encryptPassword)) {
+            throw PsychologyErrorCode.USERNAME_OR_PASSWORD_ERROR.createException(
+                    String.format("密码错误: %n==> 原密码: %s%n==> 输入: %s%n==> 盐: %s%n==> 加密后: %s%n",
+                            userDTO.getPassword(), loginForm.getPassword(), userDTO.getSalt(), encryptPassword)
+            );
         }
 
         return tokenService.createToken(userDTO);
     }
 
+    @SystemLogger
     @Override
     public boolean logout(UserDTO dto) {
         return false;

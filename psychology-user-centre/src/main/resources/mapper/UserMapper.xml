@@ -6,6 +6,7 @@
     <resultMap type="top.arsiac.psychology.user.centre.pojo.entity.UserEntity" id="userMap">
         <result property="id" column="id"/>
         <result property="username" column="username"/>
+        <result property="salt" column="salt"/>
         <result property="password" column="password"/>
         <result property="createBy" column="create_by"/>
         <result property="createTime" column="create_time"/>
@@ -43,8 +44,8 @@
     <!-- 插入 版本为1 时间为当前时间 -->
     <insert id="insert" parameterType="top.arsiac.psychology.user.centre.pojo.entity.UserEntity">
         INSERT INTO psychology_user_centre.user
-            (id, username, password, create_by, create_time, update_by, update_time, version)
-            VALUES (#{user.id}, #{user.username}, #{user.password},
+            (id, username, password, salt, create_by, create_time, update_by, update_time, version)
+            VALUES (#{user.id}, #{user.username}, #{user.password}, #{user.salt},
                     #{user.createBy}, CURRENT_TIMESTAMP(),
                     #{user.updateBy}, CURRENT_TIMESTAMP(), 1)
     </insert>
