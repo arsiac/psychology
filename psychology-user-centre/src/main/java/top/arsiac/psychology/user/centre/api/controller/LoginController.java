@@ -57,7 +57,7 @@ public class LoginController implements LoginApi {
      */
     private IdGenerator idGenerator;
 
-    @SystemLogger
+    @SystemLogger("注册")
     @Override
     public boolean register(UserDTO dto) {
         if (StringUtils.isBlank(dto.getUsername())) {
@@ -70,15 +70,13 @@ public class LoginController implements LoginApi {
 
         final String password = dto.getPassword();
         dto.setSalt(CommonTool.randomString(32));
-        logger.info("用户注册 密码：{}, 盐： {}", password, dto.getSalt());
         dto.setPassword(CommonTool.encrypt(password, dto.getSalt()));
         return userService.add(dto);
     }
 
-    @SystemLogger
+    @SystemLogger("登录")
     @Override
     public TokenEntity login(LoginForm loginForm) {
-        logger.info("登录信息: {}", loginForm);
         // 验证数据
         if (StringUtils.isBlank(loginForm.getCode())) {
             throw PsychologyErrorCode.CAPTURE_IS_EMPTY.createException();
@@ -119,7 +117,7 @@ public class LoginController implements LoginApi {
         return tokenService.createToken(userDTO);
     }
 
-    @SystemLogger
+    @SystemLogger("登出")
     @Override
     public boolean logout(UserDTO dto) {
         return false;
