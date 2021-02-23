@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import top.arsiac.psychology.user.centre.pojo.dto.UserDTO;
 import top.arsiac.psychology.user.centre.pojo.entity.TokenEntity;
 import top.arsiac.psychology.user.centre.pojo.form.LoginForm;
+import top.arsiac.psychology.user.centre.pojo.form.RegisterForm;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -22,12 +23,12 @@ public interface LoginApi {
     /**
      * <p>注册</p>
      *
-     * @param dto 用户信息
+     * @param form 用户信息
      * @return 是否成功
      */
     @ApiOperation("注册")
     @PostMapping("/register")
-    boolean register(@RequestBody UserDTO dto);
+    boolean register(@RequestBody RegisterForm form);
 
     /**
      * <p>登录</p>
@@ -59,6 +60,11 @@ public interface LoginApi {
     @GetMapping("/captcha")
     void captcha(HttpServletResponse response) throws IOException;
 
+    /**
+     * <p>应用名称</p>
+     *
+     * @return 应用名称
+     */
     @ApiOperation("应用")
     @GetMapping("/app")
     String app();

@@ -9,10 +9,12 @@ import top.arsiac.psychology.user.centre.api.LoginApi;
 import top.arsiac.psychology.user.centre.pojo.dto.UserDTO;
 import top.arsiac.psychology.user.centre.pojo.entity.TokenEntity;
 import top.arsiac.psychology.user.centre.pojo.form.LoginForm;
+import top.arsiac.psychology.user.centre.pojo.form.RegisterForm;
 import top.arsiac.psychology.user.centre.service.CaptchaService;
 import top.arsiac.psychology.user.centre.service.TokenService;
 import top.arsiac.psychology.user.centre.service.UserService;
 import top.arsiac.psychology.utils.annotation.SystemLogger;
+import top.arsiac.psychology.utils.common.BeanCopy;
 import top.arsiac.psychology.utils.common.CommonTool;
 import top.arsiac.psychology.utils.common.IdGenerator;
 import top.arsiac.psychology.utils.exception.PsychologyErrorCode;
@@ -59,19 +61,27 @@ public class LoginController implements LoginApi {
 
     @SystemLogger("注册")
     @Override
-    public boolean register(UserDTO dto) {
-        if (StringUtils.isBlank(dto.getUsername())) {
+    public boolean register(RegisterForm form) {
+        if (StringUtils.isBlank(form.getUsername())) {
             throw PsychologyErrorCode.USERNAME_IS_EMPTY.createException();
         }
-        UserDTO userDTO = userService.queryByName(dto.getUsername());
+        UserDTO userDTO = userService.queryByName(form.getUsername());
         if (userDTO != null) {
             throw PsychologyErrorCode.USERNAME_ALREADY_EXIST.createException(userDTO.getUsername());
         }
 
-        final String password = dto.getPassword();
-        dto.setSalt(CommonTool.randomString(32));
-        dto.setPassword(CommonTool.encrypt(password, dto.getSalt()));
-        return userService.add(dto);
+        final String password = form.getPassword();
+
+        // 生成随机字符串作为盐
+        form.setSalt(CommonTool.randomString(32));
+
+        // 加密密码
+        form.setPassword(CommonTool.encrypt(password, form.getSalt()));
+
+        logger.info("用户注册: {}", form);
+
+        // 注册用户
+        return userService.add(BeanCopy.copy(form, UserDTO.class));
     }
 
     @SystemLogger("登录")
@@ -91,6 +101,7 @@ public class LoginController implements LoginApi {
             throw PsychologyErrorCode.CAPTURE_WRONG.createException("captcha uuid is null");
         }
 
+        logger.info("用户登录: {}", loginForm);
         // 验证码错误
         if (!captchaService.validate(loginForm.getUuid(), loginForm.getCode())) {
             throw PsychologyErrorCode.CAPTURE_WRONG.createException();
