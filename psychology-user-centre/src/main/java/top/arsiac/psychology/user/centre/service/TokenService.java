@@ -11,6 +11,11 @@ import top.arsiac.psychology.user.centre.pojo.entity.UserEntity;
  * @since  2021/2/10
  */
 public interface TokenService {
+    /**
+     * access token 过期时间 7day
+     * */
+    long ACCESS_EXPIRE_MILLISECOND = 604800000L;
+
 
     /**
      * <p>创建 token</p>
@@ -25,5 +30,5 @@ public interface TokenService {
      *
      * @param id 用户 id
      */
-    void invalidateToken(long id);
+    void invalidateToken(Long id);
 }

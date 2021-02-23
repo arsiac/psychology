@@ -130,7 +130,8 @@ public class LoginController implements LoginApi {
     @SystemLogger("登出")
     @Override
     public boolean logout(UserDTO dto) {
-        return false;
+        tokenService.invalidateToken(dto.getId());
+        return true;
     }
 
     @Override
