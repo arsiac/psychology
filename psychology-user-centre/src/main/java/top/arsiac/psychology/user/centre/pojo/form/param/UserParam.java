@@ -1,6 +1,6 @@
 package top.arsiac.psychology.user.centre.pojo.form.param;
 
-import top.arsiac.psychology.utils.common.PageParam;
+import top.arsiac.psychology.utils.entity.PageParam;
 
 /**
  * <p>用户搜索条件</p>

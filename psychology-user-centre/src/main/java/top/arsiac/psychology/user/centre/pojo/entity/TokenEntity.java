@@ -25,20 +25,11 @@ public class TokenEntity {
      * */
     private String accessToken;
 
-    /**
-     * refresh token
-     * */
-    private String refreshToken;
 
     /**
      * access token 过期时间
      * */
     private Date expireTime;
-
-    /**
-     * refresh token 过期时间
-     * */
-    private Date updateTime;
 
     public TokenEntity() {}
 
@@ -46,17 +37,13 @@ public class TokenEntity {
      * @param userId 用户 id
      * @param username 用户名
      * @param accessToken access token
-     * @param refreshToken refresh token
      * @param expireTime access token 过期时间
-     * @param updateTime refresh token 过期时间
      * */
-    public TokenEntity(Long userId, String username, String accessToken, String refreshToken, Date expireTime, Date updateTime) {
+    public TokenEntity(Long userId, String username, String accessToken, Date expireTime) {
         this.userId = userId;
         this.username = username;
         this.accessToken = accessToken;
-        this.refreshToken = refreshToken;
         this.expireTime = expireTime;
-        this.updateTime = updateTime;
     }
 
     public Long getUserId() {
@@ -83,13 +70,6 @@ public class TokenEntity {
         this.accessToken = accessToken;
     }
 
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
 
     public Date getExpireTime() {
         return expireTime;
@@ -97,13 +77,5 @@ public class TokenEntity {
 
     public void setExpireTime(Date expireTime) {
         this.expireTime = expireTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
     }
 }
