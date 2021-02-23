@@ -14,7 +14,6 @@ import top.arsiac.psychology.user.centre.service.CaptchaService;
 import top.arsiac.psychology.user.centre.service.TokenService;
 import top.arsiac.psychology.user.centre.service.UserService;
 import top.arsiac.psychology.utils.annotation.SystemLogger;
-import top.arsiac.psychology.utils.common.BeanCopy;
 import top.arsiac.psychology.utils.common.CommonTool;
 import top.arsiac.psychology.utils.common.IdGenerator;
 import top.arsiac.psychology.utils.exception.PsychologyErrorCode;
@@ -81,7 +80,7 @@ public class LoginController implements LoginApi {
         logger.info("用户注册: {}", form);
 
         // 注册用户
-        return userService.add(BeanCopy.copy(form, UserDTO.class));
+        return userService.add(form);
     }
 
     @SystemLogger("登录")
