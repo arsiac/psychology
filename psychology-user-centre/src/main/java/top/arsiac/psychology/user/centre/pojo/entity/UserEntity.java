@@ -132,6 +132,7 @@ public class UserEntity {
 				"id=" + id +
 				", username='" + username + '\'' +
 				", password='" + password + '\'' +
+				", salt='" + salt + '\'' +
 				", createBy=" + createBy +
 				", createTime=" + createTime +
 				", updateBy=" + updateBy +
