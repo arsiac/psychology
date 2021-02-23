@@ -35,7 +35,7 @@ public interface PowerApi {
      * */
     @GetMapping
     @ApiOperation(value = "模糊查询", httpMethod = "GET")
-    List<PowerVO> queryFuzzy(@RequestBody PowerDTO dto);
+    List<PowerVO> queryFuzzy(PowerDTO dto);
 
     /**
      * <p>根据id查询</p>

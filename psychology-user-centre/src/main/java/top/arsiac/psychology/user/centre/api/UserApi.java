@@ -37,7 +37,7 @@ public interface UserApi {
     @ApiOperation("模糊查询")
     @GetMapping
     @ResponseBody
-    List<UserVO> queryFuzzy(@RequestBody UserDTO dto);
+    List<UserVO> queryFuzzy(UserDTO dto);
 
     /**
      * <p>根据id查询</p>

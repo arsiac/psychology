@@ -35,7 +35,7 @@ public interface RoleApi {
      * */
     @ApiOperation("模糊查询")
     @GetMapping
-    List<RoleVO> queryFuzzy(@RequestBody RoleDTO dto);
+    List<RoleVO> queryFuzzy(RoleDTO dto);
 
     /**
      * <p>根据id查询</p>

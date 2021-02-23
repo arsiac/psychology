@@ -35,7 +35,7 @@ public interface ResourceApi {
      * */
     @ApiOperation("模糊查询")
     @GetMapping
-    List<ResourceVO> queryFuzzy(@RequestBody ResourceDTO dto);
+    List<ResourceVO> queryFuzzy(ResourceDTO dto);
 
     /**
      * <p>根据id查询</p>
