@@ -1,5 +1,7 @@
 package top.arsiac.psychology.user.centre.pojo.form;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * <p>登录表单</p>
  *
@@ -7,6 +9,7 @@ package top.arsiac.psychology.user.centre.pojo.form;
  * @version 1.0
  * @since  2021/2/10
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class LoginForm {
     /**
      * 用户名
