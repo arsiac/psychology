@@ -1,4 +1,4 @@
-package top.arsiac.psychology.utils.common;
+package top.arsiac.psychology.utils.entity;
 
 /**
  * <p>分页需要的属性</p>
