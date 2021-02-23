@@ -55,7 +55,7 @@ public class CaptchaServiceImpl implements CaptchaService {
      * 干扰横线数量
      * */
     private  static final int MIN_LINE_NUMBER = 4;
-    private static final int MAX_LINE_NUMBER = 10;
+    private static final int MAX_LINE_NUMBER = 7;
 
     /**
      * 色彩范围, 255为白色，颜色太浅
@@ -163,6 +163,16 @@ public class CaptchaServiceImpl implements CaptchaService {
     }
 
     /**
+     * <p>随机字体样式</p>
+     *
+     * @return 字体样式
+     */
+    private int randomFontStyle() {
+        // 0 默认; 1 粗体; 2 斜体; 3 粗斜
+        return RANDOM.nextInt(4);
+    }
+
+    /**
      * <p>获取随机字体</p>
      *
      * @return 字体
@@ -170,8 +180,7 @@ public class CaptchaServiceImpl implements CaptchaService {
     private Font randomFont() {
         Font font = FONT_LIST.get(RANDOM.nextInt(FONT_LIST.size()));
         return font.deriveFont(
-                // 0 normal; 1 粗体; 2 斜体; 3 粗斜
-                RANDOM.nextInt(4),
+                randomFontStyle(),
 
                 // 字体大小 [20,30)
                 (float) (RANDOM.nextInt(10) + 20)
