@@ -25,7 +25,8 @@
         <spring.boot>2.4.2</spring.boot>
         <spring.cloud>3.0.0</spring.cloud>
         <spring.cloud.dependencies>2020.0.0</spring.cloud.dependencies>
-        <mybatis.spring.boot>2.1.4</mybatis.spring.boot>
+        <mybatis.spring-boot>2.1.4</mybatis.spring-boot>
+        <redis.spring-boot>2.4.3</redis.spring-boot>
         <page.helper>1.3.0</page.helper>
         <fastjson.version>1.2.75</fastjson.version>
         <shiro.version>1.7.0</shiro.version>
@@ -88,8 +89,16 @@
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis.spring.boot}</version>
+                <version>${mybatis.spring-boot}</version>
             </dependency>
+
+            <!-- Redis -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${redis.spring-boot}</version>
+            </dependency>
+
 
             <!-- Mysql -->
             <dependency>

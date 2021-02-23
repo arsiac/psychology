@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import top.arsiac.psychology.utils.annotation.SystemLogger;
-import top.arsiac.psychology.utils.common.PageParam;
+import top.arsiac.psychology.utils.entity.PageParam;
 import top.arsiac.psychology.utils.common.Reply;
 import top.arsiac.psychology.utils.entity.LogDetail;
 
