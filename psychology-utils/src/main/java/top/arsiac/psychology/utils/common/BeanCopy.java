@@ -1,5 +1,6 @@
 package top.arsiac.psychology.utils.common;
 
+import com.github.pagehelper.Page;
 import org.springframework.beans.BeanUtils;
 import top.arsiac.psychology.utils.exception.PsychologyErrorCode;
 
@@ -103,6 +104,63 @@ public class BeanCopy {
      */
     public static <E, T> List<T> copyList(List<E> sourceList, Class<T> targetClass) {
        return copyList(sourceList, targetClass, null);
+    }
+
+    /**
+     * <p>将 E 类型的 page 拷贝成 T 类型的 page</p>
+     *
+     * @param sourcePage 源列表
+     * @param targetClass 目标类型
+     * @param callback 复制回调函数
+     * @return 目标列表
+     */
+    public static <E, T> Page<T> copyPage(Page<E> sourcePage, Class<T> targetClass, CopyCallback callback) {
+        Page<T> page = (Page<T>) copyList(sourcePage, targetClass, callback);
+        // 复制页面属性
+        page.setPageNum(sourcePage.getPageNum());
+        page.setPages(sourcePage.getPages());
+        page.setPageSize(sourcePage.getPageSize());
+        page.setTotal(sourcePage.getTotal());
+        return page;
+    }
+
+    /**
+     * <p>将 E 类型的 page 拷贝成 T 类型的 page</p>
+     *
+     * @param sourcePage 源列表
+     * @param targetClass 目标类型
+     * @return 目标列表
+     */
+    public static <E, T> Page<T> copyPage(Page<E> sourcePage, Class<T> targetClass) {
+        return copyPage(sourcePage, targetClass, null);
+    }
+
+    /**
+     * <p>将 E 类型的 page或list 拷贝成 T 类型的 page或list</p>
+     *
+     * @param sourceList 源列表
+     * @param targetClass 目标类型
+     * @param callback 复制回调
+     * @return 目标列表
+     */
+    public static <E, T> List<T> copyListOrPage(List<E> sourceList, Class<T> targetClass, CopyCallback callback) {
+        if (sourceList instanceof Page) {
+            return copyPage((Page<E>) sourceList, targetClass, callback);
+        }
+
+        return copyList(sourceList, targetClass, callback);
+    }
+
+
+    /**
+     * <p>将 E 类型的 page或list 拷贝成 T 类型的 page或list</p>
+     *
+     * @param sourceList 源列表
+     * @param targetClass 目标类型
+     * @return 目标列表
+     */
+    public static <E, T> List<T> copyListOrPage(List<E> sourceList, Class<T> targetClass) {
+        return copyListOrPage(sourceList, targetClass, null);
     }
 
     /**
