@@ -1,6 +1,8 @@
 package top.arsiac.psychology.utils.aspect;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.page.PageMethod;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -10,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import top.arsiac.psychology.utils.annotation.SystemLogger;
+import top.arsiac.psychology.utils.common.PageParam;
+import top.arsiac.psychology.utils.common.Reply;
 import top.arsiac.psychology.utils.entity.LogDetail;
 
 import java.lang.reflect.Method;
@@ -35,41 +39,46 @@ public class SystemLoggerAspect {
 
     @Around("pointCut()")
     public Object around(ProceedingJoinPoint point) throws Throwable {
+        // 获取注解
+        MethodSignature signature = (MethodSignature) point.getSignature();
+        Method method = signature.getMethod();
+        SystemLogger systemLogger = method.getAnnotation(SystemLogger.class);
+
+
+        // 获取请求参数
+        Object[] args = point.getArgs();
+
+        // 是否需要分页
+        if (systemLogger != null && systemLogger.page()) {
+            for (Object arg : args) {
+                if (arg instanceof PageParam) {
+                    PageParam pageParam = (PageParam) arg;
+                    PageMethod.startPage(pageParam.getPageNum(), pageParam.getPageSize());
+                    break;
+                }
+            }
+        }
+
+        // 开始运行时间
         long beginTime = System.currentTimeMillis();
         //执行方法
         Object result = point.proceed();
         //执行时长(毫秒)
         long time = System.currentTimeMillis() - beginTime;
 
-        //处理
-        manageLog(point, time);
 
-        return result;
-    }
 
-    /**
-     * <p>生成日志</p>
-     * @param joinPoint 切点
-     * @param time 花费时间
-     * */
-    private void manageLog(ProceedingJoinPoint joinPoint, long time) {
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        Method method = signature.getMethod();
-
-        LogDetail logDetail = new LogDetail();
         // 获取注解上的描述
-        SystemLogger systemLogger = method.getAnnotation(SystemLogger.class);
+        LogDetail logDetail = new LogDetail();
         if(systemLogger != null){
             logDetail.setOperation(systemLogger.value());
         }
 
         //请求的方法名
-        String className = joinPoint.getTarget().getClass().getName();
+        String className = point.getTarget().getClass().getName();
         String methodName = signature.getName();
         logDetail.setMethod(className + "." + methodName + "()");
 
-        // 保存请求的参数
-        Object[] args = joinPoint.getArgs();
 
         String params = JSON.toJSONString(args);
         logDetail.setParams(params);
@@ -87,5 +96,24 @@ public class SystemLoggerAspect {
 
         // 打印日志
         logger.info(stringBuilder);
+
+        return generateGlobalResponse(result, systemLogger);
+    }
+
+    /**
+     * <p>构建统一回复</p>
+     *
+     * @param result 返回结果
+     * @return 统一结构
+     */
+    private Reply generateGlobalResponse(Object result, SystemLogger systemLogger) {
+        Reply reply = Reply.success().data(result);
+
+        if (systemLogger != null && systemLogger.page() && result instanceof Page) {
+            Page<?> page = (Page<?>) result;
+            reply.pageSize(page.getPageSize())
+                    .total(page.getTotal());
+        }
+        return reply;
     }
 }

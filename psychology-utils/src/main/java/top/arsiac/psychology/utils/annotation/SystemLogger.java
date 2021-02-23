@@ -14,4 +14,5 @@ import java.lang.annotation.*;
 @Documented
 public @interface SystemLogger {
     String value() default "UNKNOWN";
+    boolean page() default false;
 }
