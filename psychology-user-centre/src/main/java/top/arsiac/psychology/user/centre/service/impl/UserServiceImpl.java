@@ -46,7 +46,8 @@ public class UserServiceImpl implements UserService {
         } else {
             entity = BeanCopy.copy(dto, UserEntity.class);
         }
-        return BeanCopy.copyList(userMapper.selectFuzzy(entity), UserDTO.class);
+
+        return BeanCopy.copyListOrPage(userMapper.selectFuzzy(entity), UserDTO.class);
     }
 
     @Override

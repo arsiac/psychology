@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import top.arsiac.psychology.user.centre.pojo.dto.UserDTO;
+import top.arsiac.psychology.user.centre.pojo.form.param.UserParam;
 import top.arsiac.psychology.user.centre.pojo.vo.UserVO;
 
 import java.util.List;
@@ -31,13 +32,13 @@ public interface UserApi {
     /**
      * <p>模糊查询</p>
      *
-     * @param dto 用户信息
+     * @param param 用户信息
      * @return 查询结果
      * */
     @ApiOperation("模糊查询")
     @GetMapping
     @ResponseBody
-    List<UserVO> queryFuzzy(UserDTO dto);
+    List<UserVO> queryFuzzy(UserParam param);
 
     /**
      * <p>根据id查询</p>
