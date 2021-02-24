@@ -63,6 +63,16 @@ public class Reply extends HashMap<String, Object> {
         return with("pageSize", pageSize);
     }
 
+    /**
+     * <p>添加 pageNum</p>
+     *
+     * @param pageNum 行数
+     * @return reply
+     */
+    public Reply pageNum(Object pageNum) {
+        return with("pageNum", pageNum);
+    }
+
     public static Reply success() {
         return new Reply();
     }
