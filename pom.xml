@@ -32,6 +32,7 @@
         <shiro.version>1.7.0</shiro.version>
         <slf4j.version>1.7.30</slf4j.version>
         <swagger.version>3.0.0</swagger.version>
+        <common-pool2.version>2.3</common-pool2.version>
     </properties>
 
     <!-- 公共依赖声明 -->
@@ -97,6 +98,11 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${redis.spring-boot}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${common-pool2.version}</version>
             </dependency>
 
 
