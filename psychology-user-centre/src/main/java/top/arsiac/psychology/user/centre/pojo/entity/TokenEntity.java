@@ -1,7 +1,5 @@
 package top.arsiac.psychology.user.centre.pojo.entity;
 
-import java.util.Date;
-
 /**
  * <p>token结构</p>
  *
@@ -29,7 +27,7 @@ public class TokenEntity {
     /**
      * access token 过期时间
      * */
-    private Date expireTime;
+    private Long expireTime;
 
     public TokenEntity() {}
 
@@ -39,7 +37,7 @@ public class TokenEntity {
      * @param accessToken access token
      * @param expireTime access token 过期时间
      * */
-    public TokenEntity(Long userId, String username, String accessToken, Date expireTime) {
+    public TokenEntity(Long userId, String username, String accessToken, Long expireTime) {
         this.userId = userId;
         this.username = username;
         this.accessToken = accessToken;
@@ -71,11 +69,11 @@ public class TokenEntity {
     }
 
 
-    public Date getExpireTime() {
+    public Long getExpireTime() {
         return expireTime;
     }
 
-    public void setExpireTime(Date expireTime) {
+    public void setExpireTime(Long expireTime) {
         this.expireTime = expireTime;
     }
 }
