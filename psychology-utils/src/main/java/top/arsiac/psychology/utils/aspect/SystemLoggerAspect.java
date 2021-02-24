@@ -1,7 +1,6 @@
 package top.arsiac.psychology.utils.aspect;
 
 import com.alibaba.fastjson.JSON;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.page.PageMethod;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -13,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import top.arsiac.psychology.utils.annotation.SystemLogger;
 import top.arsiac.psychology.utils.entity.PageParam;
-import top.arsiac.psychology.utils.common.Reply;
 import top.arsiac.psychology.utils.entity.LogDetail;
 
 import java.lang.reflect.Method;
@@ -97,23 +95,6 @@ public class SystemLoggerAspect {
         // 打印日志
         logger.info(stringBuilder);
 
-        return generateGlobalResponse(result, systemLogger);
-    }
-
-    /**
-     * <p>构建统一回复</p>
-     *
-     * @param result 返回结果
-     * @return 统一结构
-     */
-    private Reply generateGlobalResponse(Object result, SystemLogger systemLogger) {
-        Reply reply = Reply.success().data(result);
-
-        if (systemLogger != null && systemLogger.page() && result instanceof Page) {
-            Page<?> page = (Page<?>) result;
-            reply.pageSize(page.getPageSize())
-                    .total(page.getTotal());
-        }
-        return reply;
+        return result;
     }
 }
