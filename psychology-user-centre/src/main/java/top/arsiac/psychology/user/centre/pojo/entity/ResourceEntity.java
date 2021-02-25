@@ -21,14 +21,19 @@ public class ResourceEntity {
     private String name;
 
     /**
-     * 资源url
+     * 资源uri
      * */
-    private String url;
+    private String uri;
 
     /**
-     * 资源请求类型
+     * 类型
      * */
     private Integer type;
+
+    /**
+     * 父资源
+     * */
+    private Long parent;
 
     /**
      * 创建者
@@ -69,14 +74,6 @@ public class ResourceEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public Integer getType() {
@@ -127,13 +124,30 @@ public class ResourceEntity {
         this.version = version;
     }
 
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+    public Long getParent() {
+        return parent;
+    }
+
+    public void setParent(Long parent) {
+        this.parent = parent;
+    }
+
     @Override
     public String toString() {
         return "ResourceEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
+                ", uri='" + uri + '\'' +
                 ", type=" + type +
+                ", parent=" + parent +
                 ", createBy=" + createBy +
                 ", createTime=" + createTime +
                 ", updateBy=" + updateBy +

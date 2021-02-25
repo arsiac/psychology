@@ -7,8 +7,9 @@
     <resultMap type="top.arsiac.psychology.user.centre.pojo.entity.ResourceEntity" id="resourceMap">
         <result property="id" column="id"/>
         <result property="name" column="name"/>
-        <result property="url" column="url"/>
+        <result property="uri" column="uri"/>
         <result property="type" column="type"/>
+        <result property="parent" column="parent"/>
         <result property="createBy" column="create_by"/>
         <result property="createTime" column="create_time"/>
         <result property="updateBy" column="update_by"/>
@@ -56,8 +57,8 @@
     <!-- 插入 版本为1 时间为当前时间 -->
     <insert id="insert" parameterType="top.arsiac.psychology.user.centre.pojo.entity.ResourceEntity">
         INSERT INTO psychology_user_centre.resource
-        (id, name, url, type, create_by, create_time, update_by, update_time, version)
-        VALUES (#{resource.id}, #{resource.name}, #{resource.url}, #{resource.type},
+        (id, name, url, type, parent, create_by, create_time, update_by, update_time, version)
+        VALUES (#{resource.id}, #{resource.name}, #{resource.url}, #{resource.type}, #{resource.parent},
                 #{resource.createBy}, CURRENT_TIMESTAMP(),
                 #{resource.updateBy}, CURRENT_TIMESTAMP(), 1)
     </insert>
@@ -65,7 +66,7 @@
     <!-- 更新 根据版本和id来更新数据-->
     <update id="update" parameterType="top.arsiac.psychology.user.centre.pojo.entity.ResourceEntity">
         UPDATE psychology_user_centre.resource
-        SET name = #{resource.name}, url = #{resource.url}, type = #{resource.type},
+        SET name = #{resource.name}, url = #{resource.url}, type = #{resource.type}, parent = #{resource.parent},
             update_by = #{resource.updateBy}, update_time = CURRENT_TIMESTAMP(),
             version = #{resource.version} + 1
         WHERE id = #{resource.id} AND version = #{resource.version}
