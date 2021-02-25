@@ -34,7 +34,10 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
             "/centre/login",
             "/centre/logout",
             "/centre/captcha",
-            "/centre/app"
+            "/centre/app",
+
+            /* swagger */
+            "/centre/swagger-ui"
     };
 
     @Override
