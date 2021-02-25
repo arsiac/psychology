@@ -16,7 +16,6 @@ import java.util.List;
  */
 @Mapper
 public interface UserRoleMapper {
-
     /**
      * <p>查找全部</p>
      *

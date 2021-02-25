@@ -2,9 +2,8 @@ package top.arsiac.psychology.user.centre.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.arsiac.psychology.user.centre.dao.PowerResourceMapper;
 import top.arsiac.psychology.user.centre.dao.ResourceMapper;
-import top.arsiac.psychology.user.centre.dao.RolePowerMapper;
+import top.arsiac.psychology.user.centre.dao.RoleResourceMapper;
 import top.arsiac.psychology.user.centre.dao.UserRoleMapper;
 import top.arsiac.psychology.user.centre.pojo.dto.ResourceDTO;
 import top.arsiac.psychology.user.centre.pojo.entity.*;
@@ -31,14 +30,9 @@ public class SystemServiceImpl implements SystemService {
     private UserRoleMapper userRoleMapper;
 
     /**
-     * 角色-权力服务
+     * 角色-资源服务
      * */
-    private RolePowerMapper rolePowerMapper;
-
-    /**
-     * 权力-资源服务
-     * */
-    private PowerResourceMapper powerResourceMapper;
+    private RoleResourceMapper roleResourceMapper;
 
     /**
      * 资源服务
@@ -50,21 +44,15 @@ public class SystemServiceImpl implements SystemService {
         // 查询用户对应的角色
         List<UserRoleEntity> userRoleEntityList = userRoleMapper.selectByUserId(id);
 
-        // 查询角色对应的权限
-        List<RolePowerEntity> rolePowerEntityList = new ArrayList<>();
-        userRoleEntityList.forEach(userRole -> rolePowerEntityList.addAll(rolePowerMapper.selectByRoleId(userRole.getRoleId())));
-
-        // 去除重复的权限
-        Set<Long> powerSet = new HashSet<>();
-        rolePowerEntityList.forEach(rolePower -> powerSet.add(rolePower.getPowerId()));
-
-        // 查询用户资源
-        List<PowerResourceEntity> powerResourceEntityList = new ArrayList<>();
-        powerSet.forEach(power -> powerResourceEntityList.addAll(powerResourceMapper.selectByPowerId(power)));
-
-        // 去除重复资源
+        // 查询角色对应的资源
         Set<Long> resourceSet = new HashSet<>();
-        powerResourceEntityList.forEach(powerResource -> resourceSet.add(powerResource.getResourceId()));
+        userRoleEntityList.forEach(userRole -> {
+            // 获取角色对应的资源
+            List<RoleResourceEntity> roleResourceEntityList = roleResourceMapper.selectByRoleId(userRole.getRoleId());
+
+            // 将资源放入set
+            roleResourceEntityList.forEach(roleResource -> resourceSet.add(roleResource.getResourceId()));
+        });
 
         List<ResourceEntity> resourceEntityList;
         // 为空就不执行搜索，防止报错
@@ -82,13 +70,8 @@ public class SystemServiceImpl implements SystemService {
     }
 
     @Autowired
-    public void setRolePowerMapper(RolePowerMapper rolePowerMapper) {
-        this.rolePowerMapper = rolePowerMapper;
-    }
-
-    @Autowired
-    public void setPowerResourceMapper(PowerResourceMapper powerResourceMapper) {
-        this.powerResourceMapper = powerResourceMapper;
+    public void setRolePowerMapper(RoleResourceMapper roleResourceMapper) {
+        this.roleResourceMapper = roleResourceMapper;
     }
 
     @Autowired
