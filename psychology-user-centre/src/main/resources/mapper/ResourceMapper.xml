@@ -40,6 +40,14 @@
         ORDER BY update_time
     </select>
 
+    <select id="selectIn" resultMap="resourceMap">
+        SELECT * FROM psychology_user_centre.resource
+        WHERE id IN
+        <foreach collection="ids" index="index" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
     <!-- 根据id查询 -->
     <select id="selectById" resultMap="resourceMap" parameterType="java.lang.Long">
         SELECT * FROM psychology_user_centre.resource WHERE id = #{id}

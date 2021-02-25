@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import top.arsiac.psychology.user.centre.pojo.entity.ResourceEntity;
 
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -31,6 +32,14 @@ public interface ResourceMapper {
      * @return 资源列表
      * */
     List<ResourceEntity> selectFuzzy(@Param("resource") ResourceEntity resource);
+
+    /**
+     * <p>查询指定的资源</p>
+     *
+     * @param ids 资源id
+     * @return 资源
+     */
+    List<ResourceEntity> selectIn(@Param("ids") Set<Long> ids);
 
     /**
      * <p>根据id查询</p>
