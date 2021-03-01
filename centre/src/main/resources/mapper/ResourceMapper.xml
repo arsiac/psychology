@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.arsiac.psychology.centre.dao.ResourceMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.github.arsiac.psychology.centre.pojo.entity.ResourceEntity" id="resourceMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="uri" column="uri"/>
+        <result property="type" column="type"/>
+        <result property="parent" column="parent"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="version" column="version"/>
+    </resultMap>
+
+    <!-- 查询全部 -->
+    <select id="selectAll" resultMap="resourceMap">
+        SELECT * FROM psychology_user_centre.resource ORDER BY update_time
+    </select>
+
+    <!-- 模糊查询 -->
+    <select id="selectFuzzy" resultMap="resourceMap" parameterType="com.github.arsiac.psychology.centre.pojo.entity.ResourceEntity">
+        SELECT * FROM psychology_user_centre.resource
+        <where>
+            <if test="resource.name != null">
+                <bind name="resourceName" value="'%' + resource.name + '%'"/>
+                name LIKE #{resourceName}
+            </if>
+            <if test="resource.type != null">
+                type = #{resource.type}
+            </if>
+            <if test="resource.url != null">
+                <bind name="resourceUrl" value="'%' + resource.url + '%'"/>
+                url LIKE #{resourceUrl}
+            </if>
+        </where>
+        ORDER BY update_time
+    </select>
+
+    <select id="selectIn" resultMap="resourceMap">
+        SELECT * FROM psychology_user_centre.resource
+        WHERE id IN
+        <foreach collection="ids" index="index" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <!-- 根据id查询 -->
+    <select id="selectById" resultMap="resourceMap" parameterType="java.lang.Long">
+        SELECT * FROM psychology_user_centre.resource WHERE id = #{id}
+    </select>
+
+    <!-- 插入 版本为1 时间为当前时间 -->
+    <insert id="insert" parameterType="com.github.arsiac.psychology.centre.pojo.entity.ResourceEntity">
+        INSERT INTO psychology_user_centre.resource
+        (id, name, uri, type, parent, create_by, create_time, update_by, update_time, version)
+        VALUES (#{resource.id}, #{resource.name}, #{resource.url}, #{resource.type}, #{resource.parent},
+                #{resource.createBy}, CURRENT_TIMESTAMP(),
+                #{resource.updateBy}, CURRENT_TIMESTAMP(), 1)
+    </insert>
+
+    <!-- 更新 根据版本和id来更新数据-->
+    <update id="update" parameterType="com.github.arsiac.psychology.centre.pojo.entity.ResourceEntity">
+        UPDATE psychology_user_centre.resource
+        SET name = #{resource.name}, uri = #{resource.url}, type = #{resource.type}, parent = #{resource.parent},
+            update_by = #{resource.updateBy}, update_time = CURRENT_TIMESTAMP(),
+            version = #{resource.version} + 1
+        WHERE id = #{resource.id} AND version = #{resource.version}
+    </update>
+
+    <!-- 删除 根据id和版本删除 -->
+    <delete id="delete" parameterType="com.github.arsiac.psychology.centre.pojo.entity.ResourceEntity">
+        DELETE FROM psychology_user_centre.resource WHERE id = #{resource.id} AND version = #{resource.version}
+    </delete>
+</mapper>
