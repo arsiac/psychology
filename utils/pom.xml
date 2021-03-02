@@ -11,6 +11,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>utils</artifactId>
+  <name>psychology-utils</name>
 
   <properties>
     <maven.compiler.source>8</maven.compiler.source>
@@ -58,4 +59,8 @@
       <artifactId>commons-pool2</artifactId>
     </dependency>
   </dependencies>
+
+  <build>
+    <finalName>psychology-utils</finalName>
+  </build>
 </project>
