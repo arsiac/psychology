@@ -52,7 +52,7 @@ function build() {
     jar_path="./target/${applicationName}.jar"
 
     if [ -e "$jar_path" ]; then
-        cp jar_path "./${applicationName}.jar"
+        cp "$jar_path" "./${applicationName}.jar"
         dockerBuild "$applicationName" "$applicationName" "$port" "$expose"
     else
         echo "file not found: $jar_path"
