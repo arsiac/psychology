@@ -43,6 +43,9 @@ function build() {
         echoln "暴露端口: $expose"
     fi
 
+    echoln "拉取最新"
+    git pull
+
     echoln "开始编译"
     mvn clean package -Dmaven.test.skip=$compileSkipTest
 
