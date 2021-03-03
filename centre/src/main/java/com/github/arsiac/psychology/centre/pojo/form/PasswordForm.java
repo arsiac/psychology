@@ -26,6 +26,11 @@ public class PasswordForm {
      * */
     private String newPassword;
 
+    /**
+     * 更新者
+     * */
+    private Long updateBy;
+
     public Long getUserId() {
         return userId;
     }
@@ -50,12 +55,21 @@ public class PasswordForm {
         this.newPassword = newPassword;
     }
 
+    public Long getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(Long updateBy) {
+        this.updateBy = updateBy;
+    }
+
     @Override
     public String toString() {
         return "PasswordForm{" +
                 "userId=" + userId +
                 ", oldPassword='" + oldPassword + '\'' +
                 ", newPassword='" + newPassword + '\'' +
+                ", updateBy=" + updateBy +
                 '}';
     }
 }
