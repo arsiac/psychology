@@ -21,6 +21,11 @@ public class ResourceEntity {
     private String name;
 
     /**
+     * icon
+     * */
+    private String icon;
+
+    /**
      * 资源uri
      * */
     private String uri;
@@ -74,6 +79,14 @@ public class ResourceEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public Integer getType() {
