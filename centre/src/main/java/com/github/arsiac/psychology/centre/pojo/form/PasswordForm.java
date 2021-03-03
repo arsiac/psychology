@@ -1,5 +1,7 @@
 package com.github.arsiac.psychology.centre.pojo.form;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * <p>修改密码表单</p>
  *
@@ -7,6 +9,7 @@ package com.github.arsiac.psychology.centre.pojo.form;
  * @version 1.0
  * @since  2021/2/10
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PasswordForm {
     /**
      * 用户id
