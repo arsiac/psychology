@@ -2,11 +2,14 @@ package com.github.arsiac.psychology.centre.api.controller;
 
 import com.github.arsiac.psychology.centre.api.UserApi;
 import com.github.arsiac.psychology.centre.pojo.dto.UserDTO;
+import com.github.arsiac.psychology.centre.pojo.form.PasswordForm;
 import com.github.arsiac.psychology.centre.pojo.form.param.UserParam;
 import com.github.arsiac.psychology.centre.pojo.vo.UserVO;
 import com.github.arsiac.psychology.centre.service.UserService;
 import com.github.arsiac.psychology.utils.annotation.SystemLogger;
 import com.github.arsiac.psychology.utils.common.BeanCopy;
+import com.github.arsiac.psychology.utils.common.CommonTool;
+import com.github.arsiac.psychology.utils.exception.PsychologyErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -62,6 +65,30 @@ public class UserController implements UserApi {
     @Override
     public boolean modify(UserDTO dto) {
         return userService.modify(dto);
+    }
+
+    @SystemLogger("修改密码")
+    @Override
+    public boolean changePassword(PasswordForm form) {
+        if (form == null || form.getUserId() == null) {
+            throw PsychologyErrorCode.ID_NOT_AVAILABLE.createException();
+        }
+
+        if (form.getOldPassword() == null || form.getNewPassword() == null) {
+            throw PsychologyErrorCode.PASSWORD_IS_EMPTY.createException();
+        }
+
+        UserDTO userDTO = userService.queryById(form.getUserId());
+        if (userDTO == null) {
+            throw PsychologyErrorCode.USER_NOT_EXIST.createException();
+        }
+
+        String encrypt = CommonTool.encrypt(form.getOldPassword(), userDTO.getSalt());
+        if (userDTO.getPassword().equals(encrypt)) {
+            userDTO.setPassword(encrypt);
+            return userService.modify(userDTO);
+        }
+        return false;
     }
 
     @SystemLogger("删除用户")

@@ -1,6 +1,7 @@
 package com.github.arsiac.psychology.centre.api;
 
 import com.github.arsiac.psychology.centre.pojo.dto.UserDTO;
+import com.github.arsiac.psychology.centre.pojo.form.PasswordForm;
 import com.github.arsiac.psychology.centre.pojo.form.param.UserParam;
 import com.github.arsiac.psychology.centre.pojo.vo.UserVO;
 import io.swagger.annotations.Api;
@@ -83,6 +84,18 @@ public interface UserApi {
     @PutMapping
     @ResponseBody
     boolean modify(@RequestBody UserDTO dto);
+
+
+    /**
+     * <p>修改密码</p>
+     *
+     * @param form 密码
+     * @return 是否成功
+     */
+    @ApiOperation("修改密码")
+    @PutMapping("/passwd")
+    @ResponseBody
+    boolean changePassword(@RequestBody PasswordForm form);
 
     /**
      * <p>删除用户</p>

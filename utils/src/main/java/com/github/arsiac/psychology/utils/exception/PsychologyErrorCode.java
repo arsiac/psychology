@@ -44,6 +44,7 @@ public enum PsychologyErrorCode {
     CAPTURE_WRONG(3005, "验证码错误"),
     CAPTURE_INVALID(3006, "验证码已失效"),
     USERNAME_ALREADY_EXIST(3007, "用户名已存在"),
+    USER_NOT_EXIST(3008, "用户不存在"),
 
     /**
      * 其他

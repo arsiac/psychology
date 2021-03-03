@@ -9,6 +9,11 @@ package com.github.arsiac.psychology.centre.pojo.form;
  */
 public class PasswordForm {
     /**
+     * 用户id
+     * */
+    private Long userId;
+
+    /**
      * 旧密码
      * */
     private String oldPassword;
@@ -17,6 +22,14 @@ public class PasswordForm {
      * 新密码
      * */
     private String newPassword;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public String getOldPassword() {
         return oldPassword;
@@ -32,5 +45,14 @@ public class PasswordForm {
 
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
+    }
+
+    @Override
+    public String toString() {
+        return "PasswordForm{" +
+                "userId=" + userId +
+                ", oldPassword='" + oldPassword + '\'' +
+                ", newPassword='" + newPassword + '\'' +
+                '}';
     }
 }
