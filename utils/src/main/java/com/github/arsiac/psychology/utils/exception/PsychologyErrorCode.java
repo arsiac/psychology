@@ -33,6 +33,8 @@ public enum PsychologyErrorCode {
     INSERT_FAILED(2009, "插入失败"),
     DELETE_FAILED(2010, "删除失败"),
     DATA_IS_EMPTY(2011, "传入数据为空"),
+    ROLE_NOT_AVAILABLE(2012, "未提供角色"),
+    RESOURCE_NOT_AVAILABLE(2013, "未提供资源"),
 
     /*
      * 登录注册

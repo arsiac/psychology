@@ -75,6 +75,12 @@ public class RoleResourceServiceImpl implements RoleResourceService {
         if (dto == null) {
             throw PsychologyErrorCode.DATA_IS_EMPTY.createException();
         }
+        if (dto.getRoleId() == null) {
+            throw PsychologyErrorCode.ROLE_NOT_AVAILABLE.createException();
+        }
+        if (dto.getResourceId() == null) {
+            throw PsychologyErrorCode.RESOURCE_NOT_AVAILABLE.createException();
+        }
         dto.setId(idGenerator.generate());
         return roleResourceMapper.insert(dto) > 0;
     }
