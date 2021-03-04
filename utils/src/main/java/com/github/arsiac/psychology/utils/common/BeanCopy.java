@@ -107,6 +107,26 @@ public class BeanCopy {
     }
 
     /**
+     * <p>将 E 类型的列表拷贝成 T 类型的列表</p>
+     *
+     * @param sourceList 源列表
+     * @param targetList 目标列表
+     * @param targetClass 目标类型
+     * @param callback 拷贝回调
+     */
+    public static <E, T> void copyList(List<E> sourceList, List<T> targetList, Class<T> targetClass, CopyCallback callback) {
+        if (sourceList != null && targetList != null) {
+            for (E source : sourceList) {
+                T target = copy(source, targetClass);
+                if (callback != null) {
+                    callback.copy(source, target);
+                }
+                targetList.add(target);
+            }
+        }
+    }
+
+    /**
      * <p>将 E 类型的 page 拷贝成 T 类型的 page</p>
      *
      * @param sourcePage 源列表
@@ -115,7 +135,8 @@ public class BeanCopy {
      * @return 目标列表
      */
     public static <E, T> Page<T> copyPage(Page<E> sourcePage, Class<T> targetClass, CopyCallback callback) {
-        Page<T> page = (Page<T>) copyList(sourcePage, targetClass, callback);
+        Page<T> page = new Page<>();
+        BeanCopy.copyList(sourcePage, page, targetClass, callback);
         // 复制页面属性
         page.setPageNum(sourcePage.getPageNum());
         page.setPages(sourcePage.getPages());
