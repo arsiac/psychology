@@ -55,11 +55,10 @@ public class ResourceServiceImpl implements ResourceService {
      * @param target dto
      */
     private void copy2dto(Object source, Object target) {
-        ResourceDTO dto = (ResourceDTO) target;
         ResourceEntity entity = (ResourceEntity) source;
+        ResourceDTO dto = (ResourceDTO) target;
 
-        ResourceEntity parent = resourceMapper.selectById(entity.getParent());
-        dto.setParentDTO((ResourceDTO) parent);
+        dto.setParentDTO(queryById(entity.getParent()));
     }
 
     @Override
