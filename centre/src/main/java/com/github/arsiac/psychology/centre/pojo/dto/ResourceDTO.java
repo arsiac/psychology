@@ -10,6 +10,19 @@ import com.github.arsiac.psychology.centre.pojo.entity.ResourceEntity;
  * @since  2021/1/31
  */
 public class ResourceDTO extends ResourceEntity {
+    /**
+     * 父节点
+     * */
+    private ResourceDTO parentDTO;
+
+    public ResourceDTO getParentDTO() {
+        return parentDTO;
+    }
+
+    public void setParentDTO(ResourceDTO parentDTO) {
+        this.parentDTO = parentDTO;
+    }
+
     @Override
     public String toString() {
         return "ResourceDTO{} " + super.toString();

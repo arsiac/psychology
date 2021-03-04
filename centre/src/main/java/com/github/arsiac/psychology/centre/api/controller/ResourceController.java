@@ -35,7 +35,26 @@ public class ResourceController implements ResourceApi {
     @SystemLogger(value = "模糊查询", page = true)
     @Override
     public List<ResourceVO> queryFuzzy(ResourceParam param) {
-        return BeanCopy.copyListOrPage(resourceService.queryFuzzy(BeanCopy.copy(param, ResourceDTO.class)), ResourceVO.class);
+        return BeanCopy.copyListOrPage(
+                resourceService.queryFuzzy(BeanCopy.copy(param, ResourceDTO.class)),
+                ResourceVO.class,
+                this::copy2vo
+        );
+    }
+
+    /**
+     * <p>拷贝父节点名称</p>
+     *
+     * @param source dto
+     * @param target vo
+     */
+    private void copy2vo(Object source, Object target) {
+        ResourceDTO dto = (ResourceDTO) source;
+        ResourceVO vo = (ResourceVO) target;
+
+        if (dto.getParentDTO() != null) {
+            vo.setParentName(dto.getParentDTO().getName());
+        }
     }
 
     @SystemLogger("使用id查询")

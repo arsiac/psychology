@@ -45,7 +45,21 @@ public class ResourceServiceImpl implements ResourceService {
         } else {
             entity = BeanCopy.copy(dto, ResourceEntity.class);
         }
-        return BeanCopy.copyListOrPage(resourceMapper.selectFuzzy(entity), ResourceDTO.class);
+        return BeanCopy.copyListOrPage(resourceMapper.selectFuzzy(entity), ResourceDTO.class, this::copy2dto);
+    }
+
+    /**
+     * <p>复制成dto时查询父节点</p>
+     *
+     * @param source source
+     * @param target dto
+     */
+    private void copy2dto(Object source, Object target) {
+        ResourceDTO dto = (ResourceDTO) target;
+        ResourceEntity entity = (ResourceEntity) source;
+
+        ResourceEntity parent = resourceMapper.selectById(entity.getParent());
+        dto.setParentDTO((ResourceDTO) parent);
     }
 
     @Override
