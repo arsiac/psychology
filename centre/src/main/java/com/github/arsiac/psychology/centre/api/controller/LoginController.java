@@ -60,25 +60,6 @@ public class LoginController implements LoginApi {
     @SystemLogger("注册")
     @Override
     public boolean register(RegisterForm form) {
-        if (CommonTool.isBlank(form.getUsername())) {
-            throw PsychologyErrorCode.USERNAME_IS_EMPTY.createException();
-        }
-        UserDTO userDTO = userService.queryByName(form.getUsername());
-        if (userDTO != null) {
-            throw PsychologyErrorCode.USERNAME_ALREADY_EXIST.createException(userDTO.getUsername());
-        }
-
-        final String password = form.getPassword();
-
-        // 生成随机字符串作为盐
-        form.setSalt(CommonTool.randomString(32));
-
-        // 加密密码
-        form.setPassword(CommonTool.encrypt(password, form.getSalt()));
-
-        logger.info("用户注册: {}", form);
-
-        // 注册用户
         return userService.add(form);
     }
 
@@ -114,7 +95,7 @@ public class LoginController implements LoginApi {
         }
 
         // 加密后比较密码
-        final String encryptPassword = CommonTool.encrypt(loginForm.getPassword(), userDTO.getSalt());
+        String encryptPassword = CommonTool.encrypt(loginForm.getPassword(), userDTO.getSalt());
 
         if (!userDTO.getPassword().equals(encryptPassword)) {
             throw PsychologyErrorCode.USERNAME_OR_PASSWORD_ERROR.createException(

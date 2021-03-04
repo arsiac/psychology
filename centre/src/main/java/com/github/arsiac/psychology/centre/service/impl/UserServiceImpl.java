@@ -71,6 +71,24 @@ public class UserServiceImpl implements UserService {
         if (dto == null) {
             throw PsychologyErrorCode.DATA_IS_EMPTY.createException();
         }
+
+        if (CommonTool.isBlank(dto.getUsername())) {
+            throw PsychologyErrorCode.USERNAME_IS_EMPTY.createException();
+        }
+
+        UserEntity entity = userMapper.selectByUsername(dto.getUsername());
+        if (entity != null) {
+            throw PsychologyErrorCode.USERNAME_ALREADY_EXIST.createException(entity.getUsername());
+        }
+
+        String password = dto.getPassword();
+
+        // 生成随机字符串作为盐
+        dto.setSalt(CommonTool.randomString(32));
+
+        // 加密密码
+        dto.setPassword(CommonTool.encrypt(password, dto.getSalt()));
+
         // 生成id
         dto.setId(idGenerator.generate());
         return userMapper.insert(dto) > 0;
