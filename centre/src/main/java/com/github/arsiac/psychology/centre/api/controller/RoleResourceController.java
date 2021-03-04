@@ -31,7 +31,22 @@ public class RoleResourceController implements RoleResourceApi {
 
     @Override
     public List<RoleResourceVO> queryByRoleId(Long id) {
-        return BeanCopy.copyList(roleResourceService.queryByRoleId(id), RoleResourceVO.class);
+        return BeanCopy.copyList(roleResourceService.queryByRoleId(id), RoleResourceVO.class, this::copy2vo);
+    }
+
+    /**
+     * <p>复制成vo</p>
+     *
+     * @param source entity
+     * @param target dto
+     */
+    private void copy2vo(Object source, Object target) {
+        RoleResourceDTO dto = (RoleResourceDTO) source;
+        RoleResourceVO vo = (RoleResourceVO) target;
+
+        if (dto.getResourceDTO() != null) {
+            vo.setResourceName(dto.getResourceDTO().getName());
+        }
     }
 
     @Override
