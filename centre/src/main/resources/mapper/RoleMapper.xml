@@ -39,7 +39,7 @@
     <!-- 插入 版本为1 时间为当前时间 -->
     <insert id="insert" parameterType="com.github.arsiac.psychology.centre.pojo.entity.RoleEntity">
         INSERT INTO psychology_user_centre.role (id, name, create_by, create_time, update_by, update_time, version)
-        VALUES (#{role.id}, #{role.username},
+        VALUES (#{role.id}, #{role.name},
                 #{role.createBy}, CURRENT_TIMESTAMP(),
                 #{role.updateBy}, CURRENT_TIMESTAMP(), 1)
     </insert>
