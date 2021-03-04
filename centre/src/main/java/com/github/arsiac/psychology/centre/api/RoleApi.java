@@ -1,6 +1,7 @@
 package com.github.arsiac.psychology.centre.api;
 
 import com.github.arsiac.psychology.centre.pojo.dto.RoleDTO;
+import com.github.arsiac.psychology.centre.pojo.form.param.RoleParam;
 import com.github.arsiac.psychology.centre.pojo.vo.RoleVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,12 +31,12 @@ public interface RoleApi {
     /**
      * <p>模糊查询</p>
      *
-     * @param dto 角色信息
+     * @param param 角色信息
      * @return 查询结果
      * */
     @ApiOperation("模糊查询")
     @GetMapping
-    List<RoleVO> queryFuzzy(RoleDTO dto);
+    List<RoleVO> queryFuzzy(RoleParam param);
 
     /**
      * <p>根据id查询</p>
