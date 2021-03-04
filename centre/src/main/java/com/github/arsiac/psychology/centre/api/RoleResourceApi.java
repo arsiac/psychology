@@ -55,7 +55,7 @@ public interface RoleResourceApi {
      * */
     @ApiOperation("增加")
     @PostMapping
-    boolean add(RoleResourceDTO dto);
+    boolean add(@RequestBody RoleResourceDTO dto);
 
     /**
      * <p>增加角色-资源</p>
@@ -65,7 +65,7 @@ public interface RoleResourceApi {
      * */
     @ApiOperation("批量增加")
     @PostMapping("/batch")
-    boolean batchAdd(List<RoleResourceDTO> dtoList);
+    boolean batchAdd(@RequestBody List<RoleResourceDTO> dtoList);
 
     /**
      * <p>更新角色-资源</p>
@@ -75,7 +75,7 @@ public interface RoleResourceApi {
      * */
     @ApiOperation("修改")
     @PutMapping
-    boolean modify(RoleResourceDTO dto);
+    boolean modify(@RequestBody RoleResourceDTO dto);
 
     /**
      * <p>删除角色-资源</p>
@@ -85,7 +85,7 @@ public interface RoleResourceApi {
      * */
     @ApiOperation("删除")
     @DeleteMapping
-    boolean remove(RoleResourceDTO dto);
+    boolean remove(@RequestBody RoleResourceDTO dto);
 
     /**
      * <p>批量删除角色-资源</p>
@@ -95,5 +95,5 @@ public interface RoleResourceApi {
      * */
     @ApiOperation("批量删除")
     @DeleteMapping("/batch")
-    boolean batchRemove(List<RoleResourceDTO> dtoList);
+    boolean batchRemove(@RequestBody List<RoleResourceDTO> dtoList);
 }
