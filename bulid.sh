@@ -8,16 +8,20 @@ exposes=(8000 8010 8020 8030)
 compileSkipTest=true
 
 function echoln() {
-    printf "%s\n" "$1"
+    echo -e "$1\n"
 }
 
 function dockerBuild() {
-    echoln "$1 $2 $3 $4"
+    echoln "stop $1"
     docker stop "$1"
+    echoln "remove container $1"
     docker container rm "$1"
+    echoln "remove image $1"
     docker image rm "$1"
+    echoln "build image $2"
     docker build -t "$2" .
-    docker run -itd --name "$1" -p "$3":"$4" "$1"
+    echoln "run $2, expose port $4, port $3"
+    docker run -itd --name "$2" -p "$3":"$4" "$2"
 }
 
 function build() {
@@ -34,7 +38,7 @@ function build() {
     done
 
     if [ $((expose)) -eq 0 ]; then
-        echo "module not found: $1"
+        echoln "module not found: $1"
         exit 1
     else
         echoln "模块名称: $applicationName"
@@ -46,7 +50,7 @@ function build() {
     echoln "拉取最新"
     git pull
 
-    echoln "开始编译"
+    echoln "开始编译, 跳过测试: $compileSkipTest"
     mvn clean package -Dmaven.test.skip=$compileSkipTest
 
     echoln "进入目录: $directory"
