@@ -45,7 +45,7 @@ public class ResourceServiceImpl implements ResourceService {
         } else {
             entity = BeanCopy.copy(dto, ResourceEntity.class);
         }
-        return BeanCopy.copyList(resourceMapper.selectFuzzy(entity), ResourceDTO.class);
+        return BeanCopy.copyListOrPage(resourceMapper.selectFuzzy(entity), ResourceDTO.class);
     }
 
     @Override
