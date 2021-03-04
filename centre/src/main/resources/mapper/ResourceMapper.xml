@@ -34,9 +34,9 @@
             <if test="resource.type != null">
                 type = #{resource.type}
             </if>
-            <if test="resource.url != null">
-                <bind name="resourceUrl" value="'%' + resource.url + '%'"/>
-                url LIKE #{resourceUrl}
+            <if test="resource.uri != null">
+                <bind name="resourceUri" value="'%' + resource.uri + '%'"/>
+                url LIKE #{resourceUri}
             </if>
         </where>
         ORDER BY update_time
@@ -59,7 +59,7 @@
     <insert id="insert" parameterType="com.github.arsiac.psychology.centre.pojo.entity.ResourceEntity">
         INSERT INTO psychology_user_centre.resource
         (id, name, uri, type, parent, create_by, create_time, update_by, update_time, version)
-        VALUES (#{resource.id}, #{resource.name}, #{resource.url}, #{resource.type}, #{resource.parent},
+        VALUES (#{resource.id}, #{resource.name}, #{resource.uri}, #{resource.type}, #{resource.parent},
                 #{resource.createBy}, CURRENT_TIMESTAMP(),
                 #{resource.updateBy}, CURRENT_TIMESTAMP(), 1)
     </insert>
@@ -67,7 +67,7 @@
     <!-- 更新 根据版本和id来更新数据-->
     <update id="update" parameterType="com.github.arsiac.psychology.centre.pojo.entity.ResourceEntity">
         UPDATE psychology_user_centre.resource
-        SET name = #{resource.name}, uri = #{resource.url}, type = #{resource.type}, parent = #{resource.parent},
+        SET name = #{resource.name}, uri = #{resource.uri}, type = #{resource.type}, parent = #{resource.parent},
             update_by = #{resource.updateBy}, update_time = CURRENT_TIMESTAMP(),
             version = #{resource.version} + 1
         WHERE id = #{resource.id} AND version = #{resource.version}
