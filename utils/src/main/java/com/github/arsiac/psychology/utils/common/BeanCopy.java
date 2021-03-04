@@ -191,7 +191,7 @@ public class BeanCopy {
      * @version 1.0
      * @since  2021/1/31
      */
-    interface CopyCallback {
+    public interface CopyCallback {
 
         /**
          * <p>复制回调</p>
