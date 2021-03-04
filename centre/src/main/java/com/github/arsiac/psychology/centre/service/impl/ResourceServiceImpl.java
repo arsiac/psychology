@@ -58,7 +58,9 @@ public class ResourceServiceImpl implements ResourceService {
         ResourceEntity entity = (ResourceEntity) source;
         ResourceDTO dto = (ResourceDTO) target;
 
-        dto.setParentDTO(queryById(entity.getParent()));
+        if (entity.getParent() != null) {
+            dto.setParentDTO(queryById(entity.getParent()));
+        }
     }
 
     @Override
