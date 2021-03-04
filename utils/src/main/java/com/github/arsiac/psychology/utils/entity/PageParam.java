@@ -11,12 +11,12 @@ public class PageParam {
     /**
      * 页码
      */
-    private Integer pageNum;
+    private Integer pageNum = 1;
 
     /**
      * 页面大小
      * */
-    private Integer pageSize;
+    private Integer pageSize = 10;
 
     public Integer getPageNum() {
         return pageNum;
