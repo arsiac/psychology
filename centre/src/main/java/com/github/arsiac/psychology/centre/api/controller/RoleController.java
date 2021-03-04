@@ -35,7 +35,7 @@ public class RoleController implements RoleApi {
     @SystemLogger(value = "模糊查询角色", page = true)
     @Override
     public List<RoleVO> queryFuzzy(RoleParam param) {
-        return BeanCopy.copyList(roleService.queryFuzzy(BeanCopy.copy(param, RoleDTO.class)), RoleVO.class);
+        return BeanCopy.copyListOrPage(roleService.queryFuzzy(BeanCopy.copy(param, RoleDTO.class)), RoleVO.class);
     }
 
     @SystemLogger("根据id查询角色")

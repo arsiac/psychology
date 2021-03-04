@@ -45,7 +45,7 @@ public class RoleServiceImpl implements RoleService {
         } else {
             entity = BeanCopy.copy(dto, RoleEntity.class);
         }
-        return BeanCopy.copyList(roleMapper.selectFuzzy(entity), RoleDTO.class);
+        return BeanCopy.copyListOrPage(roleMapper.selectFuzzy(entity), RoleDTO.class);
     }
 
     @Override
