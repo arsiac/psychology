@@ -32,11 +32,11 @@
                 name LIKE #{resourceName}
             </if>
             <if test="resource.type != null">
-                type = #{resource.type}
+                AND type = #{resource.type}
             </if>
             <if test="resource.uri != null">
                 <bind name="resourceUri" value="'%' + resource.uri + '%'"/>
-                url LIKE #{resourceUri}
+                AND url LIKE #{resourceUri}
             </if>
         </where>
         ORDER BY update_time desc
