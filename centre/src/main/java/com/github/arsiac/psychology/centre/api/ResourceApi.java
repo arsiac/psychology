@@ -1,6 +1,7 @@
 package com.github.arsiac.psychology.centre.api;
 
 import com.github.arsiac.psychology.centre.pojo.dto.ResourceDTO;
+import com.github.arsiac.psychology.centre.pojo.form.param.ResourceParam;
 import com.github.arsiac.psychology.centre.pojo.vo.ResourceVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,12 +31,12 @@ public interface ResourceApi {
     /**
      * <p>模糊查询</p>
      *
-     * @param dto 资源信息
+     * @param param 资源信息
      * @return 查询结果
      * */
     @ApiOperation("模糊查询")
     @GetMapping
-    List<ResourceVO> queryFuzzy(ResourceDTO dto);
+    List<ResourceVO> queryFuzzy(ResourceParam param);
 
     /**
      * <p>根据id查询</p>
