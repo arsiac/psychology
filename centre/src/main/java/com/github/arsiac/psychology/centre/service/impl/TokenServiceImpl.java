@@ -53,6 +53,11 @@ public class TokenServiceImpl implements TokenService {
         redisUtils.delete(String.valueOf(id));
     }
 
+    @Override
+    public String getToken(Long userId) {
+        return redisUtils.get(String.valueOf(userId));
+    }
+
     @Autowired
     public void setRedisUtils(RedisUtils redisUtils) {
         this.redisUtils = redisUtils;

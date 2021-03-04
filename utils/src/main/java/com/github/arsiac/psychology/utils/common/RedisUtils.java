@@ -49,6 +49,13 @@ public class RedisUtils {
     public static final NullPointerException ARGUMENT_KEY_NULL =
             new NullPointerException("key is null.");
 
+
+    /**
+     * 非法参数异常: value is null
+     * */
+    public static final NullPointerException ARGUMENT_VALUE_NULL =
+            new NullPointerException("value is null.");
+
     /**
      * <p>存储key value到redis</p>
      *
@@ -59,6 +66,9 @@ public class RedisUtils {
     public void set(String key, Object value, long expire) {
         if (key == null) {
             throw ARGUMENT_KEY_NULL;
+        }
+        if (value == null) {
+            throw ARGUMENT_VALUE_NULL;
         }
         redisTemplate.opsForValue().set(key, toJsonString(value), expire);
     }
@@ -72,6 +82,9 @@ public class RedisUtils {
     public void set(String key, Object value) {
         if (key == null) {
             throw ARGUMENT_KEY_NULL;
+        }
+        if (value == null) {
+            throw ARGUMENT_VALUE_NULL;
         }
         redisTemplate.opsForValue().set(key, toJsonString(value));
     }
@@ -128,6 +141,10 @@ public class RedisUtils {
      * @return 字符串
      */
     private String toJsonString(Object o) {
+        // 检验参数
+        if (o == null) {
+            return null;
+        }
         // 如果是字符串，直接返回
         if (o instanceof String) {
             return (String) o;

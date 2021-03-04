@@ -126,6 +126,11 @@ public class LoginController implements LoginApi {
         return tokenService.createToken(userDTO);
     }
 
+    @Override
+    public String getToken(Long id) {
+        return tokenService.getToken(id);
+    }
+
     @SystemLogger("登出")
     @Override
     public boolean logout(UserDTO dto) {

@@ -32,4 +32,12 @@ public interface TokenService {
      * @param id 用户 id
      */
     void invalidateToken(Long id);
+
+    /**
+     * <p>获取用户的token</p>
+     *
+     * @param userId 用户id
+     * @return 用户token，不存在则返回空字符串
+     * */
+    String getToken(Long userId);
 }

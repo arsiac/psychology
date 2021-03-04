@@ -41,6 +41,17 @@ public interface LoginApi {
     TokenEntity login(@RequestBody LoginForm loginForm);
 
     /**
+     * <p>获取用户的token</p>
+     * <p>从redis中读取后返回</p>
+     *
+     * @param id 用户id
+     * @return token
+     */
+    @ApiOperation("获取登录生成的token")
+    @PostMapping("/login/{id}")
+    String getToken(@PathVariable Long id);
+
+    /**
      * <p>登出</p>
      *
      * @param dto 用户信息
