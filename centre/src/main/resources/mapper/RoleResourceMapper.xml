@@ -16,21 +16,21 @@
 
     <!-- 查找全部 -->
     <select id="selectAll" resultMap="roleResourceMap">
-        SELECT * FROM psychology_user_centre.role_resource ORDER BY update_time
+        SELECT * FROM psychology_user_centre.role_resource ORDER BY update_time desc
     </select>
 
     <!-- 根据角色id查询 -->
     <select id="selectByRoleId" resultMap="roleResourceMap" parameterType="java.lang.Long">
         SELECT * FROM psychology_user_centre.role_resource
         WHERE role_id = #{roleId}
-        ORDER BY update_time
+        ORDER BY update_time desc
     </select>
 
     <!-- 根据用户id查询 -->
     <select id="selectByResourceId" resultMap="roleResourceMap" parameterType="java.lang.Long">
         SELECT * FROM psychology_user_centre.role_resource
         WHERE resource_id = #{resourceId}
-        ORDER BY update_time
+        ORDER BY update_time desc
     </select>
 
     <!-- 增加用户对应角色 -->

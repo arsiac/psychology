@@ -17,7 +17,7 @@
 
     <!-- 查询全部 -->
     <select id="selectAll" resultMap="userMap">
-        SELECT * FROM psychology_user_centre.user ORDER BY update_time
+        SELECT * FROM psychology_user_centre.user ORDER BY update_time desc
     </select>
 
     <!-- 模糊查询 -->
@@ -29,7 +29,7 @@
                 name LIKE #{userName}
             </if>
         </where>
-        ORDER BY update_time
+        ORDER BY update_time desc
     </select>
 
     <!-- 根据id查询  -->

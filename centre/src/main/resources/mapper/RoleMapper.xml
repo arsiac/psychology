@@ -16,7 +16,7 @@
 
     <!-- 查询全部 -->
     <select id="selectAll" resultMap="roleMap">
-        SELECT * FROM psychology_user_centre.role ORDER BY update_time
+        SELECT * FROM psychology_user_centre.role ORDER BY update_time desc
     </select>
 
     <!-- 模糊查询 -->
@@ -28,7 +28,7 @@
                 name LIKE #{roleName}
             </if>
         </where>
-        ORDER BY update_time
+        ORDER BY update_time desc
     </select>
 
     <!-- 根据id查询 -->

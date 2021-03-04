@@ -20,7 +20,7 @@
 
     <!-- 查询全部 -->
     <select id="selectAll" resultMap="resourceMap">
-        SELECT * FROM psychology_user_centre.resource ORDER BY update_time
+        SELECT * FROM psychology_user_centre.resource ORDER BY update_time desc
     </select>
 
     <!-- 模糊查询 -->
@@ -39,7 +39,7 @@
                 url LIKE #{resourceUri}
             </if>
         </where>
-        ORDER BY update_time
+        ORDER BY update_time desc
     </select>
 
     <select id="selectIn" resultMap="resourceMap">
