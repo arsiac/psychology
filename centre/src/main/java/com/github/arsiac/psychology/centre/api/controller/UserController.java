@@ -87,8 +87,9 @@ public class UserController implements UserApi {
         if (userDTO.getPassword().equals(encrypt)) {
             userDTO.setPassword(encrypt);
             return userService.modify(userDTO);
+        } else {
+            throw PsychologyErrorCode.PASSWORD_ERROR.createException(form.getOldPassword());
         }
-        return false;
     }
 
     @SystemLogger("删除用户")
