@@ -58,8 +58,8 @@
     <!-- 插入 版本为1 时间为当前时间 -->
     <insert id="insert" parameterType="com.github.arsiac.psychology.centre.pojo.entity.ResourceEntity">
         INSERT INTO psychology_user_centre.resource
-        (id, name, uri, type, parent, create_by, create_time, update_by, update_time, version)
-        VALUES (#{resource.id}, #{resource.name}, #{resource.uri}, #{resource.type}, #{resource.parent},
+        (id, name, icon, uri, type, parent, create_by, create_time, update_by, update_time, version)
+        VALUES (#{resource.id}, #{resource.name}, #{resource.icon}, #{resource.uri}, #{resource.type}, #{resource.parent},
                 #{resource.createBy}, CURRENT_TIMESTAMP(),
                 #{resource.updateBy}, CURRENT_TIMESTAMP(), 1)
     </insert>
@@ -67,7 +67,7 @@
     <!-- 更新 根据版本和id来更新数据-->
     <update id="update" parameterType="com.github.arsiac.psychology.centre.pojo.entity.ResourceEntity">
         UPDATE psychology_user_centre.resource
-        SET name = #{resource.name}, uri = #{resource.uri}, type = #{resource.type}, parent = #{resource.parent},
+        SET name = #{resource.name}, icon = #{resource.icon}, uri = #{resource.uri}, type = #{resource.type}, parent = #{resource.parent},
             update_by = #{resource.updateBy}, update_time = CURRENT_TIMESTAMP(),
             version = #{resource.version} + 1
         WHERE id = #{resource.id} AND version = #{resource.version}
