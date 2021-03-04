@@ -11,16 +11,20 @@ function echoln() {
     echo -e "$1\n"
 }
 
+function echolnsp() {
+    echo -e "\n$1"
+}
+
 function dockerBuild() {
-    echoln "stop $1"
+    echolnsp "stop $1"
     docker stop "$1"
-    echoln "remove container $1"
+    echolnsp "remove container $1"
     docker container rm "$1"
-    echoln "remove image $1"
+    echolnsp "remove image $1"
     docker image rm "$1"
-    echoln "build image $2"
+    echolnsp "build image $2"
     docker build -t "$2" .
-    echoln "run $2, expose port $4, port $3"
+    echolnsp "run $2, expose port $4, port $3"
     docker run -itd --name "$2" -p "$3":"$4" "$2"
 }
 
@@ -41,19 +45,19 @@ function build() {
         echoln "module not found: $1"
         exit 1
     else
-        echoln "模块名称: $applicationName"
-        echoln "模块目录: ./$directory"
-        echoln "系统端口: $port"
-        echoln "暴露端口: $expose"
+        echo "模块名称: $applicationName"
+        echo "模块目录: ./$directory"
+        echo "系统端口: $port"
+        echo "暴露端口: $expose"
     fi
 
-    echoln "拉取最新"
+    echolnsp "拉取最新"
     git pull
 
-    echoln "开始编译, 跳过测试: $compileSkipTest"
+    echosp "开始编译, 跳过测试: $compileSkipTest"
     mvn clean package -Dmaven.test.skip=$compileSkipTest
 
-    echoln "进入目录: $directory"
+    echosp "进入目录: $directory"
     cd "$directory" || exit 1
 
     jar_path="./target/${applicationName}.jar"
