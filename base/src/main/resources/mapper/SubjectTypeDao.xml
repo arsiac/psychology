@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.arsiac.psychology.base.dao.SubjectTypeDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.github.arsiac.psychology.base.pojo.entity.SubjectTypeEntity" id="subjectTypeMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="version" column="version"/>
+    </resultMap>
+
+    <!-- 查询全部 -->
+    <select id="selectAll" resultMap="subjectTypeMap">
+        SELECT * FROM psychology_base.subject_type ORDER BY update_time desc
+    </select>
+
+    <!-- 模糊查询 -->
+    <select id="selectFuzzy" resultMap="subjectTypeMap" parameterType="com.github.arsiac.psychology.base.pojo.entity.SubjectTypeEntity">
+        SELECT * FROM psychology_base.subject_type
+        <where>
+            <if test="subjectType.name != null">
+                <bind name="subjectTypeName" value="'%' + subjectType.name + '%'"/>
+                name LIKE #{subjectTypeName}
+            </if>
+        </where>
+        ORDER BY update_time desc
+    </select>
+
+    <!-- 根据id查询 -->
+    <select id="selectById" resultMap="subjectTypeMap" parameterType="java.lang.Long">
+        SELECT * FROM psychology_base.subject_type WHERE id = #{id}
+    </select>
+
+    <!-- 插入 版本为1 时间为当前时间 -->
+    <insert id="insert" parameterType="com.github.arsiac.psychology.base.pojo.entity.SubjectTypeEntity">
+        INSERT INTO psychology_base.subject_type (id, name, create_by, create_time, update_by, update_time, version)
+        VALUES (#{subjectType.id}, #{subjectType.name},
+                #{subjectType.createBy}, CURRENT_TIMESTAMP(),
+                #{subjectType.updateBy}, CURRENT_TIMESTAMP(), 1)
+    </insert>
+
+    <!-- 更新 根据版本和id来更新数据-->
+    <update id="update" parameterType="com.github.arsiac.psychology.base.pojo.entity.SubjectTypeEntity">
+        UPDATE psychology_base.subject_type
+        SET name = #{subjectType.name},
+            update_by = #{subjectType.updateBy}, update_time = CURRENT_TIMESTAMP(),
+            version = #{subjectType.version} + 1
+        WHERE id = #{subjectType.id} AND version = #{subjectType.version}
+    </update>
+
+    <!-- 删除 根据id和版本删除 -->
+    <delete id="delete" parameterType="com.github.arsiac.psychology.base.pojo.entity.SubjectTypeEntity">
+        DELETE FROM psychology_base.subject_type WHERE id = #{id} AND version = #{version}
+    </delete>
+</mapper>

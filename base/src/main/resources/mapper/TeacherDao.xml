@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.arsiac.psychology.base.dao.TeacherDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.github.arsiac.psychology.base.pojo.entity.TeacherEntity" id="teacherMap">
+        <result property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="birthday" column="birthday"/>
+        <result property="age" column="age"/>
+        <result property="departmentId" column="department_id"/>
+        <result property="titleId" column="title_id"/>
+        <result property="oversea" column="oversea"/>
+        <result property="relation" column="relation"/>
+        <result property="politic" column="politic"/>
+        <result property="type" column="type"/>
+        <result property="education" column="education"/>
+        <result property="degree" column="degree"/>
+        <result property="degreeUnit" column="degree_unit"/>
+        <result property="researchDirection" column="research_direction"/>
+        <result property="jobType" column="job_type"/>
+        <result property="position" column="position"/>
+        <result property="account" column="account"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="version" column="version"/>
+    </resultMap>
+
+    <!-- 查询全部 -->
+    <select id="selectAll" resultMap="teacherMap">
+        SELECT * FROM psychology_base.teacher ORDER BY update_time desc
+    </select>
+
+    <!-- 模糊查询 -->
+    <select id="selectFuzzy" resultMap="teacherMap" parameterType="com.github.arsiac.psychology.base.pojo.entity.TeacherEntity">
+        SELECT * FROM psychology_base.teacher
+        <where>
+            <if test="teacher.name != null">
+                <bind name="teacherName" value="'%' + teacher.name + '%'"/>
+                name LIKE #{teacherName}
+            </if>
+        </where>
+        ORDER BY update_time desc
+    </select>
+
+    <!-- 根据id查询 -->
+    <select id="selectById" resultMap="teacherMap" parameterType="java.lang.Long">
+        SELECT * FROM psychology_base.teacher WHERE id = #{id}
+    </select>
+
+    <!-- 插入 版本为1 时间为当前时间 -->
+    <insert id="insert" parameterType="com.github.arsiac.psychology.base.pojo.entity.TeacherEntity">
+        INSERT INTO psychology_base.teacher
+        (id, code, name, sex, birthday,
+         age, department_id, title_id, oversea,
+         relation, politic, type, education, degree,
+         degree_unit, research_direction, job_type, position, account,
+         create_by, create_time, update_by, update_time, version)
+        VALUES (#{teacher.id}, #{teacher.code}, #{teacher.name}, #{teacher.sex}, #{teacher.birthday}, #{teacher.age},
+                #{teacher.departmentId}, #{teacher.titleId}, #{teacher.oversea}, #{teacher.relation}, #{teacher.politic},
+                #{teacher.type}, #{teacher.education}, #{teacher.degree}, #{teacher.degreeUnit}, #{teacher.researchDirection},
+                #{teacher.jobType}, #{teacher.position}, #{teacher.account},
+                #{teacher.createBy}, CURRENT_TIMESTAMP(),
+                #{teacher.updateBy}, CURRENT_TIMESTAMP(), 1)
+    </insert>
+
+    <!-- 更新 根据版本和id来更新数据-->
+    <update id="update" parameterType="com.github.arsiac.psychology.base.pojo.entity.TeacherEntity">
+        UPDATE psychology_base.teacher
+        SET
+        code = #{teacher.code},
+        name = #{teacher.name},
+        sex = #{teacher.sex},
+        birthday = #{teacher.birthday},
+        age = #{teacher.age},
+        department_id = #{teacher.departmentId},
+        title_id = #{teacher.titleId},
+        oversea = #{teacher.oversea},
+        relation = #{teacher.relation},
+        politic = #{teacher.politic},
+        type = #{teacher.type},
+        education = #{teacher.education},
+        degree = #{teacher.degree},
+        degree_unit = #{teacher.degreeUnit},
+        research_direction = #{teacher.researchDirection},
+        job_type = #{teacher.jobType},
+        position = #{teacher.position},
+        account = #{teacher.account},
+        update_by = #{teacher.updateBy},
+        update_time = CURRENT_TIMESTAMP(),
+        version = version + 1
+        WHERE id = #{teacher.id} AND version = #{teacher.version};
+
+    </update>
+
+    <!-- 删除 根据id和版本删除 -->
+    <delete id="delete" parameterType="com.github.arsiac.psychology.base.pojo.entity.TeacherEntity">
+        DELETE FROM psychology_base.teacher WHERE id = #{id} AND version = #{version}
+    </delete>
+</mapper>
