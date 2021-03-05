@@ -21,7 +21,7 @@ public class CommonTool {
     /**
      * 字符集合
      */
-    private static final byte[] CHARACTER_SET = {
+    private static final char[] CHARACTER_SET = {
             'a', 'b', 'c', 'd', 'e', 'f',
             'g', 'h', 'i', 'j', 'k', 'l',
             'm', 'n', 'o', 'p', 'q', 'r',
