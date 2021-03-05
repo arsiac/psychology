@@ -75,6 +75,6 @@
 
     <!-- 删除 根据id和版本删除 -->
     <delete id="delete" parameterType="com.github.arsiac.psychology.centre.pojo.entity.ResourceEntity">
-        DELETE FROM psychology_user_centre.resource WHERE id = #{resource.id} AND version = #{resource.version}
+        DELETE FROM psychology_user_centre.resource WHERE id = #{id} AND version = #{version}
     </delete>
 </mapper>

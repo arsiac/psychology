@@ -54,6 +54,6 @@
 
     <!-- 删除用户对应角色 -->
     <delete id="delete" parameterType="com.github.arsiac.psychology.centre.pojo.entity.UserRoleEntity">
-        DELETE FROM psychology_user_centre.user_role WHERE id = #{userRole.id} AND version = #{userRole.version}
+        DELETE FROM psychology_user_centre.user_role WHERE id = #{id} AND version = #{version}
     </delete>
 </mapper>
