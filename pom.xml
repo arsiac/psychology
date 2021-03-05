@@ -14,6 +14,8 @@
     <module>gateway</module>
     <module>centre</module>
     <module>utils</module>
+    <module>base</module>
+    <module>manager</module>
   </modules>
 
   <properties>

@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 25/02/2021 16:48:19
+ Date: 05/03/2021 13:34:50
 */
 
 SET NAMES utf8mb4;
@@ -24,7 +24,8 @@ DROP TABLE IF EXISTS `resource`;
 CREATE TABLE `resource`  (
   `id` bigint(20) NOT NULL COMMENT '资源id',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '资源名称',
-  `uri` varchar(511) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '' COMMENT '资源URI',
+  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
+  `uri` varchar(511) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '资源URI',
   `type` int(11) NOT NULL COMMENT '类型(1分组,2菜单,3按钮)',
   `parent` bigint(20) NULL DEFAULT NULL COMMENT '父资源',
   `create_by` bigint(20) NOT NULL COMMENT '创建者',
@@ -63,7 +64,11 @@ CREATE TABLE `role_resource`  (
   `update_by` bigint(20) NOT NULL COMMENT '更新者',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `version` int(11) NOT NULL COMMENT '版本',
-  PRIMARY KEY (`role_id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `rr_role_id`(`role_id`) USING BTREE,
+  INDEX `rr_resource_id`(`resource_id`) USING BTREE,
+  CONSTRAINT `rr_resource_id` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `rr_role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -98,9 +103,9 @@ CREATE TABLE `user_role`  (
   `version` int(11) NOT NULL COMMENT '版本',
   PRIMARY KEY (`user_id`, `role_id`) USING BTREE,
   UNIQUE INDEX `id_UNIQUE`(`id`) USING BTREE,
-  INDEX `user_role_role_id`(`role_id`) USING BTREE,
-  CONSTRAINT `user_role_role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `user_role_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX `ur_role_id`(`role_id`) USING BTREE,
+  CONSTRAINT `ur_role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `ur_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户对应角色表' ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
