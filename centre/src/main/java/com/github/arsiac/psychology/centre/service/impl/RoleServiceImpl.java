@@ -91,7 +91,12 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public boolean remove(RoleDTO dto) {
         checkIdAndVersion(dto);
-        return roleMapper.delete(dto.getId(), dto.getVersion()) > 0;
+
+        try {
+            return roleMapper.delete(dto.getId(), dto.getVersion()) > 0;
+        } catch (Exception e) {
+            throw PsychologyErrorCode.CANNOT_DELETE_FOREIGN_KEY.createException(e);
+        }
     }
 
     @Override

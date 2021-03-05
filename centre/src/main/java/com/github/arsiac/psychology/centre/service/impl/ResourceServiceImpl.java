@@ -106,7 +106,12 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public boolean remove(ResourceDTO dto) {
         checkIdAndVersion(dto);
-        return resourceMapper.delete(dto.getId(), dto.getVersion()) > 0;
+
+        try {
+            return resourceMapper.delete(dto.getId(), dto.getVersion()) > 0;
+        } catch (Exception e) {
+            throw PsychologyErrorCode.CANNOT_DELETE_FOREIGN_KEY.createException(e);
+        }
     }
 
     @Override

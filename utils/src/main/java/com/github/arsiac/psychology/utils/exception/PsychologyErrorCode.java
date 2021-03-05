@@ -35,6 +35,7 @@ public enum PsychologyErrorCode {
     DATA_IS_EMPTY(2011, "传入数据为空"),
     ROLE_NOT_AVAILABLE(2012, "未提供角色"),
     RESOURCE_NOT_AVAILABLE(2013, "未提供资源"),
+    CANNOT_DELETE_FOREIGN_KEY(2013, "该数据已经被使用，无法删除"),
 
     /*
      * 登录注册
