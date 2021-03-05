@@ -24,9 +24,9 @@
     <select id="selectFuzzy" resultMap="userMap" parameterType="com.github.arsiac.psychology.centre.pojo.entity.UserEntity">
         SELECT * FROM psychology_user_centre.user
         <where>
-            <if test="user.name != null">
-                <bind name="userName" value="'%' + user.username + '%'"/>
-                name LIKE #{userName}
+            <if test="user.username != null">
+                <bind name="name" value="'%' + user.username + '%'"/>
+                username LIKE #{name}
             </if>
         </where>
         ORDER BY update_time desc
