@@ -2,9 +2,9 @@
 
 # 模块
 project='psychology'
-modules=('registry' 'gateway' 'centre' 'base')
-ports=(8000 8010 8020 8030)
-exposes=(8000 8010 8020 8030)
+modules=('registry' 'gateway' 'centre' 'base' 'manager')
+ports=(8000 8010 8020 8030 8040)
+exposes=(8000 8010 8020 8030 8040)
 compileSkipTest=true
 
 function echoln() {
