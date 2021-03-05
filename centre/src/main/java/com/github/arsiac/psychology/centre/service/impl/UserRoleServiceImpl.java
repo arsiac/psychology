@@ -1,5 +1,8 @@
 package com.github.arsiac.psychology.centre.service.impl;
 
+import com.github.arsiac.psychology.centre.dao.RoleMapper;
+import com.github.arsiac.psychology.centre.pojo.dto.RoleDTO;
+import com.github.arsiac.psychology.centre.pojo.entity.UserRoleEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.github.arsiac.psychology.centre.pojo.dto.UserRoleDTO;
@@ -23,7 +26,12 @@ import java.util.List;
 @Service
 public class UserRoleServiceImpl implements UserRoleService {
     /**
-     * 权力资源 dao
+     * 角色dao
+     * */
+    private RoleMapper roleMapper;
+
+    /**
+     * 用户角色 dao
      * */
     private UserRoleMapper userRoleMapper;
 
@@ -48,7 +56,26 @@ public class UserRoleServiceImpl implements UserRoleService {
 
     @Override
     public List<UserRoleDTO> queryByUserId(Long id) {
-        return BeanCopy.copyList(userRoleMapper.selectByUserId(id), UserRoleDTO.class);
+        if (id == null) {
+            return new ArrayList<>(0);
+        }
+
+        return BeanCopy.copyList(userRoleMapper.selectByUserId(id), UserRoleDTO.class, this::copy2dto);
+    }
+
+    /**
+     * <p>拷贝为dto</p>
+     *
+     * @param source entity
+     * @param target dto
+     */
+    private void copy2dto(Object source, Object target) {
+        UserRoleEntity entity = (UserRoleEntity) source;
+        UserRoleDTO dto = (UserRoleDTO) target;
+
+        if (entity.getRoleId() != null) {
+            dto.setRoleDTO(BeanCopy.copy(roleMapper.selectById(entity.getRoleId()), RoleDTO.class));
+        }
     }
 
     @Override
@@ -126,6 +153,11 @@ public class UserRoleServiceImpl implements UserRoleService {
         if (dto.getVersion() == null) {
             throw PsychologyErrorCode.VERSION_NOT_AVAILABLE.createException();
         }
+    }
+
+    @Resource
+    public void setRoleMapper(RoleMapper roleMapper) {
+        this.roleMapper = roleMapper;
     }
 
     @Resource

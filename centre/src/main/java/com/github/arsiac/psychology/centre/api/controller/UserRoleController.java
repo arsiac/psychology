@@ -40,7 +40,22 @@ public class UserRoleController implements UserRoleApi {
     @SystemLogger("根据用户id查询")
     @Override
     public List<UserRoleVO> queryByUserId(Long id) {
-        return BeanCopy.copyList(userRoleService.queryByUserId(id), UserRoleVO.class);
+        return BeanCopy.copyList(userRoleService.queryByUserId(id), UserRoleVO.class, this::copy2vo);
+    }
+
+    /**
+     * <p>拷贝为vo</p>
+     *
+     * @param source entity
+     * @param target dto
+     */
+    private void copy2vo(Object source, Object target) {
+        UserRoleDTO dto = (UserRoleDTO) source;
+        UserRoleVO vo = (UserRoleVO) target;
+
+        if (dto.getRoleDTO() != null) {
+            vo.setRoleName(dto.getRoleDTO().getName());
+        }
     }
 
     @SystemLogger("增加用户的角色")
