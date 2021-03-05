@@ -1,5 +1,6 @@
 package com.github.arsiac.psychology.centre.pojo.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.arsiac.psychology.centre.pojo.entity.UserEntity;
 
 /**
@@ -9,6 +10,7 @@ import com.github.arsiac.psychology.centre.pojo.entity.UserEntity;
  * @version 1.0
  * @since  2021/1/31
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDTO extends UserEntity {
     @Override
     public String toString() {

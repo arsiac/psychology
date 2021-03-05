@@ -1,5 +1,6 @@
 package com.github.arsiac.psychology.centre.pojo.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.arsiac.psychology.centre.pojo.entity.UserRoleEntity;
 
 /**
@@ -9,6 +10,7 @@ import com.github.arsiac.psychology.centre.pojo.entity.UserRoleEntity;
  * @version 1.0
  * @since  2021/1/31
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserRoleDTO extends UserRoleEntity {
     /**
      * 用户 dto
