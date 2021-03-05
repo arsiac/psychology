@@ -1,0 +1,32 @@
+server:
+  port: 8010
+
+logging:
+  level:
+    root: info
+
+# 消费者
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 47.110.247.139
+    instance-id: ${eureka.instance.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://47.110.247.139:8000/eureka
+
+spring:
+  application:
+    name: psychology-gateway
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+    gateway:
+      enabled: true
+      routes:
+        # 用户中心
+        - id: user-centre
+          uri: lb://psychology-user-centre
+          predicates:
+            - Path=/centre/**
