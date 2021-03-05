@@ -113,6 +113,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean modify(UserDTO dto) {
         checkIdAndVersion(dto);
+        String password = dto.getPassword();
+
+        // 加密密码
+        dto.setPassword(CommonTool.encrypt(password, dto.getSalt()));
         return userMapper.update(dto) > 0;
     }
 
