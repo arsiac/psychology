@@ -122,7 +122,7 @@ public class ResourceServiceImpl implements ResourceService {
 
         int count = 0;
         for (ResourceDTO dto : dtoList) {
-            count += resourceMapper.delete(dto.getId(), dto.getVersion());
+            count += remove(dto) ? 1 : 0;
         }
 
         // true 则为全部删除成功

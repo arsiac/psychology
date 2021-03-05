@@ -107,7 +107,7 @@ public class RoleServiceImpl implements RoleService {
 
         int count = 0;
         for (RoleDTO dto : dtoList) {
-            count += roleMapper.delete(dto.getId(), dto.getVersion());
+            count += remove(dto) ? 1 : 0;
         }
 
         // true 则为全部删除成功
