@@ -6,6 +6,7 @@ server:
 logging:
   level:
     root: info
+    com.github.arsiac.psychology.centre.dao: debug
 
 # 服务提供者
 eureka:
@@ -38,7 +39,7 @@ spring:
     hikari:
       maximum-pool-size: 50
       minimum-idle: 20
-      max-lifetime: 1800000
+      max-lifetime: 6000000
       connection-timeout: 30000
       auto-commit: true
       pool-name: user_centre_db_pool
@@ -69,6 +70,8 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
 
 springfox:
   documentation:
