@@ -14,7 +14,7 @@ import java.util.List;
  * @since  2021/3/5
  */
 @Mapper
-public interface SubjectTypeDao {
+public interface SubjectTypeMapper {
 
     /**
      * <p>查找全部</p>
