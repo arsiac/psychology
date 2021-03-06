@@ -30,3 +30,13 @@ spring:
           uri: lb://psychology-user-centre
           predicates:
             - Path=/centre/**
+
+        - id: base-data
+          uri: lb://psychology-base
+          predicates:
+            - Path=/base/**
+
+        - id: manager
+          uri: lb://psychology-manager
+          predicates:
+            - Path=/manager/**
