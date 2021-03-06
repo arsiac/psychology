@@ -3,6 +3,7 @@ package com.github.arsiac.psychology.base.api.controller;
 import com.github.arsiac.psychology.base.api.ProjectSourceApi;
 import com.github.arsiac.psychology.base.dao.ProjectSourceMapper;
 import com.github.arsiac.psychology.base.pojo.entity.ProjectSourceEntity;
+import com.github.arsiac.psychology.utils.common.IdGenerator;
 import com.github.arsiac.psychology.utils.exception.PsychologyErrorCode;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,11 @@ public class ProjectSourceController implements ProjectSourceApi {
      * */
     private ProjectSourceMapper projectSourceMapper;
 
+    /**
+     * id
+     * */
+    private IdGenerator idGenerator;
+
     @Override
     public List<ProjectSourceEntity> queryAll() {
         return projectSourceMapper.selectAll();
@@ -41,6 +47,7 @@ public class ProjectSourceController implements ProjectSourceApi {
 
     @Override
     public boolean add(ProjectSourceEntity entity) {
+        entity.setId(idGenerator.generate());
         return projectSourceMapper.insert(entity) > 0;
     }
 
@@ -66,5 +73,10 @@ public class ProjectSourceController implements ProjectSourceApi {
     @Resource
     public void setProjectSourceMapper(ProjectSourceMapper projectSourceMapper) {
         this.projectSourceMapper = projectSourceMapper;
+    }
+
+    @Resource
+    public void setIdGenerator(IdGenerator idGenerator) {
+        this.idGenerator = idGenerator;
     }
 }

@@ -3,6 +3,7 @@ package com.github.arsiac.psychology.base.api.controller;
 import com.github.arsiac.psychology.base.api.SubjectTypeApi;
 import com.github.arsiac.psychology.base.dao.SubjectTypeMapper;
 import com.github.arsiac.psychology.base.pojo.entity.SubjectTypeEntity;
+import com.github.arsiac.psychology.utils.common.IdGenerator;
 import com.github.arsiac.psychology.utils.exception.PsychologyErrorCode;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,11 @@ public class SubjectTypeController implements SubjectTypeApi {
      * */
     private SubjectTypeMapper subjectTypeMapper;
 
+    /**
+     * id
+     * */
+    private IdGenerator idGenerator;
+
     @Override
     public List<SubjectTypeEntity> queryAll() {
         return subjectTypeMapper.selectAll();
@@ -41,6 +47,7 @@ public class SubjectTypeController implements SubjectTypeApi {
 
     @Override
     public boolean add(SubjectTypeEntity entity) {
+        entity.setId(idGenerator.generate());
         return subjectTypeMapper.insert(entity) > 0;
     }
 
@@ -66,5 +73,10 @@ public class SubjectTypeController implements SubjectTypeApi {
     @Resource
     public void setSubjectTypeMapper(SubjectTypeMapper subjectTypeMapper) {
         this.subjectTypeMapper = subjectTypeMapper;
+    }
+
+    @Resource
+    public void setIdGenerator(IdGenerator idGenerator) {
+        this.idGenerator = idGenerator;
     }
 }

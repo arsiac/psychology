@@ -3,6 +3,7 @@ package com.github.arsiac.psychology.base.api.controller;
 import com.github.arsiac.psychology.base.api.TeacherApi;
 import com.github.arsiac.psychology.base.dao.TeacherMapper;
 import com.github.arsiac.psychology.base.pojo.entity.TeacherEntity;
+import com.github.arsiac.psychology.utils.common.IdGenerator;
 import com.github.arsiac.psychology.utils.exception.PsychologyErrorCode;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,11 @@ public class TeacherController implements TeacherApi {
      * */
     private TeacherMapper teacherMapper;
 
+    /**
+     * id
+     * */
+    private IdGenerator idGenerator;
+
     @Override
     public List<TeacherEntity> queryAll() {
         return teacherMapper.selectAll();
@@ -41,6 +47,7 @@ public class TeacherController implements TeacherApi {
 
     @Override
     public boolean add(TeacherEntity entity) {
+        entity.setId(idGenerator.generate());
         return teacherMapper.insert(entity) > 0;
     }
 
@@ -66,5 +73,10 @@ public class TeacherController implements TeacherApi {
     @Resource
     public void setTeacherMapper(TeacherMapper teacherMapper) {
         this.teacherMapper = teacherMapper;
+    }
+
+    @Resource
+    public void setIdGenerator(IdGenerator idGenerator) {
+        this.idGenerator = idGenerator;
     }
 }

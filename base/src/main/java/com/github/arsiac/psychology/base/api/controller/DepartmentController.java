@@ -3,6 +3,7 @@ package com.github.arsiac.psychology.base.api.controller;
 import com.github.arsiac.psychology.base.api.DepartmentApi;
 import com.github.arsiac.psychology.base.dao.DepartmentMapper;
 import com.github.arsiac.psychology.base.pojo.entity.DepartmentEntity;
+import com.github.arsiac.psychology.utils.common.IdGenerator;
 import com.github.arsiac.psychology.utils.exception.PsychologyErrorCode;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,11 @@ public class DepartmentController implements DepartmentApi {
      * */
     private DepartmentMapper departmentMapper;
 
+    /**
+     * id
+     * */
+    private IdGenerator idGenerator;
+
     @Override
     public List<DepartmentEntity> queryAll() {
         return departmentMapper.selectAll();
@@ -41,6 +47,7 @@ public class DepartmentController implements DepartmentApi {
 
     @Override
     public boolean add(DepartmentEntity entity) {
+        entity.setId(idGenerator.generate());
         return departmentMapper.insert(entity) > 0;
     }
 
@@ -66,5 +73,10 @@ public class DepartmentController implements DepartmentApi {
     @Resource
     public void setDepartmentMapper(DepartmentMapper departmentMapper) {
         this.departmentMapper = departmentMapper;
+    }
+
+    @Resource
+    public void setIdGenerator(IdGenerator idGenerator) {
+        this.idGenerator = idGenerator;
     }
 }

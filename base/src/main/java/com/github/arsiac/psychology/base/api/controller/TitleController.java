@@ -3,6 +3,7 @@ package com.github.arsiac.psychology.base.api.controller;
 import com.github.arsiac.psychology.base.api.TitleApi;
 import com.github.arsiac.psychology.base.dao.TitleMapper;
 import com.github.arsiac.psychology.base.pojo.entity.TitleEntity;
+import com.github.arsiac.psychology.utils.common.IdGenerator;
 import com.github.arsiac.psychology.utils.exception.PsychologyErrorCode;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,11 @@ public class TitleController implements TitleApi {
      * */
     private TitleMapper titleMapper;
 
+    /**
+     * id
+     * */
+    private IdGenerator idGenerator;
+
     @Override
     public List<TitleEntity> queryAll() {
         return titleMapper.selectAll();
@@ -41,6 +47,7 @@ public class TitleController implements TitleApi {
 
     @Override
     public boolean add(TitleEntity entity) {
+        entity.setId(idGenerator.generate());
         return titleMapper.insert(entity) > 0;
     }
 
@@ -66,5 +73,10 @@ public class TitleController implements TitleApi {
     @Resource
     public void setTitleMapper(TitleMapper titleMapper) {
         this.titleMapper = titleMapper;
+    }
+
+    @Resource
+    public void setIdGenerator(IdGenerator idGenerator) {
+        this.idGenerator = idGenerator;
     }
 }
