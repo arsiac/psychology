@@ -15,18 +15,20 @@ public class ResourceDTO extends ResourceEntity {
     /**
      * 父节点
      * */
-    private ResourceDTO parentDTO;
+    private ResourceEntity parentDTO;
 
-    public ResourceDTO getParentDTO() {
+    public ResourceEntity getParentDTO() {
         return parentDTO;
     }
 
-    public void setParentDTO(ResourceDTO parentDTO) {
+    public void setParentDTO(ResourceEntity parentDTO) {
         this.parentDTO = parentDTO;
     }
 
     @Override
     public String toString() {
-        return "ResourceDTO{} " + super.toString();
+        return "ResourceDTO{" +
+                "parentDTO=" + parentDTO +
+                "} " + super.toString();
     }
 }

@@ -1,5 +1,6 @@
 package com.github.arsiac.psychology.centre.dao;
 
+import com.github.arsiac.psychology.centre.pojo.dto.ResourceDTO;
 import com.github.arsiac.psychology.centre.pojo.entity.ResourceEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -31,7 +32,7 @@ public interface ResourceMapper {
      * @param resource 资源信息
      * @return 资源列表
      * */
-    List<ResourceEntity> selectFuzzy(@Param("resource") ResourceEntity resource);
+    List<ResourceDTO> selectFuzzy(@Param("resource") ResourceEntity resource);
 
     /**
      * <p>查询指定的资源</p>
