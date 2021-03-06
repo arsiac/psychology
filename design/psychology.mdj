@@ -2154,8 +2154,8 @@
 										"$ref": "AAAAAAF4AZ+vDB2xhcc="
 									},
 									"font": "Arial;13;1",
-									"left": 456,
-									"top": 269,
+									"left": 24,
+									"top": 509,
 									"width": 159.34619140625,
 									"height": 13,
 									"text": "project_type"
@@ -2180,8 +2180,8 @@
 												"$ref": "AAAAAAF4AZ/PFB299G0="
 											},
 											"font": "Arial;13;0",
-											"left": 461,
-											"top": 292,
+											"left": 29,
+											"top": 532,
 											"width": 149.34619140625,
 											"height": 13
 										},
@@ -2195,22 +2195,22 @@
 												"$ref": "AAAAAAF4AZ/+Yx3GtP0="
 											},
 											"font": "Arial;13;0",
-											"left": 461,
-											"top": 307,
+											"left": 29,
+											"top": 547,
 											"width": 149.34619140625,
 											"height": 13
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 456,
-									"top": 287,
+									"left": 24,
+									"top": 527,
 									"width": 159.34619140625,
 									"height": 38
 								}
 							],
 							"font": "Arial;13;0",
-							"left": 456,
-							"top": 264,
+							"left": 24,
+							"top": 504,
 							"width": 159.34619140625,
 							"height": 61,
 							"nameLabel": {
@@ -2237,8 +2237,8 @@
 										"$ref": "AAAAAAF4AaA4dh3S4L0="
 									},
 									"font": "Arial;13;1",
-									"left": 456,
-									"top": 373,
+									"left": 24,
+									"top": 605,
 									"width": 159.34619140625,
 									"height": 13,
 									"text": "source_type"
@@ -2263,8 +2263,8 @@
 												"$ref": "AAAAAAF4AaBSih3dSRg="
 											},
 											"font": "Arial;13;0",
-											"left": 461,
-											"top": 396,
+											"left": 29,
+											"top": 628,
 											"width": 149.34619140625,
 											"height": 13
 										},
@@ -2278,22 +2278,22 @@
 												"$ref": "AAAAAAF4AaB+1B3mIxg="
 											},
 											"font": "Arial;13;0",
-											"left": 461,
-											"top": 411,
+											"left": 29,
+											"top": 643,
 											"width": 149.34619140625,
 											"height": 13
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 456,
-									"top": 391,
+									"left": 24,
+									"top": 623,
 									"width": 159.34619140625,
 									"height": 38
 								}
 							],
 							"font": "Arial;13;0",
-							"left": 456,
-							"top": 368,
+							"left": 24,
+							"top": 600,
 							"width": 159.34619140625,
 							"height": 61,
 							"nameLabel": {
