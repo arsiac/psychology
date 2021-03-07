@@ -226,11 +226,11 @@ public class TeacherEntity {
 		this.researchDirection = researchDirection;
 	}
 
-	public Integer getJobType() {
+	public String getJobType() {
 		return jobType;
 	}
 
-	public void setJobType(Integer jobType) {
+	public void setJobType(String jobType) {
 		this.jobType = jobType;
 	}
 
