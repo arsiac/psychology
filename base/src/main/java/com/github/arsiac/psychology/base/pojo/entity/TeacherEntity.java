@@ -49,23 +49,23 @@ public class TeacherEntity {
 	/**
 	 * 学缘关系 (1本校, 2外校(国内), 3外校(国外))
 	 */
-	private Integer relation;
+	private String relation;
 	/**
 	 * 政治面貌(1党员, 2共青团员, 3群众)
 	 */
-	private Integer politic;
+	private String politic;
 	/**
 	 * 导师类型(1博导, 2硕导)
 	 */
-	private Integer type;
+	private String type;
 	/**
 	 * 学历(1本科, 2硕士研究生, 3博士研究生)
 	 */
-	private Integer education;
+	private String education;
 	/**
 	 * 最高学位(1.学士, 2硕士, 3博士)
 	 */
-	private Integer degree;
+	private String degree;
 	/**
 	 * 最高学位获取单位
 	 */
@@ -179,43 +179,43 @@ public class TeacherEntity {
 		this.oversea = oversea;
 	}
 
-	public Integer getRelation() {
+	public String getRelation() {
 		return relation;
 	}
 
-	public void setRelation(Integer relation) {
+	public void setRelation(String relation) {
 		this.relation = relation;
 	}
 
-	public Integer getPolitic() {
+	public String getPolitic() {
 		return politic;
 	}
 
-	public void setPolitic(Integer politic) {
+	public void setPolitic(String politic) {
 		this.politic = politic;
 	}
 
-	public Integer getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Integer type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
-	public Integer getEducation() {
+	public String getEducation() {
 		return education;
 	}
 
-	public void setEducation(Integer education) {
+	public void setEducation(String education) {
 		this.education = education;
 	}
 
-	public Integer getDegree() {
+	public String getDegree() {
 		return degree;
 	}
 
-	public void setDegree(Integer degree) {
+	public void setDegree(String degree) {
 		this.degree = degree;
 	}
 
@@ -311,11 +311,11 @@ public class TeacherEntity {
 				", departmentId=" + departmentId +
 				", titleId=" + titleId +
 				", oversea=" + oversea +
-				", relation=" + relation +
-				", politic=" + politic +
-				", type=" + type +
-				", education=" + education +
-				", degree=" + degree +
+				", relation='" + relation + '\'' +
+				", politic='" + politic + '\'' +
+				", type='" + type + '\'' +
+				", education='" + education + '\'' +
+				", degree='" + degree + '\'' +
 				", degreeUnit='" + degreeUnit + '\'' +
 				", researchDirection='" + researchDirection + '\'' +
 				", jobType=" + jobType +
