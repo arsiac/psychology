@@ -25,7 +25,7 @@
         <where>
             <if test="title.name != null">
                 <bind name="titleName" value="'%' + title.name + '%'"/>
-                name LIKE #{title}
+                name LIKE #{titleName}
             </if>
         </where>
         ORDER BY update_time desc
