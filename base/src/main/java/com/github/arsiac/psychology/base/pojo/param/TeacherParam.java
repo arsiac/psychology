@@ -71,7 +71,7 @@ public class TeacherParam extends PageParam {
     /**
      * 工作类别
      */
-    private Integer jobType;
+    private String jobType;
     /**
      * 任职情况
      */
@@ -189,11 +189,11 @@ public class TeacherParam extends PageParam {
         this.researchDirection = researchDirection;
     }
 
-    public Integer getJobType() {
+    public String getJobType() {
         return jobType;
     }
 
-    public void setJobType(Integer jobType) {
+    public void setJobType(String jobType) {
         this.jobType = jobType;
     }
 

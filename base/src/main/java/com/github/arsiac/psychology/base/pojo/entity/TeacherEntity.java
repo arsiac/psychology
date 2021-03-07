@@ -76,7 +76,7 @@ public class TeacherEntity {
 	/**
 	 * 工作类别
 	 */
-	private Integer jobType;
+	private String jobType;
 	/**
 	 * 任职情况
 	 */
