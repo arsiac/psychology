@@ -1,7 +1,7 @@
 package com.github.arsiac.psychology.base.api;
 
 import com.github.arsiac.psychology.base.pojo.entity.DepartmentEntity;
-import com.github.arsiac.psychology.utils.annotation.SystemLogger;
+import com.github.arsiac.psychology.base.pojo.param.DictionaryParam;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,19 +20,17 @@ public interface DepartmentApi {
      *
      * @return 全部系别
      * */
-    @SystemLogger("查询全部系别")
     @GetMapping("/all")
     List<DepartmentEntity> queryAll();
 
     /**
      * <p>模糊查找系别</p>
      *
-     * @param entity 系别信息
+     * @param param 系别信息
      * @return 系别列表
      * */
-    @SystemLogger("模糊查询系别")
     @GetMapping
-    List<DepartmentEntity> queryFuzzy(DepartmentEntity entity);
+    List<DepartmentEntity> queryFuzzy(DictionaryParam param);
 
     /**
      * <p>根据id查询</p>
@@ -40,7 +38,6 @@ public interface DepartmentApi {
      * @param id 系别id
      * @return 系别信息
      * */
-    @SystemLogger("根据id查询系别")
     @GetMapping("/{id}")
     DepartmentEntity queryById(@PathVariable Long id);
 
@@ -50,7 +47,6 @@ public interface DepartmentApi {
      * @param entity 系别信息
      * @return 数据库变动行数
      * */
-    @SystemLogger("添加系别")
     @PostMapping
     boolean add(@RequestBody DepartmentEntity entity);
 
@@ -60,7 +56,6 @@ public interface DepartmentApi {
      * @param entity 系别信息
      * @return 数据库变动行数
      * */
-    @SystemLogger("修改系别")
     @PutMapping
     boolean modify(@RequestBody DepartmentEntity entity);
 
@@ -70,7 +65,6 @@ public interface DepartmentApi {
      * @param entityList 系别信息
      * @return 数据库变动行数
      * */
-    @SystemLogger("删除系别")
     @DeleteMapping
     boolean remove(@RequestBody List<DepartmentEntity> entityList);
 }

@@ -1,7 +1,7 @@
 package com.github.arsiac.psychology.base.api;
 
 import com.github.arsiac.psychology.base.pojo.entity.SubjectTypeEntity;
-import com.github.arsiac.psychology.utils.annotation.SystemLogger;
+import com.github.arsiac.psychology.base.pojo.param.DictionaryParam;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,19 +20,17 @@ public interface SubjectTypeApi {
      *
      * @return 全部课题类型
      * */
-    @SystemLogger("查询全部课题类型")
     @GetMapping("/all")
     List<SubjectTypeEntity> queryAll();
 
     /**
      * <p>模糊查找课题类型</p>
      *
-     * @param entity 课题类型信息
+     * @param param 课题类型信息
      * @return 课题类型列表
      * */
-    @SystemLogger("模糊查询课题类型")
     @GetMapping
-    List<SubjectTypeEntity> queryFuzzy(SubjectTypeEntity entity);
+    List<SubjectTypeEntity> queryFuzzy(DictionaryParam param);
 
     /**
      * <p>根据id查询</p>
@@ -40,7 +38,6 @@ public interface SubjectTypeApi {
      * @param id 课题类型id
      * @return 课题类型信息
      * */
-    @SystemLogger("根据id查询课题类型")
     @GetMapping("/{id}")
     SubjectTypeEntity queryById(@PathVariable Long id);
 
@@ -50,7 +47,6 @@ public interface SubjectTypeApi {
      * @param entity 课题类型信息
      * @return 数据库变动行数
      * */
-    @SystemLogger("添加课题类型")
     @PostMapping
     boolean add(@RequestBody SubjectTypeEntity entity);
 
@@ -60,7 +56,6 @@ public interface SubjectTypeApi {
      * @param entity 课题类型信息
      * @return 数据库变动行数
      * */
-    @SystemLogger("修改课题类型")
     @PutMapping
     boolean modify(@RequestBody SubjectTypeEntity entity);
 
@@ -70,7 +65,6 @@ public interface SubjectTypeApi {
      * @param entityList 课题类型信息
      * @return 数据库变动行数
      * */
-    @SystemLogger("删除课题类型")
     @DeleteMapping
     boolean remove(@RequestBody List<SubjectTypeEntity> entityList);
 }

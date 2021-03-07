@@ -3,6 +3,9 @@ package com.github.arsiac.psychology.base.api.controller;
 import com.github.arsiac.psychology.base.api.TitleApi;
 import com.github.arsiac.psychology.base.dao.TitleMapper;
 import com.github.arsiac.psychology.base.pojo.entity.TitleEntity;
+import com.github.arsiac.psychology.base.pojo.param.DictionaryParam;
+import com.github.arsiac.psychology.utils.annotation.SystemLogger;
+import com.github.arsiac.psychology.utils.common.BeanCopy;
 import com.github.arsiac.psychology.utils.common.IdGenerator;
 import com.github.arsiac.psychology.utils.exception.PsychologyErrorCode;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,32 +33,38 @@ public class TitleController implements TitleApi {
      * */
     private IdGenerator idGenerator;
 
+    @SystemLogger("查询全部职称")
     @Override
     public List<TitleEntity> queryAll() {
         return titleMapper.selectAll();
     }
 
+    @SystemLogger(value = "模糊查询职称", page = true)
     @Override
-    public List<TitleEntity> queryFuzzy(TitleEntity entity) {
-        return titleMapper.selectFuzzy(entity);
+    public List<TitleEntity> queryFuzzy(DictionaryParam param) {
+        return titleMapper.selectFuzzy(BeanCopy.copy(param, TitleEntity.class));
     }
 
+    @SystemLogger("根据id查询职称")
     @Override
     public TitleEntity queryById(Long id) {
         return null;
     }
 
+    @SystemLogger("添加职称")
     @Override
     public boolean add(TitleEntity entity) {
         entity.setId(idGenerator.generate());
         return titleMapper.insert(entity) > 0;
     }
 
+    @SystemLogger("修改职称")
     @Override
     public boolean modify(TitleEntity entity) {
         return titleMapper.update(entity) > 0;
     }
 
+    @SystemLogger("删除职称")
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean remove(List<TitleEntity> entityList) {

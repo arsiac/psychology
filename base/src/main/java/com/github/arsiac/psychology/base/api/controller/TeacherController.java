@@ -3,6 +3,9 @@ package com.github.arsiac.psychology.base.api.controller;
 import com.github.arsiac.psychology.base.api.TeacherApi;
 import com.github.arsiac.psychology.base.dao.TeacherMapper;
 import com.github.arsiac.psychology.base.pojo.entity.TeacherEntity;
+import com.github.arsiac.psychology.base.pojo.param.TeacherParam;
+import com.github.arsiac.psychology.utils.annotation.SystemLogger;
+import com.github.arsiac.psychology.utils.common.BeanCopy;
 import com.github.arsiac.psychology.utils.common.IdGenerator;
 import com.github.arsiac.psychology.utils.exception.PsychologyErrorCode;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,32 +33,38 @@ public class TeacherController implements TeacherApi {
      * */
     private IdGenerator idGenerator;
 
+    @SystemLogger("查询全部教师")
     @Override
     public List<TeacherEntity> queryAll() {
         return teacherMapper.selectAll();
     }
 
+    @SystemLogger(value = "模糊查询教师", page = true)
     @Override
-    public List<TeacherEntity> queryFuzzy(TeacherEntity entity) {
-        return teacherMapper.selectFuzzy(entity);
+    public List<TeacherEntity> queryFuzzy(TeacherParam param) {
+        return teacherMapper.selectFuzzy(BeanCopy.copy(param, TeacherEntity.class));
     }
 
+    @SystemLogger("根据id查询教师")
     @Override
     public TeacherEntity queryById(Long id) {
         return null;
     }
 
+    @SystemLogger("添加教师")
     @Override
     public boolean add(TeacherEntity entity) {
         entity.setId(idGenerator.generate());
         return teacherMapper.insert(entity) > 0;
     }
 
+    @SystemLogger("修改教师")
     @Override
     public boolean modify(TeacherEntity entity) {
         return teacherMapper.update(entity) > 0;
     }
 
+    @SystemLogger("删除教师")
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean remove(List<TeacherEntity> entityList) {

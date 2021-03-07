@@ -3,6 +3,9 @@ package com.github.arsiac.psychology.base.api.controller;
 import com.github.arsiac.psychology.base.api.DepartmentApi;
 import com.github.arsiac.psychology.base.dao.DepartmentMapper;
 import com.github.arsiac.psychology.base.pojo.entity.DepartmentEntity;
+import com.github.arsiac.psychology.base.pojo.param.DictionaryParam;
+import com.github.arsiac.psychology.utils.annotation.SystemLogger;
+import com.github.arsiac.psychology.utils.common.BeanCopy;
 import com.github.arsiac.psychology.utils.common.IdGenerator;
 import com.github.arsiac.psychology.utils.exception.PsychologyErrorCode;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,32 +33,38 @@ public class DepartmentController implements DepartmentApi {
      * */
     private IdGenerator idGenerator;
 
+    @SystemLogger("查询全部系别")
     @Override
     public List<DepartmentEntity> queryAll() {
         return departmentMapper.selectAll();
     }
 
+    @SystemLogger(value = "模糊查询系别", page = true)
     @Override
-    public List<DepartmentEntity> queryFuzzy(DepartmentEntity entity) {
-        return departmentMapper.selectFuzzy(entity);
+    public List<DepartmentEntity> queryFuzzy(DictionaryParam param) {
+        return departmentMapper.selectFuzzy(BeanCopy.copy(param, DepartmentEntity.class));
     }
 
+    @SystemLogger("根据id查询系别")
     @Override
     public DepartmentEntity queryById(Long id) {
         return null;
     }
 
+    @SystemLogger("添加系别")
     @Override
     public boolean add(DepartmentEntity entity) {
         entity.setId(idGenerator.generate());
         return departmentMapper.insert(entity) > 0;
     }
 
+    @SystemLogger("修改系别")
     @Override
     public boolean modify(DepartmentEntity entity) {
         return departmentMapper.update(entity) > 0;
     }
 
+    @SystemLogger("删除系别")
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean remove(List<DepartmentEntity> entityList) {
