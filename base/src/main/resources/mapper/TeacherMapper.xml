@@ -10,7 +10,6 @@
         <result property="name" column="name"/>
         <result property="sex" column="sex"/>
         <result property="birthday" column="birthday"/>
-        <result property="age" column="age"/>
         <result property="departmentId" column="department_id"/>
         <result property="titleId" column="title_id"/>
         <result property="oversea" column="oversea"/>
@@ -57,11 +56,11 @@
     <insert id="insert" parameterType="com.github.arsiac.psychology.base.pojo.entity.TeacherEntity">
         INSERT INTO psychology_base.teacher
         (id, code, name, sex, birthday,
-         age, department_id, title_id, oversea,
+         department_id, title_id, oversea,
          relation, politic, type, education, degree,
          degree_unit, research_direction, job_type, position, account,
          create_by, create_time, update_by, update_time, version)
-        VALUES (#{teacher.id}, #{teacher.code}, #{teacher.name}, #{teacher.sex}, #{teacher.birthday}, #{teacher.age},
+        VALUES (#{teacher.id}, #{teacher.code}, #{teacher.name}, #{teacher.sex}, #{teacher.birthday},
                 #{teacher.departmentId}, #{teacher.titleId}, #{teacher.oversea}, #{teacher.relation}, #{teacher.politic},
                 #{teacher.type}, #{teacher.education}, #{teacher.degree}, #{teacher.degreeUnit}, #{teacher.researchDirection},
                 #{teacher.jobType}, #{teacher.position}, #{teacher.account},
@@ -77,7 +76,6 @@
         name = #{teacher.name},
         sex = #{teacher.sex},
         birthday = #{teacher.birthday},
-        age = #{teacher.age},
         department_id = #{teacher.departmentId},
         title_id = #{teacher.titleId},
         oversea = #{teacher.oversea},

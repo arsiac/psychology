@@ -29,10 +29,6 @@ public class TeacherParam extends PageParam {
      */
     private Date birthday;
     /**
-     * 年龄
-     */
-    private Integer age;
-    /**
      * 系别
      */
     private Long departmentId;
@@ -111,14 +107,6 @@ public class TeacherParam extends PageParam {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
     }
 
     public Long getDepartmentId() {
@@ -224,7 +212,6 @@ public class TeacherParam extends PageParam {
                 ", name='" + name + '\'' +
                 ", sex=" + sex +
                 ", birthday=" + birthday +
-                ", age=" + age +
                 ", departmentId=" + departmentId +
                 ", titleId=" + titleId +
                 ", oversea=" + oversea +

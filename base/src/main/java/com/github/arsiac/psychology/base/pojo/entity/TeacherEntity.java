@@ -1,5 +1,7 @@
 package com.github.arsiac.psychology.base.pojo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
 
 /**
@@ -9,6 +11,7 @@ import java.util.Date;
  * @version 1.0
  * @since  2021/3/5
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TeacherEntity {
 	/**
 	 * 教师id
@@ -30,10 +33,6 @@ public class TeacherEntity {
 	 * 生日
 	 */
 	private Date birthday;
-	/**
-	 * 年龄
-	 */
-	private Integer age;
 	/**
 	 * 系别
 	 */
@@ -145,14 +144,6 @@ public class TeacherEntity {
 
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
-	}
-
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
 	}
 
 	public Long getDepartmentId() {
@@ -307,7 +298,6 @@ public class TeacherEntity {
 				", name='" + name + '\'' +
 				", sex=" + sex +
 				", birthday=" + birthday +
-				", age=" + age +
 				", departmentId=" + departmentId +
 				", titleId=" + titleId +
 				", oversea=" + oversea +
