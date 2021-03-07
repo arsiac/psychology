@@ -2,6 +2,7 @@ package com.github.arsiac.psychology.base.api;
 
 import com.github.arsiac.psychology.base.pojo.entity.TeacherEntity;
 import com.github.arsiac.psychology.base.pojo.param.TeacherParam;
+import com.github.arsiac.psychology.base.pojo.vo.TeacherVO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public interface TeacherApi {
      * @return 教师列表
      * */
     @GetMapping
-    List<TeacherEntity> queryFuzzy(TeacherParam param);
+    List<TeacherVO> queryFuzzy(TeacherParam param);
 
     /**
      * <p>根据id查询</p>

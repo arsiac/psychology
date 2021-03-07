@@ -2,8 +2,10 @@ package com.github.arsiac.psychology.base.api.controller;
 
 import com.github.arsiac.psychology.base.api.TeacherApi;
 import com.github.arsiac.psychology.base.dao.TeacherMapper;
+import com.github.arsiac.psychology.base.pojo.dto.TeacherDTO;
 import com.github.arsiac.psychology.base.pojo.entity.TeacherEntity;
 import com.github.arsiac.psychology.base.pojo.param.TeacherParam;
+import com.github.arsiac.psychology.base.pojo.vo.TeacherVO;
 import com.github.arsiac.psychology.utils.annotation.SystemLogger;
 import com.github.arsiac.psychology.utils.common.BeanCopy;
 import com.github.arsiac.psychology.utils.common.IdGenerator;
@@ -41,8 +43,27 @@ public class TeacherController implements TeacherApi {
 
     @SystemLogger(value = "模糊查询教师", page = true)
     @Override
-    public List<TeacherEntity> queryFuzzy(TeacherParam param) {
-        return teacherMapper.selectFuzzy(BeanCopy.copy(param, TeacherEntity.class));
+    public List<TeacherVO> queryFuzzy(TeacherParam param) {
+        return BeanCopy.copyList(teacherMapper.selectFuzzy(
+                BeanCopy.copy(param, TeacherEntity.class)
+        ), TeacherVO.class, this::copy2vo);
+    }
+
+    /**
+     * <p>拷贝成vo</p>
+     *
+     * @param source dto
+     * @param target vo
+     */
+    private void copy2vo(Object source, Object target) {
+        TeacherDTO dto = (TeacherDTO) source;
+        TeacherVO vo = (TeacherVO) target;
+        if (dto.getTitleEntity() != null) {
+            vo.setTitleName(dto.getTitleEntity().getName());
+        }
+        if (dto.getDepartmentEntity() != null) {
+            vo.setDepartmentName(dto.getDepartmentEntity().getName());
+        }
     }
 
     @SystemLogger("根据id查询教师")
