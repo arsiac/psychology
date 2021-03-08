@@ -104,10 +104,10 @@
     ,#{project.status}
     ,#{project.returnMessage}
     ,#{project.createBy}
-    ,#{project.createTime}
+    ,CURRENT_TIMESTAMP()
     ,#{project.updateBy}
-    ,#{project.updateTime}
-    ,#{project.version}
+    ,CURRENT_TIMESTAMP()
+    ,1
 
     )
   </insert>
@@ -147,9 +147,9 @@
       ,
         update_by = #{project.updateBy}
       ,
-        update_time = #{project.updateTime}
+        update_time = CURRENT_TIMESTAMP()
       ,
-        version = #{project.version}
+        version = version + 1
 
     WHERE
       id = #{project.id}
