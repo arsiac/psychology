@@ -10,8 +10,51 @@ import com.github.arsiac.psychology.manager.pojo.entity.ProjectEntity;
  * @since  2021-03-08 14:14:30
  */
 public class ProjectVO extends ProjectEntity {
+    /**
+     * 项目来源名称
+     * */
+    private String projectSourceName;
+
+    /**
+     * 课题类型名称
+     * */
+    private String subjectTypeName;
+
+    /**
+     * 负责人名称
+     * */
+    private String teacherName;
+
+    public String getProjectSourceName() {
+        return projectSourceName;
+    }
+
+    public void setProjectSourceName(String projectSourceName) {
+        this.projectSourceName = projectSourceName;
+    }
+
+    public String getSubjectTypeName() {
+        return subjectTypeName;
+    }
+
+    public void setSubjectTypeName(String subjectTypeName) {
+        this.subjectTypeName = subjectTypeName;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
     @Override
     public String toString() {
-        return "ProjectVO{} " + super.toString();
+        return "ProjectVO{" +
+                "projectSourceName='" + projectSourceName + '\'' +
+                ", subjectTypeName='" + subjectTypeName + '\'' +
+                ", teacherName='" + teacherName + '\'' +
+                "} " + super.toString();
     }
 }
