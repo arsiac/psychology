@@ -1,8 +1,5 @@
 package com.github.arsiac.psychology.centre.service.impl;
 
-import com.github.arsiac.psychology.centre.dao.ResourceMapper;
-import com.github.arsiac.psychology.centre.pojo.dto.ResourceDTO;
-import com.github.arsiac.psychology.centre.pojo.entity.RoleResourceEntity;
 import com.github.arsiac.psychology.utils.common.BeanCopy;
 import com.github.arsiac.psychology.utils.common.IdGenerator;
 import com.github.arsiac.psychology.utils.exception.PsychologyErrorCode;
@@ -25,11 +22,6 @@ import java.util.List;
 @Service("roleResourceService")
 public class RoleResourceServiceImpl implements RoleResourceService {
     /**
-     * 资源 dao
-     * */
-    private ResourceMapper resourceMapper;
-
-    /**
      * 角色-资源 dao
      * */
     private RoleResourceMapper roleResourceMapper;
@@ -46,23 +38,7 @@ public class RoleResourceServiceImpl implements RoleResourceService {
 
     @Override
     public List<RoleResourceDTO> queryByRoleId(Long id) {
-        return BeanCopy.copyList(roleResourceMapper.selectByRoleId(id),
-                RoleResourceDTO.class, this::copy2dto);
-    }
-
-    /**
-     * <p>复制成dto, 查询资源</p>
-     *
-     * @param source entity
-     * @param target dto
-     */
-    private void copy2dto(Object source, Object target) {
-        RoleResourceEntity entity = (RoleResourceEntity) source;
-        RoleResourceDTO dto = (RoleResourceDTO) target;
-
-        if (entity.getResourceId() != null) {
-            dto.setResourceDTO(BeanCopy.copy(resourceMapper.selectById(entity.getResourceId()), ResourceDTO.class));
-        }
+        return roleResourceMapper.selectByRoleId(id);
     }
 
     @Override
@@ -147,11 +123,6 @@ public class RoleResourceServiceImpl implements RoleResourceService {
         if (dto.getVersion() == null) {
             throw PsychologyErrorCode.VERSION_NOT_AVAILABLE.createException();
         }
-    }
-
-    @Resource
-    public void setResourceMapper(ResourceMapper resourceMapper) {
-        this.resourceMapper = resourceMapper;
     }
 
     @Resource

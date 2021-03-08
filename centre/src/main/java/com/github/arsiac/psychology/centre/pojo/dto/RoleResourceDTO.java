@@ -1,6 +1,8 @@
 package com.github.arsiac.psychology.centre.pojo.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.arsiac.psychology.centre.pojo.entity.ResourceEntity;
+import com.github.arsiac.psychology.centre.pojo.entity.RoleEntity;
 import com.github.arsiac.psychology.centre.pojo.entity.RoleResourceEntity;
 
 /**
@@ -15,34 +17,34 @@ public class RoleResourceDTO extends RoleResourceEntity {
     /**
      * 角色dto
      * */
-    private RoleDTO roleDTO;
+    private RoleEntity roleEntity;
 
     /**
      * 资源dto
      * */
-    private ResourceDTO resourceDTO;
+    private ResourceEntity resourceEntity;
 
-    public RoleDTO getRoleDTO() {
-        return roleDTO;
+    public RoleEntity getRoleEntity() {
+        return roleEntity;
     }
 
-    public void setRoleDTO(RoleDTO roleDTO) {
-        this.roleDTO = roleDTO;
+    public void setRoleEntity(RoleEntity roleEntity) {
+        this.roleEntity = roleEntity;
     }
 
-    public ResourceDTO getResourceDTO() {
-        return resourceDTO;
+    public ResourceEntity getResourceEntity() {
+        return resourceEntity;
     }
 
-    public void setResourceDTO(ResourceDTO resourceDTO) {
-        this.resourceDTO = resourceDTO;
+    public void setResourceEntity(ResourceEntity resourceEntity) {
+        this.resourceEntity = resourceEntity;
     }
 
     @Override
     public String toString() {
         return "RoleResourceDTO{" +
-                "roleDTO=" + roleDTO +
-                ", resourceDTO=" + resourceDTO +
+                "roleEntity=" + roleEntity +
+                ", resourceEntity=" + resourceEntity +
                 "} " + super.toString();
     }
 }

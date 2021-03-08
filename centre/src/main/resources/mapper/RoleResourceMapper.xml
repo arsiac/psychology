@@ -14,19 +14,32 @@
         <result property="version" column="version"/>
     </resultMap>
 
+    <resultMap id="roleResourceDtoMap" type="com.github.arsiac.psychology.centre.pojo.dto.RoleResourceDTO" extends="roleResourceMap">
+        <association property="resourceEntity" javaType="com.github.arsiac.psychology.centre.pojo.entity.ResourceEntity">
+            <result property="id" column="re_id"/>
+            <result property="name" column="re_name"/>
+        </association>
+        <association property="roleEntity" javaType="com.github.arsiac.psychology.centre.pojo.entity.RoleEntity">
+            <result property="id" column="ro_id" />
+            <result property="name" column="ro_name"/>
+        </association>
+    </resultMap>
+
     <!-- 查找全部 -->
     <select id="selectAll" resultMap="roleResourceMap">
         SELECT * FROM psychology_user_centre.role_resource ORDER BY update_time desc
     </select>
 
     <!-- 根据角色id查询 -->
-    <select id="selectByRoleId" resultMap="roleResourceMap" parameterType="java.lang.Long">
-        SELECT * FROM psychology_user_centre.role_resource
+    <select id="selectByRoleId" resultMap="roleResourceDtoMap" parameterType="java.lang.Long">
+        SELECT rr.*, r.id AS re_id, r.name AS re_name, ro.id AS ro_id, ro.name AS ro_name FROM
+            psychology_user_centre.role_resource rr LEFT JOIN psychology_user_centre.resource r ON rr.resource_id = r.id
+            LEFT JOIN psychology_user_centre.role ro ON rr.role_id = ro.id
         WHERE role_id = #{roleId}
         ORDER BY update_time desc
     </select>
 
-    <!-- 根据用户id查询 -->
+    <!-- 根据资源id查询 -->
     <select id="selectByResourceId" resultMap="roleResourceMap" parameterType="java.lang.Long">
         SELECT * FROM psychology_user_centre.role_resource
         WHERE resource_id = #{resourceId}
@@ -46,7 +59,7 @@
     <!-- 更新用户对应角色 -->
     <update id="update" parameterType="com.github.arsiac.psychology.centre.pojo.entity.UserRoleEntity">
         UPDATE psychology_user_centre.role_resource
-        SET user_id = #{userRole.userId}, role_id = #{userRole.roleId},
+        SET resource_id = #{roleResource.resourceId}, role_id = #{roleResource.roleId},
             update_by = #{userRole.updateBy}, update_time = CURRENT_TIMESTAMP(), version = #{userRole.version} + 1
         WHERE id = #{userRole.id} AND version = #{userRole.version}
     </update>

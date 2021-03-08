@@ -1,6 +1,7 @@
 package com.github.arsiac.psychology.centre.dao;
 
 
+import com.github.arsiac.psychology.centre.pojo.dto.RoleResourceDTO;
 import com.github.arsiac.psychology.centre.pojo.entity.RoleResourceEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -30,7 +31,7 @@ public interface RoleResourceMapper {
      * @param id 角色id
      * @return 查询结果
      * */
-    List<RoleResourceEntity> selectByRoleId(@Param("roleId") Long id);
+    List<RoleResourceDTO> selectByRoleId(@Param("roleId") Long id);
 
     /**
      * <p>根据用户id查询</p>

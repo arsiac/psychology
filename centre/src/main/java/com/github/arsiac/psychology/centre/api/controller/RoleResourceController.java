@@ -47,8 +47,8 @@ public class RoleResourceController implements RoleResourceApi {
         RoleResourceDTO dto = (RoleResourceDTO) source;
         RoleResourceVO vo = (RoleResourceVO) target;
 
-        if (dto.getResourceDTO() != null) {
-            vo.setResourceName(dto.getResourceDTO().getName());
+        if (dto.getResourceEntity() != null) {
+            vo.setResourceName(dto.getResourceEntity().getName());
         }
     }
 

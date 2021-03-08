@@ -1,5 +1,6 @@
 package com.github.arsiac.psychology.centre.service.impl;
 
+import com.github.arsiac.psychology.centre.pojo.dto.RoleResourceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.github.arsiac.psychology.centre.dao.ResourceMapper;
@@ -48,10 +49,10 @@ public class SystemServiceImpl implements SystemService {
         Set<Long> resourceSet = new HashSet<>();
         userRoleEntityList.forEach(userRole -> {
             // 获取角色对应的资源
-            List<RoleResourceEntity> roleResourceEntityList = roleResourceMapper.selectByRoleId(userRole.getRoleId());
+            List<RoleResourceDTO> roleResourceDTOList = roleResourceMapper.selectByRoleId(userRole.getRoleId());
 
             // 将资源放入set
-            roleResourceEntityList.forEach(roleResource -> resourceSet.add(roleResource.getResourceId()));
+            roleResourceDTOList.forEach(roleResource -> resourceSet.add(roleResource.getResourceId()));
         });
 
         List<ResourceEntity> resourceEntityList;
