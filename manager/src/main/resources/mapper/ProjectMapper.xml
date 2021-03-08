@@ -55,7 +55,7 @@
     <where>
       <if test="project.name != null">
         <bind name="projectName" value="'%' + project.name + '%'"/>
-        name LIKE #{projectName}
+        p.name LIKE #{projectName}
       </if>
     </where>
     ORDER BY update_time desc
