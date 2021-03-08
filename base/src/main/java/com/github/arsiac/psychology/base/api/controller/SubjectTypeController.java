@@ -3,7 +3,7 @@ package com.github.arsiac.psychology.base.api.controller;
 import com.github.arsiac.psychology.base.api.SubjectTypeApi;
 import com.github.arsiac.psychology.base.dao.SubjectTypeMapper;
 import com.github.arsiac.psychology.base.pojo.entity.SubjectTypeEntity;
-import com.github.arsiac.psychology.base.pojo.param.DictionaryParam;
+import com.github.arsiac.psychology.utils.entity.DictionaryParam;
 import com.github.arsiac.psychology.utils.annotation.SystemLogger;
 import com.github.arsiac.psychology.utils.common.BeanCopy;
 import com.github.arsiac.psychology.utils.common.IdGenerator;

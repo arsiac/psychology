@@ -1,7 +1,7 @@
 package com.github.arsiac.psychology.base.api;
 
 import com.github.arsiac.psychology.base.pojo.entity.TitleEntity;
-import com.github.arsiac.psychology.base.pojo.param.DictionaryParam;
+import com.github.arsiac.psychology.utils.entity.DictionaryParam;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

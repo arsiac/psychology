@@ -1,6 +1,4 @@
-package com.github.arsiac.psychology.base.pojo.param;
-
-import com.github.arsiac.psychology.utils.entity.PageParam;
+package com.github.arsiac.psychology.utils.entity;
 
 /**
  * <p>字典分页参数</p>
