@@ -45,7 +45,7 @@ public class ProjectServiceImpl implements ProjectService {
         } else {
             entity = BeanCopy.copy(dto, ProjectEntity.class);
         }
-        return BeanCopy.copyListOrPage(projectMapper.selectFuzzy(entity), ProjectDTO.class);
+        return projectMapper.selectFuzzy(entity);
     }
 
     @Override

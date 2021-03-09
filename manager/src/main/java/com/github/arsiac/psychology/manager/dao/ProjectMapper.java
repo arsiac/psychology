@@ -1,5 +1,6 @@
 package com.github.arsiac.psychology.manager.dao;
 
+import com.github.arsiac.psychology.manager.pojo.dto.ProjectDTO;
 import com.github.arsiac.psychology.manager.pojo.entity.ProjectEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -28,7 +29,7 @@ public interface ProjectMapper {
      * @param project 科研立项信息
      * @return 科研立项列表
      * */
-    List<ProjectEntity> selectFuzzy(@Param("project") ProjectEntity project);
+    List<ProjectDTO> selectFuzzy(@Param("project") ProjectEntity project);
 
     /**
      * <p>根据id查询</p>

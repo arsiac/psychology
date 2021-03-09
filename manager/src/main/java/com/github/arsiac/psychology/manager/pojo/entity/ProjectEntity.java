@@ -247,4 +247,28 @@ public class ProjectEntity {
 	public Integer getVersion() {
 		return version;
 	}
+
+	@Override
+	public String toString() {
+		return "ProjectEntity{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", code='" + code + '\'' +
+				", schoolCode='" + schoolCode + '\'' +
+				", projectSourceId=" + projectSourceId +
+				", subjectTypeId=" + subjectTypeId +
+				", projectStartDate=" + projectStartDate +
+				", projectEndDate=" + projectEndDate +
+				", money=" + money +
+				", managerId=" + managerId +
+				", projectIsEnd=" + projectIsEnd +
+				", status=" + status +
+				", returnMessage='" + returnMessage + '\'' +
+				", createBy=" + createBy +
+				", createTime=" + createTime +
+				", updateBy=" + updateBy +
+				", updateTime=" + updateTime +
+				", version=" + version +
+				'}';
+	}
 }

@@ -35,7 +35,31 @@ public class ProjectController implements ProjectApi {
     @SystemLogger(value = "模糊查询科研立项", page = true)
     @Override
     public List<ProjectVO> queryFuzzy(ProjectParam param) {
-        return BeanCopy.copyListOrPage(projectService.queryFuzzy(BeanCopy.copy(param, ProjectDTO.class)), ProjectVO.class);
+        return BeanCopy.copyListOrPage(projectService.queryFuzzy(BeanCopy.copy(param, ProjectDTO.class)),
+                ProjectVO.class, this::copy2vo);
+    }
+
+    /**
+     * <p>拷贝成vo</p>
+     *
+     * @param source DTO
+     * @param target vo
+     */
+    private void copy2vo(Object source, Object target) {
+        ProjectDTO dto = (ProjectDTO) source;
+        ProjectVO vo = (ProjectVO) target;
+
+        if (dto.getProjectSourceEntity() != null) {
+            vo.setProjectSourceName(dto.getProjectSourceEntity().getName());
+        }
+
+        if (dto.getSubjectTypeEntity() != null) {
+            vo.setSubjectTypeName(dto.getSubjectTypeEntity().getName());
+        }
+
+        if (dto.getTeacherEntity() != null) {
+            vo.setTeacherName(dto.getTeacherEntity().getName());
+        }
     }
 
     @SystemLogger("根据id查询科研立项")
