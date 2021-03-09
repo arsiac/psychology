@@ -95,7 +95,8 @@ public class SystemLoggerAspect {
                 "\n==> 方法: " + logDetail.getMethod() +
                 "\n==> 参数: " + logDetail.getParams() +
                 "\n==> 花费时间: " + logDetail.getTime() +
-                "ms\n==> 调用时间: " + logDetail.getCreateDate();
+                "ms\n==> 调用时间: " + logDetail.getCreateDate() +
+                "\n==>结果: " + result.toString();
 
         // 打印日志
         logger.info(stringBuilder);
