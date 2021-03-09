@@ -14,8 +14,9 @@ public interface TokenService {
     /**
      * access token 过期时间 7day 604800L
      *      1hour 3600L
+     *      24hours 86400L
      * */
-    long ACCESS_EXPIRE_SECOND = 3600L;
+    long ACCESS_EXPIRE_SECOND = 86400L;
 
 
     /**
