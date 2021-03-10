@@ -17,7 +17,7 @@ import java.util.List;
  * @since  2021/2/2
  */
 @Api(tags = "课题来源管理")
-@RequestMapping("/projectSource")
+@RequestMapping("/project/source")
 public interface ProjectSourceApi {
     /**
      * <p>查找全部</p>

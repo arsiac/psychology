@@ -17,7 +17,7 @@ import java.util.List;
  * @since  2021/2/2
  */
 @Api(tags = "获奖等级管理")
-@RequestMapping("/rewordLevel")
+@RequestMapping("/reword/level")
 public interface RewordLevelApi {
     /**
      * <p>查找全部</p>

@@ -17,7 +17,7 @@ import java.util.List;
  * @since  2021/2/2
  */
 @Api(tags = "课题类别管理")
-@RequestMapping("/subjectType")
+@RequestMapping("/subject/type")
 public interface SubjectTypeApi {
     /**
      * <p>查找全部</p>

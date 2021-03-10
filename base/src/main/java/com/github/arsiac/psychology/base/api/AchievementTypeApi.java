@@ -17,7 +17,7 @@ import java.util.List;
  * @since  2021/2/2
  */
 @Api(tags = "成果形式管理")
-@RequestMapping("/achievementType")
+@RequestMapping("/achievement/type")
 public interface AchievementTypeApi {
     /**
      * <p>查找全部</p>
