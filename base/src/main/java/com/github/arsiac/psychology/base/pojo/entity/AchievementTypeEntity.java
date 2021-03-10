@@ -4,21 +4,21 @@ package com.github.arsiac.psychology.base.pojo.entity;
 import java.util.Date;
 
 /**
- * <p>课题类别</p>
+ * <p>成果形式</p>
  *
  * @author arsiac
  * @version 1.0
- * @since  2021-03-11 00:10:07
+ * @since  2021-03-11 00:10:06
  */
-public class SubjectTypeEntity {
+public class AchievementTypeEntity {
 
 	/**
-	 * 课题类别id
+	 * 成果形式id
 	 */
 	private Long id;
 
 	/**
-	 * 课题类别
+	 * 成果形式name
 	 */
 	private String name;
 

@@ -1,19 +1,22 @@
 package com.github.arsiac.psychology.base.api;
 
-import com.github.arsiac.psychology.base.pojo.entity.TeacherEntity;
+import com.github.arsiac.psychology.base.pojo.dto.TeacherDTO;
 import com.github.arsiac.psychology.base.pojo.param.TeacherParam;
 import com.github.arsiac.psychology.base.pojo.vo.TeacherVO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
- * <p>教师api</p>
+ * <p>教师业务接口声明</p>
  *
  * @author arsiac
  * @version 1.0
- * @since  2021/3/6
+ * @since  2021/2/2
  */
+@Api(tags = "教师管理")
 @RequestMapping("/teacher")
 public interface TeacherApi {
     /**
@@ -21,15 +24,17 @@ public interface TeacherApi {
      *
      * @return 全部教师
      * */
+    @ApiOperation("查询全部")
     @GetMapping("/all")
-    List<TeacherEntity> queryAll();
+    List<TeacherVO> queryAll();
 
     /**
-     * <p>模糊查找教师</p>
+     * <p>模糊查询</p>
      *
      * @param param 教师信息
-     * @return 教师列表
+     * @return 查询结果
      * */
+    @ApiOperation("模糊查询")
     @GetMapping
     List<TeacherVO> queryFuzzy(TeacherParam param);
 
@@ -37,35 +42,59 @@ public interface TeacherApi {
      * <p>根据id查询</p>
      *
      * @param id 教师id
-     * @return 教师信息
+     * @return 查询结果
      * */
+    @ApiOperation("根据id查询")
     @GetMapping("/{id}")
-    TeacherEntity queryById(@PathVariable Long id);
+    TeacherVO queryById(@PathVariable Long id);
 
     /**
-     * <p>增加教师</p>
+     * <p>添加新教师</p>
      *
-     * @param entity 教师信息
-     * @return 数据库变动行数
-     * */
+     * @param dto 教师信息
+     * @return 是否成功
+     */
+    @ApiOperation("新增")
     @PostMapping
-    boolean add(@RequestBody TeacherEntity entity);
+    boolean add(@RequestBody TeacherDTO dto);
+
+    /**
+     * <p>批量添加新教师</p>
+     *
+     * @param dtoList 教师信息
+     * @return 是否成功
+     */
+    @ApiOperation("批量新增")
+    @PostMapping("/batch")
+    boolean batchAdd(@RequestBody List<TeacherDTO> dtoList);
 
     /**
      * <p>更新教师</p>
      *
-     * @param entity 教师信息
-     * @return 数据库变动行数
-     * */
+     * @param dto 教师信息
+     * @return 是否成功
+     */
+    @ApiOperation("修改")
     @PutMapping
-    boolean modify(@RequestBody TeacherEntity entity);
+    boolean modify(@RequestBody TeacherDTO dto);
 
     /**
      * <p>删除教师</p>
      *
-     * @param entityList 教师信息
-     * @return 数据库变动行数
-     * */
+     * @param dto 教师信息 id version
+     * @return 是否成功
+     */
+    @ApiOperation("删除")
     @DeleteMapping
-    boolean remove(@RequestBody List<TeacherEntity> entityList);
+    boolean remove(@RequestBody TeacherDTO dto);
+
+    /**
+     * <p>批量删除教师</p>
+     *
+     * @param dtoList 教师信息
+     * @return 是否成功
+     */
+    @ApiOperation("批量删除")
+    @DeleteMapping("/batch")
+    boolean batchRemove(@RequestBody List<TeacherDTO> dtoList);
 }

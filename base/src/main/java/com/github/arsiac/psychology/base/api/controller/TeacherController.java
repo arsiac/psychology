@@ -1,112 +1,81 @@
 package com.github.arsiac.psychology.base.api.controller;
 
 import com.github.arsiac.psychology.base.api.TeacherApi;
-import com.github.arsiac.psychology.base.dao.TeacherMapper;
 import com.github.arsiac.psychology.base.pojo.dto.TeacherDTO;
-import com.github.arsiac.psychology.base.pojo.entity.TeacherEntity;
 import com.github.arsiac.psychology.base.pojo.param.TeacherParam;
 import com.github.arsiac.psychology.base.pojo.vo.TeacherVO;
+import com.github.arsiac.psychology.base.service.TeacherService;
 import com.github.arsiac.psychology.utils.annotation.SystemLogger;
 import com.github.arsiac.psychology.utils.common.BeanCopy;
-import com.github.arsiac.psychology.utils.common.IdGenerator;
-import com.github.arsiac.psychology.utils.exception.PsychologyErrorCode;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * <p>教师接口实现</p>
- * 
+ * <p>教师实现</p>
+ *
  * @author arsiac
  * @version 1.0
- * @since  2021/3/6
+ * @since  2021-03-11 00:10:07
  */
 @RestController
 public class TeacherController implements TeacherApi {
     /**
-     * 教师 dao
+     * 教师服务
      * */
-    private TeacherMapper teacherMapper;
-
-    /**
-     * id
-     * */
-    private IdGenerator idGenerator;
+    private TeacherService teacherService;
 
     @SystemLogger("查询全部教师")
     @Override
-    public List<TeacherEntity> queryAll() {
-        return teacherMapper.selectAll();
+    public List<TeacherVO> queryAll() {
+        return BeanCopy.copyList(teacherService.queryAll(), TeacherVO.class);
     }
 
     @SystemLogger(value = "模糊查询教师", page = true)
     @Override
     public List<TeacherVO> queryFuzzy(TeacherParam param) {
-        return BeanCopy.copyList(teacherMapper.selectFuzzy(
-                BeanCopy.copy(param, TeacherEntity.class)
-        ), TeacherVO.class, this::copy2vo);
-    }
-
-    /**
-     * <p>拷贝成vo</p>
-     *
-     * @param source dto
-     * @param target vo
-     */
-    private void copy2vo(Object source, Object target) {
-        TeacherDTO dto = (TeacherDTO) source;
-        TeacherVO vo = (TeacherVO) target;
-        if (dto.getTitleEntity() != null) {
-            vo.setTitleName(dto.getTitleEntity().getName());
-        }
-        if (dto.getDepartmentEntity() != null) {
-            vo.setDepartmentName(dto.getDepartmentEntity().getName());
-        }
+        return BeanCopy.copyListOrPage(teacherService.queryFuzzy(BeanCopy.copy(param, TeacherDTO.class)), TeacherVO.class);
     }
 
     @SystemLogger("根据id查询教师")
     @Override
-    public TeacherEntity queryById(Long id) {
-        return null;
+    public TeacherVO queryById(Long id) {
+        return BeanCopy.copy(teacherService.queryById(id), TeacherVO.class);
     }
 
     @SystemLogger("添加教师")
     @Override
-    public boolean add(TeacherEntity entity) {
-        entity.setId(idGenerator.generate());
-        return teacherMapper.insert(entity) > 0;
+    public boolean add(TeacherDTO dto) {
+        return teacherService.add(dto);
+    }
+
+    @SystemLogger("批量添加教师")
+    @Override
+    public boolean batchAdd(List<TeacherDTO> dtoList) {
+        return teacherService.batchAdd(dtoList);
     }
 
     @SystemLogger("修改教师")
     @Override
-    public boolean modify(TeacherEntity entity) {
-        return teacherMapper.update(entity) > 0;
+    public boolean modify(TeacherDTO dto) {
+        return teacherService.modify(dto);
     }
 
     @SystemLogger("删除教师")
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public boolean remove(List<TeacherEntity> entityList) {
-        int count = 0;
-        try {
-            for (TeacherEntity entity : entityList) {
-                count += teacherMapper.delete(entity.getId(), entity.getVersion());
-            }
-        } catch (Exception e) {
-            throw PsychologyErrorCode.CANNOT_DELETE_FOREIGN_KEY.createException();
-        }
-        return count == entityList.size();
+    public boolean remove(TeacherDTO dto) {
+        return teacherService.remove(dto);
     }
 
-    @Resource
-    public void setTeacherMapper(TeacherMapper teacherMapper) {
-        this.teacherMapper = teacherMapper;
+    @SystemLogger("批量删除教师")
+    @Override
+    public boolean batchRemove(List<TeacherDTO> dtoList) {
+        return teacherService.batchRemove(dtoList);
     }
 
-    @Resource
-    public void setIdGenerator(IdGenerator idGenerator) {
-        this.idGenerator = idGenerator;
+    @Autowired
+    public void setTeacherService(TeacherService teacherService) {
+        this.teacherService = teacherService;
     }
 }

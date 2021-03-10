@@ -8,59 +8,57 @@ import java.util.List;
 
 /**
  * <p>课题来源</p>
- * 
+ *
  * @author arsiac
  * @version 1.0
- * @since  2021/3/5
+ * @since  2021-03-11 00:10:07
  */
 @Mapper
 public interface ProjectSourceMapper {
-
     /**
      * <p>查找全部</p>
      *
-     * @return 全部项目来源
+     * @return 全部课题来源
      * */
     List<ProjectSourceEntity> selectAll();
 
     /**
-     * <p>模糊查找项目来源</p>
+     * <p>模糊查找课题来源</p>
      *
-     * @param projectSource 项目来源信息
-     * @return 项目来源列表
+     * @param projectSource 课题来源信息
+     * @return 课题来源列表
      * */
     List<ProjectSourceEntity> selectFuzzy(@Param("projectSource") ProjectSourceEntity projectSource);
 
     /**
      * <p>根据id查询</p>
      *
-     * @param id 项目来源id
-     * @return 项目来源信息
+     * @param id 课题来源id
+     * @return 课题来源信息
      * */
     ProjectSourceEntity selectById(@Param("id") Long id);
 
     /**
-     * <p>增加项目来源</p>
+     * <p>增加课题来源</p>
      *
-     * @param projectSource 项目来源信息
+     * @param projectSource 课题来源信息
      * @return 数据库变动行数
      * */
     int insert(@Param("projectSource") ProjectSourceEntity projectSource);
 
     /**
-     * <p>更新项目来源</p>
+     * <p>更新课题来源</p>
      *
-     * @param projectSource 项目来源信息
+     * @param projectSource 课题来源信息
      * @return 数据库变动行数
      * */
     int update(@Param("projectSource") ProjectSourceEntity projectSource);
 
     /**
-     * <p>删除项目来源</p>
+     * <p>删除课题来源</p>
      *
-     * @param id 项目来源 id
-     * @param version 版本
+     * @param projectSource 课题来源信息
      * @return 数据库变动行数
      * */
-    int delete(@Param("id") Long id, @Param("version") Integer version);
+    int delete(@Param("projectSource") ProjectSourceEntity projectSource);
 }

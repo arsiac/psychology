@@ -8,14 +8,13 @@ import java.util.List;
 
 /**
  * <p>课题类别</p>
- * 
+ *
  * @author arsiac
  * @version 1.0
- * @since  2021/3/5
+ * @since  2021-03-11 00:10:07
  */
 @Mapper
 public interface SubjectTypeMapper {
-
     /**
      * <p>查找全部</p>
      *
@@ -58,9 +57,8 @@ public interface SubjectTypeMapper {
     /**
      * <p>删除课题类别</p>
      *
-     * @param id 课题类别 id
-     * @param version 版本
+     * @param subjectType 课题类别信息
      * @return 数据库变动行数
      * */
-    int delete(@Param("id") Long id, @Param("version") Integer version);
+    int delete(@Param("subjectType") SubjectTypeEntity subjectType);
 }

@@ -1,91 +1,81 @@
 package com.github.arsiac.psychology.base.api.controller;
 
 import com.github.arsiac.psychology.base.api.TitleApi;
-import com.github.arsiac.psychology.base.dao.TitleMapper;
-import com.github.arsiac.psychology.base.pojo.entity.TitleEntity;
-import com.github.arsiac.psychology.utils.entity.DictionaryParam;
+import com.github.arsiac.psychology.base.pojo.dto.TitleDTO;
+import com.github.arsiac.psychology.base.pojo.vo.TitleVO;
+import com.github.arsiac.psychology.base.service.TitleService;
 import com.github.arsiac.psychology.utils.annotation.SystemLogger;
 import com.github.arsiac.psychology.utils.common.BeanCopy;
-import com.github.arsiac.psychology.utils.common.IdGenerator;
-import com.github.arsiac.psychology.utils.exception.PsychologyErrorCode;
-import org.springframework.transaction.annotation.Transactional;
+import com.github.arsiac.psychology.utils.entity.DictionaryParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * <p>职称接口实现</p>
- * 
+ * <p>职称实现</p>
+ *
  * @author arsiac
  * @version 1.0
- * @since  2021/3/6
+ * @since  2021-03-11 00:10:07
  */
 @RestController
 public class TitleController implements TitleApi {
     /**
-     * 职称 dao
+     * 职称服务
      * */
-    private TitleMapper titleMapper;
-
-    /**
-     * id
-     * */
-    private IdGenerator idGenerator;
+    private TitleService titleService;
 
     @SystemLogger("查询全部职称")
     @Override
-    public List<TitleEntity> queryAll() {
-        return titleMapper.selectAll();
+    public List<TitleVO> queryAll() {
+        return BeanCopy.copyList(titleService.queryAll(), TitleVO.class);
     }
 
     @SystemLogger(value = "模糊查询职称", page = true)
     @Override
-    public List<TitleEntity> queryFuzzy(DictionaryParam param) {
-        return titleMapper.selectFuzzy(BeanCopy.copy(param, TitleEntity.class));
+    public List<TitleVO> queryFuzzy(DictionaryParam param) {
+        return BeanCopy.copyListOrPage(titleService.queryFuzzy(BeanCopy.copy(param, TitleDTO.class)), TitleVO.class);
     }
 
     @SystemLogger("根据id查询职称")
     @Override
-    public TitleEntity queryById(Long id) {
-        return null;
+    public TitleVO queryById(Long id) {
+        return BeanCopy.copy(titleService.queryById(id), TitleVO.class);
     }
 
     @SystemLogger("添加职称")
     @Override
-    public boolean add(TitleEntity entity) {
-        entity.setId(idGenerator.generate());
-        return titleMapper.insert(entity) > 0;
+    public boolean add(TitleDTO dto) {
+        return titleService.add(dto);
+    }
+
+    @SystemLogger("批量添加职称")
+    @Override
+    public boolean batchAdd(List<TitleDTO> dtoList) {
+        return titleService.batchAdd(dtoList);
     }
 
     @SystemLogger("修改职称")
     @Override
-    public boolean modify(TitleEntity entity) {
-        return titleMapper.update(entity) > 0;
+    public boolean modify(TitleDTO dto) {
+        return titleService.modify(dto);
     }
 
     @SystemLogger("删除职称")
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public boolean remove(List<TitleEntity> entityList) {
-        int count = 0;
-        try {
-            for (TitleEntity entity : entityList) {
-                count += titleMapper.delete(entity.getId(), entity.getVersion());
-            }
-        } catch (Exception e) {
-            throw PsychologyErrorCode.CANNOT_DELETE_FOREIGN_KEY.createException();
-        }
-        return count == entityList.size();
+    public boolean remove(TitleDTO dto) {
+        return titleService.remove(dto);
     }
 
-    @Resource
-    public void setTitleMapper(TitleMapper titleMapper) {
-        this.titleMapper = titleMapper;
+    @SystemLogger("批量删除职称")
+    @Override
+    public boolean batchRemove(List<TitleDTO> dtoList) {
+        return titleService.batchRemove(dtoList);
     }
 
-    @Resource
-    public void setIdGenerator(IdGenerator idGenerator) {
-        this.idGenerator = idGenerator;
+    @Autowired
+    public void setTitleService(TitleService titleService) {
+        this.titleService = titleService;
     }
 }

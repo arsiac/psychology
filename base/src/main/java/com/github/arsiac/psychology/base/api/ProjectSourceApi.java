@@ -1,70 +1,100 @@
 package com.github.arsiac.psychology.base.api;
 
-import com.github.arsiac.psychology.base.pojo.entity.ProjectSourceEntity;
+import com.github.arsiac.psychology.base.pojo.dto.ProjectSourceDTO;
+import com.github.arsiac.psychology.base.pojo.vo.ProjectSourceVO;
 import com.github.arsiac.psychology.utils.entity.DictionaryParam;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
- * <p>项目来源api</p>
+ * <p>课题来源业务接口声明</p>
  *
  * @author arsiac
  * @version 1.0
- * @since  2021/3/6
+ * @since  2021/2/2
  */
-@RequestMapping("/project/source")
+@Api(tags = "课题来源管理")
+@RequestMapping("/projectSource")
 public interface ProjectSourceApi {
     /**
      * <p>查找全部</p>
      *
-     * @return 全部项目来源
+     * @return 全部课题来源
      * */
+    @ApiOperation("查询全部")
     @GetMapping("/all")
-    List<ProjectSourceEntity> queryAll();
+    List<ProjectSourceVO> queryAll();
 
     /**
-     * <p>模糊查找项目来源</p>
+     * <p>模糊查询</p>
      *
-     * @param param 项目来源信息
-     * @return 项目来源列表
+     * @param param 课题来源信息
+     * @return 查询结果
      * */
+    @ApiOperation("模糊查询")
     @GetMapping
-    List<ProjectSourceEntity> queryFuzzy(DictionaryParam param);
+    List<ProjectSourceVO> queryFuzzy(DictionaryParam param);
 
     /**
      * <p>根据id查询</p>
      *
-     * @param id 项目来源id
-     * @return 项目来源信息
+     * @param id 课题来源id
+     * @return 查询结果
      * */
+    @ApiOperation("根据id查询")
     @GetMapping("/{id}")
-    ProjectSourceEntity queryById(@PathVariable Long id);
+    ProjectSourceVO queryById(@PathVariable Long id);
 
     /**
-     * <p>增加项目来源</p>
+     * <p>添加新课题来源</p>
      *
-     * @param entity 项目来源信息
-     * @return 数据库变动行数
-     * */
+     * @param dto 课题来源信息
+     * @return 是否成功
+     */
+    @ApiOperation("新增")
     @PostMapping
-    boolean add(@RequestBody ProjectSourceEntity entity);
+    boolean add(@RequestBody ProjectSourceDTO dto);
 
     /**
-     * <p>更新项目来源</p>
+     * <p>批量添加新课题来源</p>
      *
-     * @param entity 项目来源信息
-     * @return 数据库变动行数
-     * */
+     * @param dtoList 课题来源信息
+     * @return 是否成功
+     */
+    @ApiOperation("批量新增")
+    @PostMapping("/batch")
+    boolean batchAdd(@RequestBody List<ProjectSourceDTO> dtoList);
+
+    /**
+     * <p>更新课题来源</p>
+     *
+     * @param dto 课题来源信息
+     * @return 是否成功
+     */
+    @ApiOperation("修改")
     @PutMapping
-    boolean modify(@RequestBody ProjectSourceEntity entity);
+    boolean modify(@RequestBody ProjectSourceDTO dto);
 
     /**
-     * <p>删除项目来源</p>
+     * <p>删除课题来源</p>
      *
-     * @param entityList 项目来源信息
-     * @return 数据库变动行数
-     * */
+     * @param dto 课题来源信息 id version
+     * @return 是否成功
+     */
+    @ApiOperation("删除")
     @DeleteMapping
-    boolean remove(@RequestBody List<ProjectSourceEntity> entityList);
+    boolean remove(@RequestBody ProjectSourceDTO dto);
+
+    /**
+     * <p>批量删除课题来源</p>
+     *
+     * @param dtoList 课题来源信息
+     * @return 是否成功
+     */
+    @ApiOperation("批量删除")
+    @DeleteMapping("/batch")
+    boolean batchRemove(@RequestBody List<ProjectSourceDTO> dtoList);
 }

@@ -8,14 +8,13 @@ import java.util.List;
 
 /**
  * <p>系别</p>
- * 
+ *
  * @author arsiac
  * @version 1.0
- * @since  2021/3/5
+ * @since  2021-03-11 00:10:07
  */
 @Mapper
 public interface DepartmentMapper {
-
     /**
      * <p>查找全部</p>
      *
@@ -58,9 +57,8 @@ public interface DepartmentMapper {
     /**
      * <p>删除系别</p>
      *
-     * @param id 系别 id
-     * @param version 版本
+     * @param department 系别信息
      * @return 数据库变动行数
      * */
-    int delete(@Param("id") Long id, @Param("version") Integer version);
+    int delete(@Param("department") DepartmentEntity department);
 }

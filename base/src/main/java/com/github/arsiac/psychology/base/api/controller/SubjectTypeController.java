@@ -1,91 +1,81 @@
 package com.github.arsiac.psychology.base.api.controller;
 
 import com.github.arsiac.psychology.base.api.SubjectTypeApi;
-import com.github.arsiac.psychology.base.dao.SubjectTypeMapper;
-import com.github.arsiac.psychology.base.pojo.entity.SubjectTypeEntity;
-import com.github.arsiac.psychology.utils.entity.DictionaryParam;
+import com.github.arsiac.psychology.base.pojo.dto.SubjectTypeDTO;
+import com.github.arsiac.psychology.base.pojo.vo.SubjectTypeVO;
+import com.github.arsiac.psychology.base.service.SubjectTypeService;
 import com.github.arsiac.psychology.utils.annotation.SystemLogger;
 import com.github.arsiac.psychology.utils.common.BeanCopy;
-import com.github.arsiac.psychology.utils.common.IdGenerator;
-import com.github.arsiac.psychology.utils.exception.PsychologyErrorCode;
-import org.springframework.transaction.annotation.Transactional;
+import com.github.arsiac.psychology.utils.entity.DictionaryParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * <p>课题类型</p>
- * 
+ * <p>课题类别实现</p>
+ *
  * @author arsiac
  * @version 1.0
- * @since  2021/3/6
+ * @since  2021-03-11 00:10:07
  */
 @RestController
 public class SubjectTypeController implements SubjectTypeApi {
     /**
-     * 课题类型 dao
+     * 课题类别服务
      * */
-    private SubjectTypeMapper subjectTypeMapper;
+    private SubjectTypeService subjectTypeService;
 
-    /**
-     * id
-     * */
-    private IdGenerator idGenerator;
-
-    @SystemLogger("查询全部课题类型")
+    @SystemLogger("查询全部课题类别")
     @Override
-    public List<SubjectTypeEntity> queryAll() {
-        return subjectTypeMapper.selectAll();
+    public List<SubjectTypeVO> queryAll() {
+        return BeanCopy.copyList(subjectTypeService.queryAll(), SubjectTypeVO.class);
     }
 
-    @SystemLogger(value = "模糊查询课题类型", page = true)
+    @SystemLogger(value = "模糊查询课题类别", page = true)
     @Override
-    public List<SubjectTypeEntity> queryFuzzy(DictionaryParam param) {
-        return subjectTypeMapper.selectFuzzy(BeanCopy.copy(param, SubjectTypeEntity.class));
+    public List<SubjectTypeVO> queryFuzzy(DictionaryParam param) {
+        return BeanCopy.copyListOrPage(subjectTypeService.queryFuzzy(BeanCopy.copy(param, SubjectTypeDTO.class)), SubjectTypeVO.class);
     }
 
-    @SystemLogger("根据id查询课题类型")
+    @SystemLogger("根据id查询课题类别")
     @Override
-    public SubjectTypeEntity queryById(Long id) {
-        return null;
+    public SubjectTypeVO queryById(Long id) {
+        return BeanCopy.copy(subjectTypeService.queryById(id), SubjectTypeVO.class);
     }
 
-    @SystemLogger("添加课题类型")
+    @SystemLogger("添加课题类别")
     @Override
-    public boolean add(SubjectTypeEntity entity) {
-        entity.setId(idGenerator.generate());
-        return subjectTypeMapper.insert(entity) > 0;
+    public boolean add(SubjectTypeDTO dto) {
+        return subjectTypeService.add(dto);
     }
 
-    @SystemLogger("修改课题类型")
+    @SystemLogger("批量添加课题类别")
     @Override
-    public boolean modify(SubjectTypeEntity entity) {
-        return subjectTypeMapper.update(entity) > 0;
+    public boolean batchAdd(List<SubjectTypeDTO> dtoList) {
+        return subjectTypeService.batchAdd(dtoList);
     }
 
-    @SystemLogger("删除课题类型")
+    @SystemLogger("修改课题类别")
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public boolean remove(List<SubjectTypeEntity> entityList) {
-        int count = 0;
-        try {
-            for (SubjectTypeEntity entity : entityList) {
-                count += subjectTypeMapper.delete(entity.getId(), entity.getVersion());
-            }
-        } catch (Exception e) {
-            throw PsychologyErrorCode.CANNOT_DELETE_FOREIGN_KEY.createException();
-        }
-        return count == entityList.size();
+    public boolean modify(SubjectTypeDTO dto) {
+        return subjectTypeService.modify(dto);
     }
 
-    @Resource
-    public void setSubjectTypeMapper(SubjectTypeMapper subjectTypeMapper) {
-        this.subjectTypeMapper = subjectTypeMapper;
+    @SystemLogger("删除课题类别")
+    @Override
+    public boolean remove(SubjectTypeDTO dto) {
+        return subjectTypeService.remove(dto);
     }
 
-    @Resource
-    public void setIdGenerator(IdGenerator idGenerator) {
-        this.idGenerator = idGenerator;
+    @SystemLogger("批量删除课题类别")
+    @Override
+    public boolean batchRemove(List<SubjectTypeDTO> dtoList) {
+        return subjectTypeService.batchRemove(dtoList);
+    }
+
+    @Autowired
+    public void setSubjectTypeService(SubjectTypeService subjectTypeService) {
+        this.subjectTypeService = subjectTypeService;
     }
 }

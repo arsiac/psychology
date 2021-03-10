@@ -1,91 +1,81 @@
 package com.github.arsiac.psychology.base.api.controller;
 
 import com.github.arsiac.psychology.base.api.DepartmentApi;
-import com.github.arsiac.psychology.base.dao.DepartmentMapper;
-import com.github.arsiac.psychology.base.pojo.entity.DepartmentEntity;
-import com.github.arsiac.psychology.utils.entity.DictionaryParam;
+import com.github.arsiac.psychology.base.pojo.dto.DepartmentDTO;
+import com.github.arsiac.psychology.base.pojo.vo.DepartmentVO;
+import com.github.arsiac.psychology.base.service.DepartmentService;
 import com.github.arsiac.psychology.utils.annotation.SystemLogger;
 import com.github.arsiac.psychology.utils.common.BeanCopy;
-import com.github.arsiac.psychology.utils.common.IdGenerator;
-import com.github.arsiac.psychology.utils.exception.PsychologyErrorCode;
-import org.springframework.transaction.annotation.Transactional;
+import com.github.arsiac.psychology.utils.entity.DictionaryParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * <p>系别接口实现</p>
- * 
+ * <p>系别实现</p>
+ *
  * @author arsiac
  * @version 1.0
- * @since  2021/3/6
+ * @since  2021-03-11 00:10:07
  */
 @RestController
 public class DepartmentController implements DepartmentApi {
     /**
-     * 系别 dao
+     * 系别服务
      * */
-    private DepartmentMapper departmentMapper;
-
-    /**
-     * id
-     * */
-    private IdGenerator idGenerator;
+    private DepartmentService departmentService;
 
     @SystemLogger("查询全部系别")
     @Override
-    public List<DepartmentEntity> queryAll() {
-        return departmentMapper.selectAll();
+    public List<DepartmentVO> queryAll() {
+        return BeanCopy.copyList(departmentService.queryAll(), DepartmentVO.class);
     }
 
     @SystemLogger(value = "模糊查询系别", page = true)
     @Override
-    public List<DepartmentEntity> queryFuzzy(DictionaryParam param) {
-        return departmentMapper.selectFuzzy(BeanCopy.copy(param, DepartmentEntity.class));
+    public List<DepartmentVO> queryFuzzy(DictionaryParam param) {
+        return BeanCopy.copyListOrPage(departmentService.queryFuzzy(BeanCopy.copy(param, DepartmentDTO.class)), DepartmentVO.class);
     }
 
     @SystemLogger("根据id查询系别")
     @Override
-    public DepartmentEntity queryById(Long id) {
-        return null;
+    public DepartmentVO queryById(Long id) {
+        return BeanCopy.copy(departmentService.queryById(id), DepartmentVO.class);
     }
 
     @SystemLogger("添加系别")
     @Override
-    public boolean add(DepartmentEntity entity) {
-        entity.setId(idGenerator.generate());
-        return departmentMapper.insert(entity) > 0;
+    public boolean add(DepartmentDTO dto) {
+        return departmentService.add(dto);
+    }
+
+    @SystemLogger("批量添加系别")
+    @Override
+    public boolean batchAdd(List<DepartmentDTO> dtoList) {
+        return departmentService.batchAdd(dtoList);
     }
 
     @SystemLogger("修改系别")
     @Override
-    public boolean modify(DepartmentEntity entity) {
-        return departmentMapper.update(entity) > 0;
+    public boolean modify(DepartmentDTO dto) {
+        return departmentService.modify(dto);
     }
 
     @SystemLogger("删除系别")
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public boolean remove(List<DepartmentEntity> entityList) {
-        int count = 0;
-        try {
-            for (DepartmentEntity entity : entityList) {
-                count += departmentMapper.delete(entity.getId(), entity.getVersion());
-            }
-        } catch (Exception e) {
-            throw PsychologyErrorCode.CANNOT_DELETE_FOREIGN_KEY.createException();
-        }
-        return count == entityList.size();
+    public boolean remove(DepartmentDTO dto) {
+        return departmentService.remove(dto);
     }
 
-    @Resource
-    public void setDepartmentMapper(DepartmentMapper departmentMapper) {
-        this.departmentMapper = departmentMapper;
+    @SystemLogger("批量删除系别")
+    @Override
+    public boolean batchRemove(List<DepartmentDTO> dtoList) {
+        return departmentService.batchRemove(dtoList);
     }
 
-    @Resource
-    public void setIdGenerator(IdGenerator idGenerator) {
-        this.idGenerator = idGenerator;
+    @Autowired
+    public void setDepartmentService(DepartmentService departmentService) {
+        this.departmentService = departmentService;
     }
 }
