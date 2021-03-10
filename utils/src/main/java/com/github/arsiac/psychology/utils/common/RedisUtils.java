@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.TimeUnit;
+
 
 /**
  * <p>Redis 工具类</p>
@@ -70,7 +72,7 @@ public class RedisUtils {
         if (value == null) {
             throw ARGUMENT_VALUE_NULL;
         }
-        redisTemplate.opsForValue().set(key, toJsonString(value), expire);
+        redisTemplate.opsForValue().set(key, toJsonString(value), expire, TimeUnit.SECONDS);
     }
 
     /**
@@ -112,7 +114,8 @@ public class RedisUtils {
         if (key == null) {
             throw ARGUMENT_KEY_NULL;
         }
-        return gson.fromJson(toJsonString(redisTemplate.opsForValue().get(key)), target);
+        Object value = redisTemplate.opsForValue().get(key);
+        return value == null ? null : gson.fromJson(toJsonString(value), target);
     }
 
     /**

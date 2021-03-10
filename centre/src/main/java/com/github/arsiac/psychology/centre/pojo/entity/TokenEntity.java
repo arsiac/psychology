@@ -76,4 +76,14 @@ public class TokenEntity {
     public void setExpireTime(Long expireTime) {
         this.expireTime = expireTime;
     }
+
+    @Override
+    public String toString() {
+        return "TokenEntity{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", accessToken='" + accessToken + '\'' +
+                ", expireTime=" + expireTime +
+                '}';
+    }
 }

@@ -55,7 +55,8 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public String getToken(Long userId) {
-        return redisUtils.get(String.valueOf(userId));
+        TokenEntity entity = redisUtils.get(String.valueOf(userId), TokenEntity.class);
+        return entity == null ? "" : entity.getAccessToken();
     }
 
     @Autowired
