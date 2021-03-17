@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.arsiac.psychology.manager.dao.OpusMapper">
+
+  <!-- 可根据自己的需求，是否要使用 -->
+  <resultMap type="com.github.arsiac.psychology.manager.pojo.entity.OpusEntity" id="opusMap">
+    <result property="id" column="id"/>
+    <result property="name" column="name"/>
+    <result property="authorId" column="author_id"/>
+    <result property="achievementTypeId" column="achievement_type_id"/>
+    <result property="publishingHouse" column="publishing_house"/>
+    <result property="publishDate" column="publish_date"/>
+    <result property="isbn" column="isbn"/>
+    <result property="status" column="status"/>
+    <result property="returnMessage" column="return_message"/>
+    <result property="createBy" column="create_by"/>
+    <result property="createTime" column="create_time"/>
+    <result property="updateBy" column="update_by"/>
+    <result property="updateTime" column="update_time"/>
+    <result property="version" column="version"/>
+  </resultMap>
+
+  <resultMap id="opusDtoMap" type="com.github.arsiac.psychology.manager.pojo.dto.OpusDTO" extends="opusMap">
+    <association property="achievementType" column="achievement_type_id"
+                 javaType="com.github.arsiac.psychology.base.pojo.entity.AchievementTypeEntity">
+      <result property="id" column="at_id"/>
+      <result property="name" column="at_name"/>
+    </association>
+    <association property="author" column="author_id"
+                 javaType="com.github.arsiac.psychology.base.pojo.entity.TeacherEntity">
+      <result property="id" column="t_id"/>
+      <result property="name" column="t_name"/>
+    </association>
+  </resultMap>
+
+  <!-- 查询全部 -->
+  <select id="selectAll" resultMap="opusMap">
+    SELECT *
+    FROM psychology_manager.opus
+    ORDER BY update_time desc
+  </select>
+
+  <!-- 模糊查询 -->
+  <select id="selectFuzzy" resultMap="opusDtoMap"
+          parameterType="com.github.arsiac.psychology.manager.pojo.entity.OpusEntity">
+    SELECT o.*, at.id AS at_id, at.name AS at_name, t.id AS t_id, t.name AS t_name FROM psychology_manager.opus o
+    LEFT JOIN psychology_base.achievement_type at ON o.achievement_type_id = at.id
+    LEFT JOIN psychology_base.teacher t ON o.author_id = t.id
+    <where>
+      <if test="opus.name != null">
+        <bind name="opusName" value="'%' + opus.name + '%'"/>
+        o.name LIKE #{opusName}
+      </if>
+      <if test="opus.createBy != null and opus.createBy != 0">
+        AND o.create_by = #{opus.createBy}
+        AND o.status > 0
+      </if>
+      <!-- 查看所有的，可以看已提交以上的 -->
+      <if test="opus.createBy == null or opus.createBy == 0">
+        AND o.status > 0
+      </if>
+    </where>
+    ORDER BY update_time desc
+  </select>
+
+  <!-- 根据id查询 -->
+  <select id="selectById" resultMap="opusMap" parameterType="java.lang.Long">
+    SELECT *
+    FROM psychology_manager.opus
+    WHERE id = #{id}
+  </select>
+
+  <!-- 插入 版本为1 时间为当前时间 -->
+  <insert id="insert" parameterType="com.github.arsiac.psychology.manager.pojo.entity.OpusEntity">
+    INSERT INTO psychology_manager.opus
+    (id, name, author_id, achievement_type_id, publishing_house, publish_date, isbn, status, return_message, create_by,
+     create_time, update_by, update_time, version)
+    VALUES ( #{opus.id}
+           , #{opus.name}
+           , #{opus.authorId}
+           , #{opus.achievementTypeId}
+           , #{opus.publishingHouse}
+           , #{opus.publishDate}
+           , #{opus.isbn}
+           , #{opus.status}
+           , #{opus.returnMessage}
+           , #{opus.createBy}
+           , CURRENT_TIMESTAMP()
+           , #{opus.updateBy}
+           , CURRENT_TIMESTAMP()
+           , 1)
+  </insert>
+
+  <!-- 更新 根据版本和id来更新数据-->
+  <update id="update" parameterType="com.github.arsiac.psychology.manager.pojo.entity.OpusEntity">
+    UPDATE psychology_manager.opus
+    SET name                = #{opus.name}
+      , author_id           = #{opus.authorId}
+      , achievement_type_id = #{opus.achievementTypeId}
+      , publishing_house    = #{opus.publishingHouse}
+      , publish_date        = #{opus.publishDate}
+      , isbn                = #{opus.isbn}
+      , status              = #{opus.status}
+      , return_message      = #{opus.returnMessage}
+      , update_by           = #{opus.updateBy}
+      , update_time         = CURRENT_TIMESTAMP()
+      , version             = version + 1
+    WHERE id = #{opus.id}
+      AND version = #{opus.version}
+  </update>
+
+  <!-- 删除 根据id和版本删除 -->
+  <delete id="delete" parameterType="com.github.arsiac.psychology.manager.pojo.entity.OpusEntity">
+    DELETE
+    FROM psychology_manager.opus
+    WHERE id = #{opus.id}
+      AND version = #{opus.version}
+  </delete>
+</mapper>

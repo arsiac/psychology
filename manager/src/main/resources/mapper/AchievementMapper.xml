@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.arsiac.psychology.manager.dao.AchievementMapper">
+
+  <!-- 可根据自己的需求，是否要使用 -->
+  <resultMap type="com.github.arsiac.psychology.manager.pojo.entity.AchievementEntity" id="achievementMap">
+    <result property="id" column="id"/>
+    <result property="name" column="name"/>
+    <result property="achievementTypeId" column="achievement_type_id"/>
+    <result property="awardName" column="award_name"/>
+    <result property="rewordLevelId" column="reword_level_id"/>
+    <result property="unit" column="unit"/>
+    <result property="date" column="date"/>
+    <result property="code" column="code"/>
+    <result property="status" column="status"/>
+    <result property="returnMessage" column="return_message"/>
+    <result property="createBy" column="create_by"/>
+    <result property="createTime" column="create_time"/>
+    <result property="updateBy" column="update_by"/>
+    <result property="updateTime" column="update_time"/>
+    <result property="version" column="version"/>
+  </resultMap>
+
+  <resultMap id="achievementDtoMap" type="com.github.arsiac.psychology.manager.pojo.dto.AchievementDTO"
+             extends="achievementMap">
+    <association property="achievementType" column="achievement_type_id"
+                 javaType="com.github.arsiac.psychology.base.pojo.entity.AchievementTypeEntity">
+      <result property="id" column="at_id"/>
+      <result property="name" column="at_name"/>
+    </association>
+    <association property="rewordLevel" column="reword_level_id"
+                 javaType="com.github.arsiac.psychology.base.pojo.entity.RewordLevelEntity">
+      <result property="id" column="rl_id"/>
+      <result property="name" column="rl_name"/>
+    </association>
+  </resultMap>
+
+  <!-- 查询全部 -->
+  <select id="selectAll" resultMap="achievementMap">
+    SELECT *
+    FROM psychology_manager.achievement
+    ORDER BY update_time desc
+  </select>
+
+  <!-- 模糊查询 -->
+  <select id="selectFuzzy" resultMap="achievementDtoMap"
+          parameterType="com.github.arsiac.psychology.manager.pojo.entity.AchievementEntity">
+    SELECT a.*, at.id AS at_id, at.name AS at_name, rl.id AS rl_id, rl.name AS rl_name FROM
+    psychology_manager.achievement a
+    LEFT JOIN psychology_base.achievement_type at ON a.achievement_type_id = at.id
+    LEFT JOIN psychology_base.reword_level rl ON a.reword_level_id = rl.id
+    <where>
+      <if test="achievement.name != null">
+        <bind name="achievementName" value="'%' + achievement.name + '%'"/>
+        a.name LIKE #{achievementName}
+      </if>
+      <!-- 是否只查看自己的, 可以看全部 -->
+      <if test="achievement.createBy != null and achievement.createBy != 0">
+        AND a.create_by = #{achievement.createBy}
+      </if>
+      <!-- 查看所以的，可以看已提交以上的 -->
+      <if test="achievement.createBy == null or achievement.createBy == 0">
+        AND a.status > 0
+      </if>
+    </where>
+    ORDER BY update_time desc
+  </select>
+
+  <!-- 根据id查询 -->
+  <select id="selectById" resultMap="achievementMap" parameterType="java.lang.Long">
+    SELECT *
+    FROM psychology_manager.achievement
+    WHERE id = #{id}
+  </select>
+
+  <!-- 插入 版本为1 时间为当前时间 -->
+  <insert id="insert" parameterType="com.github.arsiac.psychology.manager.pojo.entity.AchievementEntity">
+    INSERT INTO psychology_manager.achievement
+    (id, name, achievement_type_id, award_name, reword_level_id, unit, date, code, status, return_message, create_by,
+     create_time, update_by, update_time, version)
+    VALUES ( #{achievement.id}
+           , #{achievement.name}
+           , #{achievement.achievementTypeId}
+           , #{achievement.awardName}
+           , #{achievement.rewordLevelId}
+           , #{achievement.unit}
+           , #{achievement.date}
+           , #{achievement.code}
+           , #{achievement.status}
+           , #{achievement.returnMessage}
+           , #{achievement.createBy}
+           , CURRENT_TIMESTAMP()
+           , #{achievement.updateBy}
+           , CURRENT_TIMESTAMP()
+           , 1)
+  </insert>
+
+  <!-- 更新 根据版本和id来更新数据-->
+  <update id="update" parameterType="com.github.arsiac.psychology.manager.pojo.entity.AchievementEntity">
+    UPDATE psychology_manager.achievement
+    SET name                = #{achievement.name}
+      , achievement_type_id = #{achievement.achievementTypeId}
+      , award_name          = #{achievement.awardName}
+      , reword_level_id     = #{achievement.rewordLevelId}
+      , unit                = #{achievement.unit}
+      , date                = #{achievement.date}
+      , code                = #{achievement.code}
+      , return_message      = #{achievement.returnMessage}
+      , status              = #{achievement.status}
+      , update_by           = #{achievement.updateBy}
+      , update_time         = CURRENT_TIMESTAMP()
+      , version             = version + 1
+    WHERE id = #{achievement.id}
+      AND version = #{achievement.version}
+  </update>
+
+  <!-- 删除 根据id和版本删除 -->
+  <delete id="delete" parameterType="com.github.arsiac.psychology.manager.pojo.entity.AchievementEntity">
+    DELETE
+    FROM psychology_manager.achievement
+    WHERE id = #{achievement.id}
+      AND version = #{achievement.version}
+  </delete>
+</mapper>
