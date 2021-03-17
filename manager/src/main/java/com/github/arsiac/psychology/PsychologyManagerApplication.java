@@ -15,8 +15,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @EnableEurekaClient
 @SpringBootApplication
-public class PsychologyManageApplication {
+public class PsychologyManagerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(PsychologyManageApplication.class, args);
+        SpringApplication.run(PsychologyManagerApplication.class, args);
     }
 }
