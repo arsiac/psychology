@@ -18,6 +18,11 @@ public class PageParam {
      * */
     private Integer pageSize = 10;
 
+    /**
+     * 创建者
+     * */
+    private Long createBy = 0L;
+
     public Integer getPageNum() {
         return pageNum;
     }
@@ -34,11 +39,20 @@ public class PageParam {
         this.pageSize = pageSize;
     }
 
+    public Long getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(Long createBy) {
+        this.createBy = createBy;
+    }
+
     @Override
     public String toString() {
         return "PageParam{" +
                 "pageNum=" + pageNum +
                 ", pageSize=" + pageSize +
+                ", createBy=" + createBy +
                 '}';
     }
 }
