@@ -35,7 +35,27 @@ public class TeacherController implements TeacherApi {
     @SystemLogger(value = "模糊查询教师", page = true)
     @Override
     public List<TeacherVO> queryFuzzy(TeacherParam param) {
-        return BeanCopy.copyListOrPage(teacherService.queryFuzzy(BeanCopy.copy(param, TeacherDTO.class)), TeacherVO.class);
+        return BeanCopy.copyListOrPage(teacherService.queryFuzzy(BeanCopy.copy(param, TeacherDTO.class)),
+                TeacherVO.class, this::copy2vo);
+    }
+
+    /**
+     * <p>拷贝系别和职称</p>
+     *
+     * @param source dto
+     * @param target vo
+     */
+    private void copy2vo(Object source, Object target) {
+        TeacherDTO dto = (TeacherDTO) source;
+        TeacherVO vo = (TeacherVO) target;
+
+        if (dto.getDepartmentEntity() != null) {
+            vo.setDepartmentName(dto.getDepartmentEntity().getName());
+        }
+
+        if (dto.getTitleEntity() != null) {
+            vo.setTitleName(dto.getTitleEntity().getName());
+        }
     }
 
     @SystemLogger("根据id查询教师")

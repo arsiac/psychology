@@ -45,7 +45,7 @@ public class TeacherServiceImpl implements TeacherService {
         } else {
             entity = BeanCopy.copy(dto, TeacherEntity.class);
         }
-        return BeanCopy.copyListOrPage(teacherMapper.selectFuzzy(entity), TeacherDTO.class);
+        return teacherMapper.selectFuzzy(entity);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.github.arsiac.psychology.centre.dao;
 
+import com.github.arsiac.psychology.centre.pojo.dto.StudentDTO;
 import com.github.arsiac.psychology.centre.pojo.entity.StudentEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -28,7 +29,7 @@ public interface StudentMapper {
      * @param student 学生信息
      * @return 学生列表
      * */
-    List<StudentEntity> selectFuzzy(@Param("student") StudentEntity student);
+    List<StudentDTO> selectFuzzy(@Param("student") StudentEntity student);
 
     /**
      * <p>根据id查询</p>

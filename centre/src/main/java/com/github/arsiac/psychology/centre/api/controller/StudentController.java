@@ -35,7 +35,27 @@ public class StudentController implements StudentApi {
     @SystemLogger(value = "模糊查询学生", page = true)
     @Override
     public List<StudentVO> queryFuzzy(StudentParam param) {
-        return BeanCopy.copyListOrPage(studentService.queryFuzzy(BeanCopy.copy(param, StudentDTO.class)), StudentVO.class);
+        return BeanCopy.copyListOrPage(studentService.queryFuzzy(BeanCopy.copy(param, StudentDTO.class)),
+                StudentVO.class, this::copy2vo);
+    }
+
+    /**
+     * <p>拷贝专业和学院名称</p>
+     *
+     * @param source dto
+     * @param target vo
+     */
+    private void copy2vo(Object source, Object target) {
+        StudentDTO dto = (StudentDTO) source;
+        StudentVO vo = (StudentVO) target;
+
+        if (dto.getMajorEntity() != null) {
+            vo.setMajorName(dto.getMajorEntity().getName());
+        }
+
+        if (dto.getSchoolDepartmentEntity() != null) {
+            vo.setSchoolDepartmentName(dto.getSchoolDepartmentEntity().getName());
+        }
     }
 
     @SystemLogger("根据id查询学生")

@@ -1,5 +1,6 @@
 package com.github.arsiac.psychology.centre.dao;
 
+import com.github.arsiac.psychology.centre.pojo.dto.TeacherDTO;
 import com.github.arsiac.psychology.centre.pojo.entity.TeacherEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -28,7 +29,7 @@ public interface TeacherMapper {
      * @param teacher 教师信息
      * @return 教师列表
      * */
-    List<TeacherEntity> selectFuzzy(@Param("teacher") TeacherEntity teacher);
+    List<TeacherDTO> selectFuzzy(@Param("teacher") TeacherEntity teacher);
 
     /**
      * <p>根据id查询</p>
