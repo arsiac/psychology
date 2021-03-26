@@ -3,7 +3,6 @@
 
 <mapper namespace="com.github.arsiac.psychology.centre.dao.ResourceMapper">
 
-    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.github.arsiac.psychology.centre.pojo.entity.ResourceEntity" id="resourceMap">
         <result property="id" column="id"/>
         <result property="name" column="name"/>
