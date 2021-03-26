@@ -3,7 +3,6 @@
 
 <mapper namespace="com.github.arsiac.psychology.base.dao.AchievementTypeMapper">
 
-  <!-- 可根据自己的需求，是否要使用 -->
   <resultMap type="com.github.arsiac.psychology.base.pojo.entity.AchievementTypeEntity" id="achievementTypeMap">
               <result property="id" column="id"/>
               <result property="name" column="name"/>
