@@ -311,4 +311,33 @@ public class TeacherEntity {
 	public Integer getVersion() {
 		return version;
 	}
+
+	@Override
+	public String toString() {
+		return "TeacherEntity{" +
+				"id=" + id +
+				", code='" + code + '\'' +
+				", name='" + name + '\'' +
+				", sex=" + sex +
+				", birthday=" + birthday +
+				", departmentId=" + departmentId +
+				", titleId=" + titleId +
+				", oversea=" + oversea +
+				", relation='" + relation + '\'' +
+				", politic='" + politic + '\'' +
+				", type='" + type + '\'' +
+				", education='" + education + '\'' +
+				", degree='" + degree + '\'' +
+				", degreeUnit='" + degreeUnit + '\'' +
+				", researchDirection='" + researchDirection + '\'' +
+				", jobType='" + jobType + '\'' +
+				", position='" + position + '\'' +
+				", account=" + account +
+				", createBy=" + createBy +
+				", createTime=" + createTime +
+				", updateBy=" + updateBy +
+				", updateTime=" + updateTime +
+				", version=" + version +
+				'}';
+	}
 }
