@@ -272,4 +272,30 @@ public class StudentEntity {
 	public Integer getVersion() {
 		return version;
 	}
+
+	@Override
+	public String toString() {
+		return "StudentEntity{" +
+				"id=" + id +
+				", account=" + account +
+				", code='" + code + '\'' +
+				", name='" + name + '\'' +
+				", majorId=" + majorId +
+				", schoolDepartmentId=" + schoolDepartmentId +
+				", grade=" + grade +
+				", identity='" + identity + '\'' +
+				", sex='" + sex + '\'' +
+				", birthday=" + birthday +
+				", phone='" + phone + '\'' +
+				", email='" + email + '\'' +
+				", source='" + source + '\'' +
+				", address='" + address + '\'' +
+				", politic='" + politic + '\'' +
+				", createBy=" + createBy +
+				", createTime=" + createTime +
+				", updateBy=" + updateBy +
+				", updateTime=" + updateTime +
+				", version=" + version +
+				'}';
+	}
 }

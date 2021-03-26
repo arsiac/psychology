@@ -113,4 +113,18 @@ public class RoleResourceEntity {
     public void setVersion(Integer version) {
         this.version = version;
     }
+
+    @Override
+    public String toString() {
+        return "RoleResourceEntity{" +
+                "id=" + id +
+                ", roleId=" + roleId +
+                ", resourceId=" + resourceId +
+                ", createBy=" + createBy +
+                ", createTime=" + createTime +
+                ", updateBy=" + updateBy +
+                ", updateTime=" + updateTime +
+                ", version=" + version +
+                '}';
+    }
 }
