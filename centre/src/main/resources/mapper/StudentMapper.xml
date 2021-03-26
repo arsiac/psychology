@@ -3,43 +3,58 @@
 
 <mapper namespace="com.github.arsiac.psychology.centre.dao.StudentMapper">
 
-  <!-- 可根据自己的需求，是否要使用 -->
   <resultMap type="com.github.arsiac.psychology.centre.pojo.entity.StudentEntity" id="studentMap">
-              <result property="id" column="id"/>
-              <result property="account" column="account"/>
-              <result property="code" column="code"/>
-              <result property="name" column="name"/>
-              <result property="majorId" column="major_id"/>
-              <result property="schoolDepartmentId" column="school_department_id"/>
-              <result property="grade" column="grade"/>
-              <result property="identity" column="identity"/>
-              <result property="sex" column="sex"/>
-              <result property="birthday" column="birthday"/>
-              <result property="phone" column="phone"/>
-              <result property="email" column="email"/>
-              <result property="source" column="source"/>
-              <result property="address" column="address"/>
-              <result property="politic" column="politic"/>
-              <result property="createBy" column="create_by"/>
-              <result property="createTime" column="create_time"/>
-              <result property="updateBy" column="update_by"/>
-              <result property="updateTime" column="update_time"/>
-              <result property="version" column="version"/>
-        </resultMap>
+    <result property="id" column="id"/>
+    <result property="account" column="account"/>
+    <result property="code" column="code"/>
+    <result property="name" column="name"/>
+    <result property="majorId" column="major_id"/>
+    <result property="schoolDepartmentId" column="school_department_id"/>
+    <result property="grade" column="grade"/>
+    <result property="identity" column="identity"/>
+    <result property="sex" column="sex"/>
+    <result property="birthday" column="birthday"/>
+    <result property="phone" column="phone"/>
+    <result property="email" column="email"/>
+    <result property="source" column="source"/>
+    <result property="address" column="address"/>
+    <result property="politic" column="politic"/>
+    <result property="createBy" column="create_by"/>
+    <result property="createTime" column="create_time"/>
+    <result property="updateBy" column="update_by"/>
+    <result property="updateTime" column="update_time"/>
+    <result property="version" column="version"/>
+  </resultMap>
+
+  <resultMap type="com.github.arsiac.psychology.centre.pojo.dto.StudentDTO" extends="studentMap" id="studentDtoMap">
+    <association property="majorEntity" javaType="com.github.arsiac.psychology.base.pojo.entity.MajorEntity">
+      <result property="id" column="m_id"/>
+      <result property="name" column="m_name"/>
+    </association>
+    <association property="schoolDepartmentEntity" javaType="com.github.arsiac.psychology.base.pojo.entity.SchoolDepartmentEntity">
+      <result property="id" column="sd_id"/>
+      <result property="name" column="sd_name"/>
+    </association>
+  </resultMap>
 
   <!-- 查询全部 -->
   <select id="selectAll" resultMap="studentMap">
-      SELECT *
-      FROM psychology_user_centre.student ORDER BY update_time desc
+    SELECT *
+    FROM psychology_user_centre.student
+    ORDER BY update_time desc
   </select>
 
   <!-- 模糊查询 -->
-  <select id="selectFuzzy" resultMap="studentMap" parameterType="com.github.arsiac.psychology.centre.pojo.entity.StudentEntity">
-    SELECT * FROM psychology_user_centre.student
+  <select id="selectFuzzy" resultMap="studentMap"
+          parameterType="com.github.arsiac.psychology.centre.pojo.entity.StudentEntity">
+    SELECT s.*, m.id AS m_id, m.name AS m_name, sd.id AS sd_id, sd.name AS sd_name
+    FROM psychology_user_centre.student s
+    LEFT JOIN psychology_base.major m ON s.major_id = m.id
+    LEFT JOIN psychology_base.school_department sd ON s.school_department_id = sd.id
     <where>
       <if test="student.name != null">
         <bind name="studentName" value="'%' + student.name + '%'"/>
-        name LIKE #{studentName}
+        s.name LIKE #{studentName}
       </if>
     </where>
     ORDER BY update_time desc
@@ -47,109 +62,67 @@
 
   <!-- 根据id查询 -->
   <select id="selectById" resultMap="studentMap" parameterType="java.lang.Long">
-      SELECT *
-      FROM psychology_user_centre.student WHERE id = #{id}
+    SELECT *
+    FROM psychology_user_centre.student
+    WHERE id = #{id}
   </select>
 
   <!-- 插入 版本为1 时间为当前时间 -->
   <insert id="insert" parameterType="com.github.arsiac.psychology.centre.pojo.entity.StudentEntity">
-      INSERT INTO psychology_user_centre.student(
-                                  id
-                                              , account
-                                              , code
-                                              , name
-                                              , major_id
-                                              , school_department_id
-                                              , grade
-                                              , identity
-                                              , sex
-                                              , birthday
-                                              , phone
-                                              , email
-                                              , source
-                                              , address
-                                              , politic
-                                              , create_by
-                                              , create_time
-                                              , update_by
-                                              , update_time
-                                              , version
-                          )
-      VALUES (
-          
-                          #{student.id}
-                        
-                          , #{student.account}
-                        
-                          , #{student.code}
-                        
-                          , #{student.name}
-                        
-                          , #{student.majorId}
-                        
-                          , #{student.schoolDepartmentId}
-                        
-                          , #{student.grade}
-                        
-                          , #{student.identity}
-                        
-                          , #{student.sex}
-                        
-                          , #{student.birthday}
-                        
-                          , #{student.phone}
-                        
-                          , #{student.email}
-                        
-                          , #{student.source}
-                        
-                          , #{student.address}
-                        
-                          , #{student.politic}
-                        
-                          , #{student.createBy}
-                        
-                          , #{student.createTime}
-                        
-                          , #{student.updateBy}
-                        
-                          , #{student.updateTime}
-                        
-                          , #{student.version}
-                                  )
+    INSERT INTO psychology_user_centre.student
+    (id, account, code, name, major_id, school_department_id, grade, identity, sex, birthday, phone, email, source,
+     address, politic, create_by, create_time, update_by, update_time, version)
+    VALUES ( #{student.id}
+           , #{student.account}
+           , #{student.code}
+           , #{student.name}
+           , #{student.majorId}
+           , #{student.schoolDepartmentId}
+           , #{student.grade}
+           , #{student.identity}
+           , #{student.sex}
+           , #{student.birthday}
+           , #{student.phone}
+           , #{student.email}
+           , #{student.source}
+           , #{student.address}
+           , #{student.politic}
+           , #{student.createBy}
+           , CURRENT_TIMESTAMP()
+           , #{student.updateBy}
+           , CURRENT_TIMESTAMP()
+           , 1)
   </insert>
 
   <!-- 更新 根据版本和id来更新数据-->
   <update id="update" parameterType="com.github.arsiac.psychology.centre.pojo.entity.StudentEntity">
-      UPDATE psychology_user_centre.student
-          SET
-                                          id = #{student.id}
-                                                        , account = #{student.account}
-                                                        , code = #{student.code}
-                                                        , name = #{student.name}
-                                                        , major_id = #{student.majorId}
-                                                        , school_department_id = #{student.schoolDepartmentId}
-                                                        , grade = #{student.grade}
-                                                        , identity = #{student.identity}
-                                                        , sex = #{student.sex}
-                                                        , birthday = #{student.birthday}
-                                                        , phone = #{student.phone}
-                                                        , email = #{student.email}
-                                                        , source = #{student.source}
-                                                        , address = #{student.address}
-                                                        , politic = #{student.politic}
-                                                        , create_by = #{student.createBy}
-                                                        , create_time = #{student.createTime}
-                                                        , update_by = #{student.updateBy}
-                                                        , update_time = #{student.updateTime}
-                                                        , version = #{student.version}
-                              WHERE id = #{student.id}
-        AND version = #{student.version}
+    UPDATE psychology_user_centre.student
+    SET account              = #{student.account}
+      , code                 = #{student.code}
+      , name                 = #{student.name}
+      , major_id             = #{student.majorId}
+      , school_department_id = #{student.schoolDepartmentId}
+      , grade                = #{student.grade}
+      , identity             = #{student.identity}
+      , sex                  = #{student.sex}
+      , birthday             = #{student.birthday}
+      , phone                = #{student.phone}
+      , email                = #{student.email}
+      , source               = #{student.source}
+      , address              = #{student.address}
+      , politic              = #{student.politic}
+      , update_by            = #{student.updateBy}
+      , update_time          = CURRENT_TIMESTAMP()
+      , version              = version + 1
+    WHERE id = #{student.id}
+      AND version = #{student.version}
   </update>
 
   <!-- 删除 根据id和版本删除 -->
   <delete id="delete" parameterType="com.github.arsiac.psychology.centre.pojo.entity.StudentEntity">
-      DELETE
-      FROM psychology_user_centre.student WHERE id = #{student.id} AND version = #{student.version}
+    DELETE
+    FROM psychology_user_centre.student
+    WHERE id = #{student.id}
+      AND version = #{student.version}
   </delete>
 </mapper>
