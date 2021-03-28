@@ -60,14 +60,14 @@ public class LoginController implements LoginApi {
     @SystemLogger("注册")
     @Override
     public boolean register(RegisterForm form) {
-        return userService.add(form);
+        return userService.register(form);
     }
 
     @SystemLogger("登录")
     @Override
     public TokenEntity login(LoginForm loginForm) {
         // 验证数据
-        if (CommonTool.isBlank(loginForm.getCode())) {
+        if (loginForm.getUuid() != -1 && CommonTool.isBlank(loginForm.getCode())) {
             throw PsychologyErrorCode.CAPTURE_IS_EMPTY.createException();
         }
         if (CommonTool.isBlank(loginForm.getUsername())) {
@@ -82,7 +82,7 @@ public class LoginController implements LoginApi {
 
         logger.info("用户登录: {}", loginForm);
         // 验证码错误
-        if (!captchaService.validate(loginForm.getUuid(), loginForm.getCode())) {
+        if (loginForm.getUuid() != -1 && !captchaService.validate(loginForm.getUuid(), loginForm.getCode())) {
             throw PsychologyErrorCode.CAPTURE_WRONG.createException();
         }
 

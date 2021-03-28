@@ -49,6 +49,11 @@ public enum PsychologyErrorCode {
     USERNAME_ALREADY_EXIST(3007, "用户名已存在"),
     USER_NOT_EXIST(3008, "用户不存在"),
     PASSWORD_ERROR(3009, "密码错误"),
+    TEACHER_CODE_IS_EMPTY(3010, "未提供教师编码"),
+    TEACHER_CODE_IS_INVALID(3011, "教师编码无效"),
+    TEACHER_ALREADY_HAS_ACCOUNT(3012, "该教师已注册账号"),
+    UPDATE_TEACHER_ACCOUNT_FAILED(3013, "注册失败(更新账号到教师失败)"),
+    CREATE_NEW_USER_FALIED(3014, "注册失败(创建新用户失败)"),
 
     /**
      * 其他

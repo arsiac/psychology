@@ -1,6 +1,7 @@
 package com.github.arsiac.psychology.centre.service;
 
 import com.github.arsiac.psychology.centre.pojo.dto.UserDTO;
+import com.github.arsiac.psychology.centre.pojo.form.RegisterForm;
 
 import java.util.List;
 
@@ -50,6 +51,14 @@ public interface UserService {
      * @return 是否成功
      */
     boolean add(UserDTO dto);
+
+    /**
+     * <p>注册用户</p>
+     *
+     * @param form 注册表单
+     * @return 是否成功
+     */
+    boolean register(RegisterForm form);
 
     /**
      * <p>批量添加新用户</p>

@@ -15,13 +15,13 @@ public class RegisterForm extends UserDTO {
     /**
      * 教师编号
      * */
-    private Long code;
+    private String code;
 
-    public Long getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(Long code) {
+    public void setCode(String code) {
         this.code = code;
     }
 

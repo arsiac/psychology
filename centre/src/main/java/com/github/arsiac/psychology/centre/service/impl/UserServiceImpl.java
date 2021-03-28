@@ -1,5 +1,8 @@
 package com.github.arsiac.psychology.centre.service.impl;
 
+import com.github.arsiac.psychology.centre.dao.TeacherMapper;
+import com.github.arsiac.psychology.centre.pojo.entity.TeacherEntity;
+import com.github.arsiac.psychology.centre.pojo.form.RegisterForm;
 import com.github.arsiac.psychology.utils.common.CommonTool;
 import org.springframework.stereotype.Service;
 import com.github.arsiac.psychology.centre.pojo.dto.UserDTO;
@@ -9,6 +12,7 @@ import com.github.arsiac.psychology.centre.service.UserService;
 import com.github.arsiac.psychology.utils.common.IdGenerator;
 import com.github.arsiac.psychology.utils.common.BeanCopy;
 import com.github.arsiac.psychology.utils.exception.PsychologyErrorCode;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -26,6 +30,11 @@ public class UserServiceImpl implements UserService {
      * 用户 dao
      */
     private UserMapper userMapper;
+
+    /**
+     * 教师 dao
+     * */
+    private TeacherMapper teacherMapper;
 
     /**
      * id 生成器
@@ -66,20 +75,29 @@ public class UserServiceImpl implements UserService {
         return BeanCopy.copy(userMapper.selectByUsername(name), UserDTO.class);
     }
 
-    @Override
-    public boolean add(UserDTO dto) {
-        if (dto == null) {
+    /**
+     * <p>确认用户信息正确且不重复</p>
+     *
+     * @param user 用户信息
+     */
+    private void checkUserInfo(UserEntity user) {
+        if (user == null) {
             throw PsychologyErrorCode.DATA_IS_EMPTY.createException();
         }
 
-        if (CommonTool.isBlank(dto.getUsername())) {
+        if (CommonTool.isBlank(user.getUsername())) {
             throw PsychologyErrorCode.USERNAME_IS_EMPTY.createException();
         }
 
-        UserEntity entity = userMapper.selectByUsername(dto.getUsername());
+        UserEntity entity = userMapper.selectByUsername(user.getUsername());
         if (entity != null) {
             throw PsychologyErrorCode.USERNAME_ALREADY_EXIST.createException(entity.getUsername());
         }
+    }
+
+    @Override
+    public boolean add(UserDTO dto) {
+        checkUserInfo(dto);
 
         String password = dto.getPassword();
 
@@ -92,6 +110,61 @@ public class UserServiceImpl implements UserService {
         // 生成id
         dto.setId(idGenerator.generate());
         return userMapper.insert(dto) > 0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean register(RegisterForm form) {
+        checkUserInfo(form);
+
+        // 确认教师号存在
+        String teacherCode = form.getCode();
+        if (teacherCode == null || CommonTool.isBlank(teacherCode)) {
+            throw PsychologyErrorCode.TEACHER_CODE_IS_EMPTY.createException(teacherCode);
+        }
+
+        // 查询教师
+        TeacherEntity teacherEntity = teacherMapper.selectByCode(teacherCode);
+        if (teacherEntity == null) {
+            throw PsychologyErrorCode.TEACHER_CODE_IS_INVALID.createException(teacherCode);
+        }
+
+        final String teacherInfo = String.format("code: %s, name: %s", teacherEntity.getCode(), teacherEntity.getName());
+
+        // 教师已注册账号
+        if (teacherEntity.getAccount() != null) {
+            throw PsychologyErrorCode.TEACHER_ALREADY_HAS_ACCOUNT.createException(teacherInfo);
+        }
+
+
+        // 创建用户id
+        long userId = idGenerator.generate();
+        form.setId(userId);
+        teacherEntity.setAccount(userId);
+
+
+        // 生成随机字符串作为盐
+        form.setSalt(CommonTool.randomString(32));
+
+        // 加密密码
+        form.setPassword(CommonTool.encrypt(form.getPassword(), form.getSalt()));
+
+        // 创建新用户
+        int successCode = userMapper.insert(form);
+        if (successCode > 0) {
+            successCode = teacherMapper.update(teacherEntity);
+            if (successCode > 0) {
+                return true;
+
+                // 更新教师账号信息失败
+            } else {
+                throw PsychologyErrorCode.UPDATE_TEACHER_ACCOUNT_FAILED.createException(teacherInfo );
+            }
+
+            // 创建用户失败
+        } else {
+            throw PsychologyErrorCode.CREATE_NEW_USER_FALIED.createException(teacherInfo);
+        }
     }
 
     @Override
@@ -162,6 +235,11 @@ public class UserServiceImpl implements UserService {
     @Resource
     public void setUserMapper(UserMapper userMapper) {
         this.userMapper = userMapper;
+    }
+
+    @Resource
+    public void setTeacherMapper(TeacherMapper teacherMapper) {
+        this.teacherMapper = teacherMapper;
     }
 
     @Resource
