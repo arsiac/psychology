@@ -40,6 +40,14 @@ public interface TeacherMapper {
     TeacherEntity selectById(@Param("id") Long id);
 
     /**
+     * <p>根据教师编码查询</p>
+     *
+     * @param code 教师编码
+     * @return 教师信息
+     */
+    TeacherEntity selectByCode(@Param("code") String code);
+
+    /**
      * <p>增加教师</p>
      *
      * @param teacher 教师信息
