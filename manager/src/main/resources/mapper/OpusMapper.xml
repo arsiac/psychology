@@ -28,7 +28,7 @@
       <result property="name" column="at_name"/>
     </association>
     <association property="author" column="author_id"
-                 javaType="com.github.arsiac.psychology.base.pojo.entity.TeacherEntity">
+                 javaType="com.github.arsiac.psychology.centre.pojo.entity.TeacherEntity">
       <result property="id" column="t_id"/>
       <result property="name" column="t_name"/>
     </association>

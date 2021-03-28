@@ -87,6 +87,13 @@
         <version>1.0-SNAPSHOT</version>
       </dependency>
 
+      <!-- Psychology Centre -->
+      <dependency>
+        <groupId>com.github.arsiac</groupId>
+        <artifactId>centre</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+
       <!-- Redis Pool -->
       <dependency>
         <groupId>org.apache.commons</groupId>

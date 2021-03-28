@@ -24,12 +24,12 @@
 
   <resultMap id="paperDtoMap" type="com.github.arsiac.psychology.manager.pojo.dto.PaperDTO" extends="paperMap">
     <association property="firstAuthor" column="first_author_id"
-                 javaType="com.github.arsiac.psychology.base.pojo.entity.TeacherEntity">
+                 javaType="com.github.arsiac.psychology.centre.pojo.entity.TeacherEntity">
       <result property="id" column="t_fa_id"/>
       <result property="name" column="t_fa_name"/>
     </association>
     <association property="correspondingAuthor" column="corresponding_author_id"
-                 javaType="com.github.arsiac.psychology.base.pojo.entity.TeacherEntity">
+                 javaType="com.github.arsiac.psychology.centre.pojo.entity.TeacherEntity">
       <result property="id" column="t_ca_id"/>
       <result property="name" column="t_ca_name"/>
     </association>

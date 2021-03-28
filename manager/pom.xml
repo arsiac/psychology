@@ -51,6 +51,12 @@
 
     <dependency>
       <groupId>com.github.arsiac</groupId>
+      <artifactId>centre</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.arsiac</groupId>
       <artifactId>base</artifactId>
       <scope>compile</scope>
     </dependency>
