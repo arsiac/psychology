@@ -53,8 +53,8 @@
     SELECT p.*, t_fa.id AS t_fa_id, t_fa.name AS t_fa_name,
     t_ca.id AS t_ca_id, t_ca.name AS t_ca_name,
     pl.id AS pl_id, pl.name AS pl_name FROM psychology_manager.paper p
-    LEFT JOIN psychology_base.teacher t_fa ON p.first_author_id = t_fa.id
-    LEFT JOIN psychology_base.teacher t_ca ON p.corresponding_author_id = t_ca.id
+    LEFT JOIN psychology_user_centre.teacher t_fa ON p.first_author_id = t_fa.id
+    LEFT JOIN psychology_user_centre.teacher t_ca ON p.corresponding_author_id = t_ca.id
     LEFT JOIN psychology_base.paper_level pl ON p.paper_level_id = pl.id
     <where>
       <if test="paper.name != null">

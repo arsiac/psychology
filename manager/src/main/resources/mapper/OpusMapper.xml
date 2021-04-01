@@ -46,7 +46,7 @@
           parameterType="com.github.arsiac.psychology.manager.pojo.entity.OpusEntity">
     SELECT o.*, at.id AS at_id, at.name AS at_name, t.id AS t_id, t.name AS t_name FROM psychology_manager.opus o
     LEFT JOIN psychology_base.achievement_type at ON o.achievement_type_id = at.id
-    LEFT JOIN psychology_base.teacher t ON o.author_id = t.id
+    LEFT JOIN psychology_user_centre.teacher t ON o.author_id = t.id
     <where>
       <if test="opus.name != null">
         <bind name="opusName" value="'%' + opus.name + '%'"/>

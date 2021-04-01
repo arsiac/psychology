@@ -51,7 +51,7 @@
     SELECT p.*, ps.id AS ps_id, ps.name AS ps_name, st.id AS st_id, st.name AS st_name, t.id AS t_id, t.name AS t_name FROM
         psychology_manager.project p LEFT JOIN psychology_base.project_source ps ON p.project_source_id = ps.id
         LEFT JOIN psychology_base.subject_type st ON p.subject_type_id = st.id
-        LEFT JOIN psychology_base.teacher t ON p.manager_id = t.id
+        LEFT JOIN psychology_user_centre.teacher t ON p.manager_id = t.id
     <where>
       <if test="project.name != null">
         <bind name="projectName" value="'%' + project.name + '%'"/>

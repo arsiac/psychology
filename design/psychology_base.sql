@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 18/03/2021 04:27:18
+ Date: 30/03/2021 12:02:50
 */
 
 SET NAMES utf8mb4;
@@ -46,6 +46,21 @@ CREATE TABLE `department`  (
   `version` int(11) NOT NULL COMMENT '版本',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '系别' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for major
+-- ----------------------------
+DROP TABLE IF EXISTS `major`;
+CREATE TABLE `major`  (
+  `id` bigint(20) NOT NULL COMMENT '专业id',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '专业名称',
+  `create_by` bigint(20) NOT NULL COMMENT '创建者',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_by` bigint(20) NOT NULL COMMENT '更新者',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `version` int(11) NOT NULL COMMENT '版本',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '专业' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for paper_level
@@ -91,6 +106,21 @@ CREATE TABLE `reword_level`  (
   `version` int(11) NOT NULL COMMENT '版本',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '获奖等级' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for school_department
+-- ----------------------------
+DROP TABLE IF EXISTS `school_department`;
+CREATE TABLE `school_department`  (
+  `id` bigint(20) NOT NULL COMMENT '学院id',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '学院名称',
+  `create_by` bigint(20) NOT NULL COMMENT '创建者',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_by` bigint(20) NOT NULL COMMENT '更新者',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `version` int(11) NOT NULL COMMENT '版本',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '学院' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for subject_type
