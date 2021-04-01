@@ -54,10 +54,10 @@ function build() {
     echolnsp "拉取最新"
     git pull
 
-    echosp "开始编译, 跳过测试: $compileSkipTest"
+    echolnsp "开始编译, 跳过测试: $compileSkipTest"
     mvn clean package -Dmaven.test.skip=$compileSkipTest
 
-    echosp "进入目录: $directory"
+    echolnsp "进入目录: $directory"
     cd "$directory" || exit 1
 
     jar_path="./target/${applicationName}.jar"
