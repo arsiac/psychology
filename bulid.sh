@@ -51,12 +51,6 @@ function build() {
         echo "暴露端口: $expose"
     fi
 
-    echolnsp "拉取最新"
-    git pull
-
-    echolnsp "开始编译, 跳过测试: $compileSkipTest"
-    mvn clean package -Dmaven.test.skip=$compileSkipTest
-
     echolnsp "进入目录: $directory"
     cd "$directory" || exit 1
 
@@ -72,6 +66,7 @@ function build() {
 
 function help() {
     echo "-l list modules."
+    echo "-c pull latest, compile source code."
     echoln "-b <module> build module."
 }
 
@@ -80,6 +75,13 @@ if [ -n "$1" ]; then
     case "$1" in
     -l)
         echoln "${modules[*]}"
+        ;;
+    -c)
+        echolnsp "拉取最新"
+        git pull
+
+        echolnsp "开始编译, 跳过测试: $compileSkipTest"
+        mvn clean package -Dmaven.test.skip=$compileSkipTest
         ;;
     -b)
         if [ -n "$2" ]; then
