@@ -26,15 +26,15 @@
   </resultMap>
 
   <resultMap id="projectDtoMap" type="com.github.arsiac.psychology.manager.pojo.dto.ProjectDTO" extends="projectMap">
-    <association property="projectSourceEntity" javaType="com.github.arsiac.psychology.base.pojo.entity.ProjectSourceEntity">
+    <association property="projectSourceEntity" javaType="com.github.arsiac.psychology.manager.pojo.entity.ProjectSourceEntity">
       <result property="id" column="ps_id" />
       <result property="name" column="ps_name" />
     </association>
-    <association property="subjectTypeEntity" javaType="com.github.arsiac.psychology.base.pojo.entity.SubjectTypeEntity">
+    <association property="subjectTypeEntity" javaType="com.github.arsiac.psychology.manager.pojo.entity.SubjectTypeEntity">
       <result property="id" column="st_id" />
       <result property="name" column="st_name" />
     </association>
-    <association property="teacherEntity" javaType="com.github.arsiac.psychology.centre.pojo.entity.TeacherEntity">
+    <association property="teacherEntity" javaType="com.github.arsiac.psychology.manager.pojo.entity.TeacherEntity">
       <result property="id" column="t_id" />
       <result property="name" column="t_name" />
     </association>

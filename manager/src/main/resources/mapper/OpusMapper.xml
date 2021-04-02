@@ -23,12 +23,12 @@
 
   <resultMap id="opusDtoMap" type="com.github.arsiac.psychology.manager.pojo.dto.OpusDTO" extends="opusMap">
     <association property="achievementType" column="achievement_type_id"
-                 javaType="com.github.arsiac.psychology.base.pojo.entity.AchievementTypeEntity">
+                 javaType="com.github.arsiac.psychology.manager.pojo.entity.AchievementTypeEntity">
       <result property="id" column="at_id"/>
       <result property="name" column="at_name"/>
     </association>
     <association property="author" column="author_id"
-                 javaType="com.github.arsiac.psychology.centre.pojo.entity.TeacherEntity">
+                 javaType="com.github.arsiac.psychology.manager.pojo.entity.TeacherEntity">
       <result property="id" column="t_id"/>
       <result property="name" column="t_name"/>
     </association>

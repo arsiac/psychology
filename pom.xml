@@ -72,7 +72,6 @@
         <version>${mybatis.version}</version>
       </dependency>
 
-
       <!-- Psychology Utils -->
       <dependency>
         <groupId>com.github.arsiac</groupId>
