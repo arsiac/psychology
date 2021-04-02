@@ -1,8 +1,8 @@
 package com.github.arsiac.psychology.centre.pojo.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.github.arsiac.psychology.base.pojo.entity.MajorEntity;
-import com.github.arsiac.psychology.base.pojo.entity.SchoolDepartmentEntity;
+import com.github.arsiac.psychology.centre.pojo.entity.MajorEntity;
+import com.github.arsiac.psychology.centre.pojo.entity.SchoolDepartmentEntity;
 import com.github.arsiac.psychology.centre.pojo.entity.StudentEntity;
 
 /**

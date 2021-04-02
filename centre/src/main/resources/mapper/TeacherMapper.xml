@@ -30,11 +30,11 @@
   </resultMap>
 
   <resultMap type="com.github.arsiac.psychology.centre.pojo.dto.TeacherDTO" extends="teacherMap" id="teacherDtoMap">
-    <association property="titleEntity" javaType="com.github.arsiac.psychology.base.pojo.entity.TitleEntity">
+    <association property="titleEntity" javaType="com.github.arsiac.psychology.centre.pojo.entity.TitleEntity">
       <result property="id" column="t_id"/>
       <result property="name" column="title_name"/>
     </association>
-    <association property="departmentEntity" javaType="com.github.arsiac.psychology.base.pojo.entity.DepartmentEntity">
+    <association property="departmentEntity" javaType="com.github.arsiac.psychology.centre.pojo.entity.DepartmentEntity">
       <result property="id" column="d_id"/>
       <result property="name" column="department_name"/>
     </association>

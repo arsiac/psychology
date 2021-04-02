@@ -25,12 +25,12 @@
   <resultMap id="achievementDtoMap" type="com.github.arsiac.psychology.manager.pojo.dto.AchievementDTO"
              extends="achievementMap">
     <association property="achievementType" column="achievement_type_id"
-                 javaType="com.github.arsiac.psychology.base.pojo.entity.AchievementTypeEntity">
+                 javaType="com.github.arsiac.psychology.manager.pojo.entity.AchievementTypeEntity">
       <result property="id" column="at_id"/>
       <result property="name" column="at_name"/>
     </association>
     <association property="rewordLevel" column="reword_level_id"
-                 javaType="com.github.arsiac.psychology.base.pojo.entity.RewordLevelEntity">
+                 javaType="com.github.arsiac.psychology.manager.pojo.entity.RewordLevelEntity">
       <result property="id" column="rl_id"/>
       <result property="name" column="rl_name"/>
     </association>

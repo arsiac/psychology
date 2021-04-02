@@ -1,8 +1,8 @@
 package com.github.arsiac.psychology.manager.pojo.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.github.arsiac.psychology.base.pojo.entity.AchievementTypeEntity;
-import com.github.arsiac.psychology.base.pojo.entity.RewordLevelEntity;
+import com.github.arsiac.psychology.manager.pojo.entity.AchievementTypeEntity;
+import com.github.arsiac.psychology.manager.pojo.entity.RewordLevelEntity;
 import com.github.arsiac.psychology.manager.pojo.entity.AchievementEntity;
 
 /**

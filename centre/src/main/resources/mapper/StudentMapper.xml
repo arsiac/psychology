@@ -27,11 +27,11 @@
   </resultMap>
 
   <resultMap type="com.github.arsiac.psychology.centre.pojo.dto.StudentDTO" extends="studentMap" id="studentDtoMap">
-    <association property="majorEntity" javaType="com.github.arsiac.psychology.base.pojo.entity.MajorEntity">
+    <association property="majorEntity" javaType="com.github.arsiac.psychology.centre.pojo.entity.MajorEntity">
       <result property="id" column="m_id"/>
       <result property="name" column="m_name"/>
     </association>
-    <association property="schoolDepartmentEntity" javaType="com.github.arsiac.psychology.base.pojo.entity.SchoolDepartmentEntity">
+    <association property="schoolDepartmentEntity" javaType="com.github.arsiac.psychology.centre.pojo.entity.SchoolDepartmentEntity">
       <result property="id" column="sd_id"/>
       <result property="name" column="sd_name"/>
     </association>
