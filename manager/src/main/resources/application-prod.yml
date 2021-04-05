@@ -11,7 +11,7 @@ logging:
 eureka:
   instance:
     prefer-ip-address: true
-#    ip-address: 47.110.247.139
+    ip-address: 47.110.247.139
     instance-id: ${eureka.instance.ip-address}:${server.port}
   client:
     service-url:
