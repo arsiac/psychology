@@ -11,11 +11,11 @@ logging:
 eureka:
   instance:
     prefer-ip-address: true
-#    ip-address: 47.110.247.139
-    instance-id: ${eureka.instance.ip-address}:${server.port}
+    ip-address: 47.110.247.139
+    instance-id: 47.110.247.139:${server.port}
   client:
     service-url:
-      defaultZone: http://${eureka.instance.ip-address}:8000/eureka
+      defaultZone: http://47,110.247.139:8000/eureka
 
 snow-flake:
   machine-id: 2
