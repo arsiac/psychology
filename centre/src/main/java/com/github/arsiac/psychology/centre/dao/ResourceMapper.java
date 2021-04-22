@@ -35,6 +35,14 @@ public interface ResourceMapper {
     List<ResourceDTO> selectFuzzy(@Param("resource") ResourceEntity resource);
 
     /**
+     * <p>根据用户id查询资源</p>
+     *
+     * @param id 用户id
+     * @return 查询结果
+     * */
+    List<ResourceDTO> selectByUserId(@Param("userId") Long id);
+
+    /**
      * <p>查询指定的资源</p>
      *
      * @param ids 资源id

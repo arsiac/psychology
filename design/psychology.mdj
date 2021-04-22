@@ -2627,7 +2627,7 @@
 									"font": "Arial;13;1",
 									"left": 256,
 									"top": 325,
-									"width": 149.0947265625,
+									"width": 159.34619140625,
 									"height": 13,
 									"text": "title"
 								},
@@ -2653,7 +2653,7 @@
 											"font": "Arial;13;0",
 											"left": 261,
 											"top": 348,
-											"width": 139.0947265625,
+											"width": 149.34619140625,
 											"height": 13
 										},
 										{
@@ -2668,21 +2668,21 @@
 											"font": "Arial;13;0",
 											"left": 261,
 											"top": 363,
-											"width": 139.0947265625,
+											"width": 149.34619140625,
 											"height": 13
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 256,
 									"top": 343,
-									"width": 149.0947265625,
+									"width": 159.34619140625,
 									"height": 38
 								}
 							],
 							"font": "Arial;13;0",
 							"left": 256,
 							"top": 320,
-							"width": 149.0947265625,
+							"width": 159.34619140625,
 							"height": 61,
 							"nameLabel": {
 								"$ref": "AAAAAAF4APqGIgvrEHc="
@@ -3271,6 +3271,315 @@
 							"columnCompartment": {
 								"$ref": "AAAAAAF4b6+PVwxrj6o="
 							}
+						},
+						{
+							"_type": "ERDEntityView",
+							"_id": "AAAAAAF4zv2vtpWMqxA=",
+							"_parent": {
+								"$ref": "AAAAAAF4AOMegwryiso="
+							},
+							"model": {
+								"$ref": "AAAAAAF4zv2vtZWKXyE="
+							},
+							"subViews": [
+								{
+									"_type": "LabelView",
+									"_id": "AAAAAAF4zv2vtpWNFuc=",
+									"_parent": {
+										"$ref": "AAAAAAF4zv2vtpWMqxA="
+									},
+									"font": "Arial;13;1",
+									"left": 256,
+									"top": 421,
+									"width": 162.16455078125,
+									"height": 13,
+									"text": "course_type"
+								},
+								{
+									"_type": "ERDColumnCompartmentView",
+									"_id": "AAAAAAF4zv2vtpWOcrY=",
+									"_parent": {
+										"$ref": "AAAAAAF4zv2vtpWMqxA="
+									},
+									"model": {
+										"$ref": "AAAAAAF4zv2vtZWKXyE="
+									},
+									"subViews": [
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAF4zv8ZIJWbgeg=",
+											"_parent": {
+												"$ref": "AAAAAAF4zv2vtpWOcrY="
+											},
+											"model": {
+												"$ref": "AAAAAAF4zv8ZE5WYx5k="
+											},
+											"font": "Arial;13;0",
+											"left": 261,
+											"top": 444,
+											"width": 152.16455078125,
+											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAF4zv90V5WlNQs=",
+											"_parent": {
+												"$ref": "AAAAAAF4zv2vtpWOcrY="
+											},
+											"model": {
+												"$ref": "AAAAAAF4zv90TpWiGhI="
+											},
+											"font": "Arial;13;0",
+											"left": 261,
+											"top": 459,
+											"width": 152.16455078125,
+											"height": 13
+										}
+									],
+									"font": "Arial;13;0",
+									"left": 256,
+									"top": 439,
+									"width": 162.16455078125,
+									"height": 38
+								}
+							],
+							"font": "Arial;13;0",
+							"left": 256,
+							"top": 416,
+							"width": 162.16455078125,
+							"height": 61,
+							"nameLabel": {
+								"$ref": "AAAAAAF4zv2vtpWNFuc="
+							},
+							"columnCompartment": {
+								"$ref": "AAAAAAF4zv2vtpWOcrY="
+							}
+						},
+						{
+							"_type": "ERDEntityView",
+							"_id": "AAAAAAF4zwPkrJWuJGo=",
+							"_parent": {
+								"$ref": "AAAAAAF4AOMegwryiso="
+							},
+							"model": {
+								"$ref": "AAAAAAF4zwPkq5WsuCw="
+							},
+							"subViews": [
+								{
+									"_type": "LabelView",
+									"_id": "AAAAAAF4zwPkrJWvsDM=",
+									"_parent": {
+										"$ref": "AAAAAAF4zwPkrJWuJGo="
+									},
+									"font": "Arial;13;1",
+									"left": 32,
+									"top": 533,
+									"width": 180.998046875,
+									"height": 13,
+									"text": "dictionary"
+								},
+								{
+									"_type": "ERDColumnCompartmentView",
+									"_id": "AAAAAAF4zwPkrJWwWSc=",
+									"_parent": {
+										"$ref": "AAAAAAF4zwPkrJWuJGo="
+									},
+									"model": {
+										"$ref": "AAAAAAF4zwPkq5WsuCw="
+									},
+									"subViews": [
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAF4zwQYapW+MnQ=",
+											"_parent": {
+												"$ref": "AAAAAAF4zwPkrJWwWSc="
+											},
+											"model": {
+												"$ref": "AAAAAAF4zwQYXZW7AWY="
+											},
+											"font": "Arial;13;0",
+											"left": 37,
+											"top": 556,
+											"width": 170.998046875,
+											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAF4zwRropXFi7s=",
+											"_parent": {
+												"$ref": "AAAAAAF4zwPkrJWwWSc="
+											},
+											"model": {
+												"$ref": "AAAAAAF4zwRrlpXCV0Y="
+											},
+											"font": "Arial;13;0",
+											"left": 37,
+											"top": 571,
+											"width": 170.998046875,
+											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAF4zx3vxpX+msA=",
+											"_parent": {
+												"$ref": "AAAAAAF4zwPkrJWwWSc="
+											},
+											"model": {
+												"$ref": "AAAAAAF4zx3vvJX7xrI="
+											},
+											"font": "Arial;13;0",
+											"left": 37,
+											"top": 586,
+											"width": 170.998046875,
+											"height": 13
+										}
+									],
+									"font": "Arial;13;0",
+									"left": 32,
+									"top": 551,
+									"width": 180.998046875,
+									"height": 53
+								}
+							],
+							"font": "Arial;13;0",
+							"left": 32,
+							"top": 528,
+							"width": 180.998046875,
+							"height": 76,
+							"nameLabel": {
+								"$ref": "AAAAAAF4zwPkrJWvsDM="
+							},
+							"columnCompartment": {
+								"$ref": "AAAAAAF4zwPkrJWwWSc="
+							}
+						},
+						{
+							"_type": "ERDEntityView",
+							"_id": "AAAAAAF4zwhqYZXNjF4=",
+							"_parent": {
+								"$ref": "AAAAAAF4AOMegwryiso="
+							},
+							"model": {
+								"$ref": "AAAAAAF4zwhqYJXLcqA="
+							},
+							"subViews": [
+								{
+									"_type": "LabelView",
+									"_id": "AAAAAAF4zwhqYZXOi4A=",
+									"_parent": {
+										"$ref": "AAAAAAF4zwhqYZXNjF4="
+									},
+									"font": "Arial;13;1",
+									"left": 248,
+									"top": 533,
+									"width": 206.29345703125,
+									"height": 13,
+									"text": "diactionary_detail"
+								},
+								{
+									"_type": "ERDColumnCompartmentView",
+									"_id": "AAAAAAF4zwhqYZXP1AU=",
+									"_parent": {
+										"$ref": "AAAAAAF4zwhqYZXNjF4="
+									},
+									"model": {
+										"$ref": "AAAAAAF4zwhqYJXLcqA="
+									},
+									"subViews": [
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAF4zwjelZXcwoY=",
+											"_parent": {
+												"$ref": "AAAAAAF4zwhqYZXP1AU="
+											},
+											"model": {
+												"$ref": "AAAAAAF4zwjegpXZzJg="
+											},
+											"font": "Arial;13;0",
+											"left": 253,
+											"top": 556,
+											"width": 196.29345703125,
+											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAF4zwmEipXvXW8=",
+											"_parent": {
+												"$ref": "AAAAAAF4zwhqYZXP1AU="
+											},
+											"model": {
+												"$ref": "AAAAAAF4zwmEgJXsK7Q="
+											},
+											"font": "Arial;13;0",
+											"left": 253,
+											"top": 571,
+											"width": 196.29345703125,
+											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAF4zwkdOJXl984=",
+											"_parent": {
+												"$ref": "AAAAAAF4zwhqYZXP1AU="
+											},
+											"model": {
+												"$ref": "AAAAAAF4zwkdLJXikJ4="
+											},
+											"font": "Arial;13;0",
+											"left": 253,
+											"top": 586,
+											"width": 196.29345703125,
+											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAF48HPxKRNQqbA=",
+											"_parent": {
+												"$ref": "AAAAAAF4zwhqYZXP1AU="
+											},
+											"model": {
+												"$ref": "AAAAAAF48HPxBxNNisM="
+											},
+											"font": "Arial;13;0",
+											"left": 253,
+											"top": 601,
+											"width": 196.29345703125,
+											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAF4zwn1FZX3u+E=",
+											"_parent": {
+												"$ref": "AAAAAAF4zwhqYZXP1AU="
+											},
+											"model": {
+												"$ref": "AAAAAAF4zwn1C5X0SSY="
+											},
+											"font": "Arial;13;0",
+											"left": 253,
+											"top": 616,
+											"width": 196.29345703125,
+											"height": 13
+										}
+									],
+									"font": "Arial;13;0",
+									"left": 248,
+									"top": 551,
+									"width": 206.29345703125,
+									"height": 83
+								}
+							],
+							"font": "Arial;13;0",
+							"left": 248,
+							"top": 528,
+							"width": 206.29345703125,
+							"height": 106,
+							"nameLabel": {
+								"$ref": "AAAAAAF4zwhqYZXOi4A="
+							},
+							"columnCompartment": {
+								"$ref": "AAAAAAF4zwhqYZXP1AU="
+							}
 						}
 					]
 				},
@@ -3321,7 +3630,8 @@
 							},
 							"name": "id",
 							"type": "bigint",
-							"length": "20"
+							"length": "20",
+							"primaryKey": true
 						},
 						{
 							"_type": "ERDColumn",
@@ -3599,6 +3909,141 @@
 							"name": "name",
 							"type": "varchar",
 							"length": "255"
+						}
+					]
+				},
+				{
+					"_type": "ERDEntity",
+					"_id": "AAAAAAF4zv2vtZWKXyE=",
+					"_parent": {
+						"$ref": "AAAAAAF4AOMegwrxDBA="
+					},
+					"name": "course_type",
+					"documentation": "课程类别",
+					"columns": [
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAF4zv8ZE5WYx5k=",
+							"_parent": {
+								"$ref": "AAAAAAF4zv2vtZWKXyE="
+							},
+							"name": "id",
+							"type": "bigint",
+							"length": "20",
+							"primaryKey": true
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAF4zv90TpWiGhI=",
+							"_parent": {
+								"$ref": "AAAAAAF4zv2vtZWKXyE="
+							},
+							"name": "name",
+							"type": "varchar",
+							"length": "255"
+						}
+					]
+				},
+				{
+					"_type": "ERDEntity",
+					"_id": "AAAAAAF4zwPkq5WsuCw=",
+					"_parent": {
+						"$ref": "AAAAAAF4AOMegwrxDBA="
+					},
+					"name": "dictionary",
+					"documentation": "字典表",
+					"columns": [
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAF4zwQYXZW7AWY=",
+							"_parent": {
+								"$ref": "AAAAAAF4zwPkq5WsuCw="
+							},
+							"name": "id",
+							"type": "bigint",
+							"length": "20",
+							"primaryKey": true
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAF4zwRrlpXCV0Y=",
+							"_parent": {
+								"$ref": "AAAAAAF4zwPkq5WsuCw="
+							},
+							"name": "name",
+							"type": "varchar",
+							"length": "255"
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAF4zx3vvJX7xrI=",
+							"_parent": {
+								"$ref": "AAAAAAF4zwPkq5WsuCw="
+							},
+							"name": "remark",
+							"type": "varchar",
+							"length": "255"
+						}
+					]
+				},
+				{
+					"_type": "ERDEntity",
+					"_id": "AAAAAAF4zwhqYJXLcqA=",
+					"_parent": {
+						"$ref": "AAAAAAF4AOMegwrxDBA="
+					},
+					"name": "diactionary_detail",
+					"documentation": "字典明细表",
+					"columns": [
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAF4zwjegpXZzJg=",
+							"_parent": {
+								"$ref": "AAAAAAF4zwhqYJXLcqA="
+							},
+							"name": "id",
+							"type": "bigint",
+							"length": "20",
+							"primaryKey": true
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAF4zwmEgJXsK7Q=",
+							"_parent": {
+								"$ref": "AAAAAAF4zwhqYJXLcqA="
+							},
+							"name": "dictionary_id",
+							"type": "bigint",
+							"length": "20"
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAF4zwkdLJXikJ4=",
+							"_parent": {
+								"$ref": "AAAAAAF4zwhqYJXLcqA="
+							},
+							"name": "name",
+							"type": "varchar",
+							"length": "255"
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAF48HPxBxNNisM=",
+							"_parent": {
+								"$ref": "AAAAAAF4zwhqYJXLcqA="
+							},
+							"name": "value",
+							"type": "int",
+							"length": 0
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAF4zwn1C5X0SSY=",
+							"_parent": {
+								"$ref": "AAAAAAF4zwhqYJXLcqA="
+							},
+							"name": "status",
+							"length": 0
 						}
 					]
 				}
@@ -4751,7 +5196,7 @@
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
-			"name": "Manager",
+			"name": "UC_Manager",
 			"ownedElements": [
 				{
 					"_type": "UMLUseCaseDiagram",
@@ -4818,7 +5263,7 @@
 											"top": 48,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -4999,7 +5444,7 @@
 											"top": -512,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -5180,7 +5625,7 @@
 											"top": -16,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -5380,7 +5825,7 @@
 											"top": -256,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -5559,7 +6004,7 @@
 											"left": -128,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -5753,7 +6198,7 @@
 											"top": 144,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -5953,7 +6398,7 @@
 											"top": -256,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -6153,7 +6598,7 @@
 											"top": -64,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -14651,7 +15096,7 @@
 											"top": -464,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -14832,7 +15277,7 @@
 											"top": -856,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -15013,7 +15458,7 @@
 											"top": -576,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -15192,7 +15637,7 @@
 											"left": -16,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -15385,7 +15830,7 @@
 											"top": -16,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -15584,7 +16029,7 @@
 											"top": -64,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -15783,7 +16228,7 @@
 											"top": -80,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -15982,7 +16427,7 @@
 											"top": -240,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -19997,7 +20442,7 @@
 											"top": -792,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -20174,7 +20619,7 @@
 											"top": -1280,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -20355,7 +20800,7 @@
 											"top": -792,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -20532,7 +20977,7 @@
 											"font": "Arial;13;0",
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -20719,7 +21164,7 @@
 											"top": -16,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -20918,7 +21363,7 @@
 											"top": -64,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -21117,7 +21562,7 @@
 											"top": -32,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -21316,7 +21761,7 @@
 											"top": -80,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -25331,7 +25776,7 @@
 											"top": -1272,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -25512,7 +25957,7 @@
 											"top": -1680,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -25693,7 +26138,7 @@
 											"top": -1080,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -25872,9 +26317,9 @@
 											"font": "Arial;13;0",
 											"left": 144,
 											"top": 16,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -26071,9 +26516,9 @@
 											"font": "Arial;13;0",
 											"left": -32,
 											"top": 16,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -26270,9 +26715,9 @@
 											"font": "Arial;13;0",
 											"left": -112,
 											"top": 16,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -26469,9 +26914,9 @@
 											"font": "Arial;13;0",
 											"left": -128,
 											"top": 32,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -26666,9 +27111,9 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": 288,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -30677,7 +31122,7 @@
 											"top": -1744,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -30854,7 +31299,7 @@
 											"top": -2192,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -31035,7 +31480,7 @@
 											"top": -1360,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -31210,9 +31655,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -31393,9 +31838,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -31576,9 +32021,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -31759,9 +32204,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -31942,9 +32387,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -35947,7 +36392,7 @@
 											"top": -2112,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -36128,7 +36573,7 @@
 											"top": -2712,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -36309,7 +36754,7 @@
 											"top": -1616,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -36484,9 +36929,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -36667,9 +37112,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -36850,9 +37295,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -37033,9 +37478,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -37216,9 +37661,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -41221,7 +41666,7 @@
 											"top": -2504,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -41402,7 +41847,7 @@
 											"top": -3168,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -41583,7 +42028,7 @@
 											"top": -1944,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -41760,9 +42205,9 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": 48,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -41953,9 +42398,9 @@
 											"font": "Arial;13;0",
 											"left": -16,
 											"top": 48,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -42152,9 +42597,9 @@
 											"font": "Arial;13;0",
 											"left": -32,
 											"top": 64,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -42349,9 +42794,9 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -48,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -42540,9 +42985,9 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -48,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -46551,7 +46996,7 @@
 											"top": -3016,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -46732,7 +47177,7 @@
 											"top": -3640,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -46913,7 +47358,7 @@
 											"top": -2208,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -47092,9 +47537,9 @@
 											"font": "Arial;13;0",
 											"left": 144,
 											"top": -48,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -47291,9 +47736,9 @@
 											"font": "Arial;13;0",
 											"left": 16,
 											"top": -32,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -47490,9 +47935,9 @@
 											"font": "Arial;13;0",
 											"left": 48,
 											"top": -48,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -47689,9 +48134,9 @@
 											"font": "Arial;13;0",
 											"left": -16,
 											"top": -32,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -47888,9 +48333,9 @@
 											"font": "Arial;13;0",
 											"left": 176,
 											"top": -96,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -51933,7 +52378,7 @@
 											"top": -3488,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -52114,7 +52559,7 @@
 											"top": -4112,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -52295,7 +52740,7 @@
 											"top": -2488,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -52474,9 +52919,9 @@
 											"font": "Arial;13;0",
 											"left": 208,
 											"top": -16,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -52673,9 +53118,9 @@
 											"font": "Arial;13;0",
 											"left": 32,
 											"top": -80,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -52872,9 +53317,9 @@
 											"font": "Arial;13;0",
 											"left": -64,
 											"top": -48,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -53071,9 +53516,9 @@
 											"font": "Arial;13;0",
 											"left": -80,
 											"top": 64,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -53270,9 +53715,9 @@
 											"font": "Arial;13;0",
 											"left": 160,
 											"top": 48,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -57287,7 +57732,7 @@
 											"top": -3744,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -57468,7 +57913,7 @@
 											"top": -4552,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -57649,7 +58094,7 @@
 											"top": -2720,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -57824,9 +58269,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -58007,9 +58452,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -58194,9 +58639,9 @@
 											"font": "Arial;13;0",
 											"left": -16,
 											"top": -16,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -58391,9 +58836,9 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"top": -16,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -58580,9 +59025,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -62585,7 +63030,7 @@
 											"top": -4120,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -62762,7 +63207,7 @@
 											"top": -5024,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -62943,7 +63388,7 @@
 											"top": -3008,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -63118,9 +63563,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -63301,9 +63746,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -63484,9 +63929,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -63667,9 +64112,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -63850,9 +64295,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -67855,7 +68300,7 @@
 											"top": -4664,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -68036,7 +68481,7 @@
 											"top": -5536,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -68217,7 +68662,7 @@
 											"top": -3376,
 											"width": 108.34814453125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -68392,9 +68837,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
@@ -69117,9 +69562,9 @@
 											"font": "Arial;13;0",
 											"left": -48,
 											"top": 48,
-											"width": 89.578125,
+											"width": 107.935546875,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from UC_Manager)"
 										},
 										{
 											"_type": "LabelView",
