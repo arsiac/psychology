@@ -1,6 +1,7 @@
 package com.github.arsiac.psychology.centre.api.controller;
 
 import com.github.arsiac.psychology.centre.api.SystemApi;
+import com.github.arsiac.psychology.centre.pojo.dto.ResourceDTO;
 import com.github.arsiac.psychology.centre.pojo.vo.ResourceVO;
 import com.github.arsiac.psychology.centre.service.SystemService;
 import com.github.arsiac.psychology.utils.annotation.SystemLogger;
@@ -27,7 +28,22 @@ public class SystemController implements SystemApi {
     @Override
     @SystemLogger("获取用户资源")
     public List<ResourceVO> getResourceByUserId(Long id) {
-        return BeanCopy.copyList(systemService.queryResourceByUserId(id), ResourceVO.class);
+        return BeanCopy.copyList(systemService.queryResourceByUserId(id), ResourceVO.class, this::copy2vo);
+    }
+
+    /**
+     * <p>拷贝 父节点信息</p>
+     *
+     * @param source dto
+     * @param target vo
+     * */
+    private void copy2vo(Object source, Object target) {
+        ResourceDTO dto = (ResourceDTO) source;
+        ResourceVO vo = (ResourceVO) target;
+
+        if (dto.getParentDTO() != null) {
+            vo.setParentName(dto.getParentDTO().getName());
+        }
     }
 
     @Autowired
