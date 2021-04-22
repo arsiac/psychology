@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.arsiac.psychology.base.dao.DictionaryMapper">
+
+    <resultMap type="com.github.arsiac.psychology.base.pojo.entity.DictionaryEntity" id="dictionaryMap">
+        <result property="id" column="id"/>
+        <result property="dictionaryTypeId" column="dictionary_type_id"/>
+        <result property="name" column="name"/>
+        <result property="value" column="value"/>
+        <result property="status" column="status"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="version" column="version"/>
+    </resultMap>
+
+    <resultMap id="dictionaryDtoMap" type="com.github.arsiac.psychology.base.pojo.dto.DictionaryDTO" extends="dictionaryMap">
+       <association property="dictionaryTypeEntity" javaType="com.github.arsiac.psychology.base.pojo.entity.DictionaryTypeEntity">
+           <result property="id" column="dt_id"/>
+           <result property="name" column="dt_name" />
+       </association>
+    </resultMap>
+
+    <!-- 查询全部 -->
+    <select id="selectAll" resultMap="dictionaryMap">
+        SELECT *
+        FROM psychology_base.dictionary
+        ORDER BY update_time desc
+    </select>
+
+    <!-- 模糊查询 -->
+    <select id="selectFuzzy" resultMap="dictionaryDtoMap"
+            parameterType="com.github.arsiac.psychology.base.pojo.entity.DictionaryEntity">
+        SELECT d.*, dt.id AS dt_id, dt.name AS dt_name
+        FROM psychology_base.dictionary d LEFT JOIN psychology_base.dictionary_type dt ON d.dictionary_type_id = dt.id
+        <where>
+            <if test="dictionary.name != null">
+                <bind name="dictionaryName" value="'%' + dictionary.name + '%'"/>
+                d.name LIKE #{dictionaryName}
+            </if>
+            <if test="dictionary.dictionaryTypeId != null">
+              AND d.dictionary_type_id = #{dictionary.dictionaryTypeId}
+            </if>
+            <if test="dictionary.status != null">
+                AND d.status = #{dictionary.status}
+            </if>
+        </where>
+        ORDER BY update_time desc
+    </select>
+
+    <!-- 根据id查询 -->
+    <select id="selectById" resultMap="dictionaryMap" parameterType="java.lang.Long">
+        SELECT *
+        FROM psychology_base.dictionary
+        WHERE id = #{id}
+    </select>
+
+    <!-- 插入 版本为1 时间为当前时间 -->
+    <insert id="insert" parameterType="com.github.arsiac.psychology.base.pojo.entity.DictionaryEntity">
+        INSERT INTO psychology_base.dictionary(id, dictionary_type_id, name, value, status, create_by, create_time,
+                                               update_by, update_time, version)
+        VALUES ( #{dictionary.id}
+               , #{dictionary.dictionaryTypeId}
+               , #{dictionary.name}
+               , #{dictionary.value}
+               , #{dictionary.status}
+               , #{dictionary.createBy}
+               , CURRENT_TIMESTAMP()
+               , #{dictionary.updateBy}
+               , CURRENT_TIMESTAMP()
+               , 1)
+    </insert>
+
+    <!-- 更新 根据版本和id来更新数据-->
+    <update id="update" parameterType="com.github.arsiac.psychology.base.pojo.entity.DictionaryEntity">
+        UPDATE psychology_base.dictionary
+        SET id                 = #{dictionary.id}
+          , dictionary_type_id = #{dictionary.dictionaryTypeId}
+          , name               = #{dictionary.name}
+          , value              = #{dictionary.value}
+          , status             = #{dictionary.status}
+          , update_by          = #{dictionary.updateBy}
+          , update_time        = CURRENT_TIMESTAMP()
+          , version            = version + 1
+        WHERE id = #{dictionary.id}
+          AND version = #{dictionary.version}
+    </update>
+
+    <!-- 删除 根据id和版本删除 -->
+    <delete id="delete" parameterType="com.github.arsiac.psychology.base.pojo.entity.DictionaryEntity">
+        DELETE
+        FROM psychology_base.dictionary
+        WHERE id = #{dictionary.id}
+          AND version = #{dictionary.version}
+    </delete>
+</mapper>
