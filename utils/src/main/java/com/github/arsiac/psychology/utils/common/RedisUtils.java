@@ -91,6 +91,14 @@ public class RedisUtils {
         redisTemplate.opsForValue().set(key, toJsonString(value));
     }
 
+    public Object getObject(String key) {
+        if (key == null) {
+            return ARGUMENT_KEY_NULL;
+        }
+
+        return redisTemplate.opsForValue().get(key);
+    }
+
     /**
      * <p>获取key对应的value</p>
      *

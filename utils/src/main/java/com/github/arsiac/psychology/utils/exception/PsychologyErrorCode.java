@@ -36,6 +36,7 @@ public enum PsychologyErrorCode {
     ROLE_NOT_AVAILABLE(2012, "未提供角色"),
     RESOURCE_NOT_AVAILABLE(2013, "未提供资源"),
     CANNOT_DELETE_FOREIGN_KEY(2013, "该数据已经被使用，无法删除"),
+    ID_ALREADY_EXISTS(2014, "ID已存在"),
 
     /*
      * 登录注册
