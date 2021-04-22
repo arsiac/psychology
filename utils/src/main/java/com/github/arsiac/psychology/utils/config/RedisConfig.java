@@ -1,5 +1,11 @@
 package com.github.arsiac.psychology.utils.config;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.cache.CacheManager;
@@ -10,9 +16,7 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializationContext;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.data.redis.serializer.*;
 
 /**
  * <p>redis客户端配置</p>
@@ -31,20 +35,30 @@ public class RedisConfig {
      */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+        RedisSerializer<Object> redisSerializer = redisJsonSerializer();
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
-        template.setKeySerializer(stringRedisSerializer);
-        template.setValueSerializer(stringRedisSerializer);
-        template.setHashKeySerializer(stringRedisSerializer);
-        template.setHashValueSerializer(stringRedisSerializer);
-        template.setDefaultSerializer(stringRedisSerializer);
+        template.setKeySerializer(redisSerializer);
+        template.setValueSerializer(redisSerializer);
+        template.setHashKeySerializer(redisSerializer);
+        template.setHashValueSerializer(redisSerializer);
+        template.setDefaultSerializer(redisSerializer);
         return template;
     }
 
-    /**
-     * 配置使用注解的时候缓存配置，默认是序列化反序列化的形式，加上此配置则为 json 形式
-     */
+    @Bean
+    public RedisSerializer<Object> redisJsonSerializer() {
+        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        // 必须设置，否则无法将 JSON 转化为对象，会转化成 Map 类型
+        objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance,
+                ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
+        return jackson2JsonRedisSerializer;
+    }
+
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory factory) {
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();
